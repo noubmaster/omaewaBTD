@@ -17,6 +17,7 @@ public class ParticipaControle {
 
     private List<Participa> participacoes = new ArrayList<Participa>();
     private int[] pId;
+    private int[] iId;
     private Participa participa = new Participa();
     private boolean salvar = false;
     private int idArtista = 0;
@@ -63,7 +64,6 @@ public class ParticipaControle {
     public void salvarP() {
         Musica musica = new Musica();
         musica.setIdMusica(idMusica);
-        System.out.println(idMusica);
         if (salvar) {
             try {
                 for (int i = 0; i < pId.length; i++) {
@@ -75,6 +75,34 @@ public class ParticipaControle {
                     ParticipaDAO.inserir(participa);
                 }
                 pId = null;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                ParticipaDAO.alterar(participa);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        atualizaParticipacoes();
+    }
+    
+    public void salvarI() {
+        Musica musica = new Musica();
+        musica.setIdMusica(idMusica);
+        if (salvar) {
+            try {
+                for (int i = 0; i < iId.length; i++) {
+                    Artista artista = new Artista();
+                    artista.setIdArtista(iId[i]);
+                    participa.setArtista(artista);
+                    participa.setMusica(musica);
+                    participa.setPapel("Intérprete");
+                    ParticipaDAO.inserir(participa);
+                }
+                iId = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -145,6 +173,14 @@ public class ParticipaControle {
 
     public void setpId(int[] pId) {
         this.pId = pId;
+    }
+
+    public int[] getiId() {
+        return iId;
+    }
+
+    public void setiId(int[] iId) {
+        this.iId = iId;
     }
 
 }

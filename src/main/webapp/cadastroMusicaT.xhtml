@@ -146,8 +146,10 @@
                                                                    update=":parcomento">
                                                         <p:resetInput target=":parcomento:painel" />
                                                         <f:setPropertyActionListener value="#{q.idMusica}" target="#{participaControle.idMusica}" />
+                                                        <f:setPropertyActionListener value="#{q.idMusica}" target="#{composicaoControle.idMusica}" />
                                                         <i class="glyphicon glyphicon-pencil"/>
                                                         <f:ajax listener="#{participaControle.preparaIncluir()}"/>
+                                                        <f:ajax listener="#{composicaoControle.preparaIncluir()}"/>
                                                     </p:commandLink>
                                                 </div>
                                             </td>
@@ -272,8 +274,26 @@
                                     required="true"
                                     maxlength="30"
                                     value="#{participaControle.idMusica}"></p:inputText>
+                                <label style="margin-right: 50px" for="idc">Id</label>
+                                <p:inputText 
+                                    style="width: 225px"
+                                    styleClass="form-control"
+                                    id="idc"
+                                    required="true"
+                                    maxlength="30"
+                                    value="#{composicaoControle.idMusica}"></p:inputText>
                                 <h:outputLabel for="participante" value="Participante:" />
                                 <p:selectCheckboxMenu appendTo="participante" id="participante" value="#{participaControle.pId}" label="Artistas" multiple="true"
+                                                      filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                                    <f:selectItems value="#{artistaControle.artistas}" var="aux" itemValue="#{aux.idArtista}" itemLabel="#{aux.nomeArtista}"></f:selectItems>
+                                </p:selectCheckboxMenu>
+                                <h:outputLabel for="interprete" value="Interprete:" />
+                                <p:selectCheckboxMenu appendTo="interprete" id="interprete" value="#{participaControle.iId}" label="Artistas" multiple="true"
+                                                      filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                                    <f:selectItems value="#{artistaControle.artistas}" var="aux" itemValue="#{aux.idArtista}" itemLabel="#{aux.nomeArtista}"></f:selectItems>
+                                </p:selectCheckboxMenu>
+                                <h:outputLabel for="compositor" value="Composição:" />
+                                <p:selectCheckboxMenu appendTo="compositor" id="compositor" value="#{composicaoControle.cId}" label="Artistas" multiple="true"
                                                       filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
                                     <f:selectItems value="#{artistaControle.artistas}" var="aux" itemValue="#{aux.idArtista}" itemLabel="#{aux.nomeArtista}"></f:selectItems>
                                 </p:selectCheckboxMenu>
@@ -284,7 +304,9 @@
                                            class="btn btn-default"
                                            update=":tabelaMusica"
                                            oncomplete="$('#modalParCom').modal('hide');">
-                                <f:ajax listener="#{participaControle.salvarP}"/>
+                                <f:ajax listener="#{participaControle.salvarP()}"/>
+                                <f:ajax listener="#{participaControle.salvarI()}"/>
+                                <f:ajax listener="#{composicaoControle.salvar()}"/>
                             </p:commandLink>
                             <p:commandLink value="Fechar" 
                                            immediate="true" 

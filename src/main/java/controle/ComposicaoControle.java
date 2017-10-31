@@ -17,6 +17,7 @@ public class ComposicaoControle {
 
     private List<Composicao> composicoes = new ArrayList<Composicao>();
     private Composicao composicao = new Composicao();
+    private int[] cId;
     private boolean salvar = false;
     private int idArtista = 0;
     private int idMusica = 0;
@@ -61,17 +62,18 @@ public class ComposicaoControle {
     }
 
     public void salvar() {
-        Artista artista = new Artista();
         Musica musica = new Musica();
-        artista.setIdArtista(idArtista);
         musica.setIdMusica(idMusica);
-        
-        composicao.setArtista(artista);
-        composicao.setMusica(musica);
-        
         if (salvar) {
             try {
-                ComposicaoDAO.inserir(composicao);
+                for (int i = 0; i < cId.length; i++) {
+                    Artista artista = new Artista();
+                    artista.setIdArtista(cId[i]);
+                    composicao.setArtista(artista);
+                    composicao.setMusica(musica);
+                    ComposicaoDAO.inserir(composicao);
+                }
+                cId = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -110,4 +112,13 @@ public class ComposicaoControle {
     public void setComposicao(Composicao composicao) {
         this.composicao = composicao;
     }
+
+    public int[] getcId() {
+        return cId;
+    }
+
+    public void setcId(int[] cId) {
+        this.cId = cId;
+    }
+    
 }
