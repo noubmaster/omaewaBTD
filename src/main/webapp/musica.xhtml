@@ -1,0 +1,297 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css"/>
+        <meta name="google-signin-client_id" content="488287116710-mg5d2db5prvt3gep4l6a037k2jclguoa.apps.googleusercontent.com"/>
+        <script src="https://apis.google.com/js/platform.js"  async="async"></script>
+        <h:outputStylesheet library="css" name="musicP.css"/>
+        <link rel="stylesheet" href="resources/css/navbar.css"/>
+        <title>#{buscaControle.musica.nomeMusica}</title>
+        <script>
+        </script>
+    </h:head>
+    <h:body onload="#{avaliacaoControle.listAsd(buscaControle.musica.idMusica)}">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/omaewa/index.xhtml">BTheD</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <button class="btn btn-default dropdown-toggle btn-outline" id="admUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown"> Admin Options
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/omaewa/cadastroMusicaT.xhtml">Cadastro Musica</a></li>
+                                <li><a href="/omaewa/cadastroGeneroT.xhtml">Cadastro Genero</a></li>
+                                <li><a href="/omaewa/cadastroAlbumT.xhtml">Cadastro Album</a></li>
+                                <li><a href="/omaewa/cadastroArtistaT.xhtml">Cadastro Artista</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="navbar-form navbar-left">
+                        <ul class="nav navbar-nav">
+                            <li><h:form id="busca">
+                                    <div class="input-group">
+                                        <p:inputText id="txt" value="#{buscaControle.webInput}" placeholder="Search" class="form-control"/>
+                                        <span class="input-group-btn">
+                                            <p:commandLink onclick="vozes()" class="btn btn-danger btn-outline"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
+                                            <p:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" action="index.xhtml" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></p:commandLink>
+                                        </span>
+                                    </div>
+                                </h:form></li>
+                        </ul>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><p:commandLink value="Log In" 
+                                           id="login"
+                                           styleClass="btn btn-default" 
+                                           style="padding: 8px; margin-top: 6px; margin-right: 6px;"
+                                           onclick="$('#myModal').modal('show');"
+                                           update=":memes:myMemes"
+                                           immediate="true" /></li>
+                        <li class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" onclick="signOut();">Sign out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div style="height: 51px;"/>
+        
+        <div class="container">
+            <div id="block" >
+                
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 bgcool">
+                        <div class="page-header">
+                            <h1>#{buscaControle.musica.nomeMusica}</h1>
+                        </div>
+                        <p style="white-space: pre-wrap;">#{buscaControle.musica.letra}</p>
+                        <!-- Avaliação -->
+                        <h:form id="avaliacao">
+                            <h:panelGrid  id="panelA" styleClass="panel">
+                                <p:rating value="#{avaliacaoControle.avaliacao.nota}" />
+                                <p:inputTextarea style="resize: none;" 
+                                                 styleClass="form-control"
+                                                 id="comentario"
+                                                 rows="3"
+                                                 cols="33"
+                                                 required="true"
+                                                 value="#{avaliacaoControle.avaliacao.comentario}"></p:inputTextarea>
+                                <p:inputText style="display: none" id="idUser" value="#{avaliacaoControle.idUsuario}"/>
+                                <p:inputText style="display: none" id="idMus" value="#{avaliacaoControle.idMusica}"/>
+                                <p:commandButton value="Salvar" 
+                                                 class="btn btn-default"
+                                                 action="#{avaliacaoControle.salvar}"
+                                                 >
+                                    <p:resetInput target=":avaliacao:panelA" />
+                                </p:commandButton>
+                            </h:panelGrid>
+                        </h:form>
+                        <!--Lista de Avaliação -->
+                        <h:form id="aval">
+                            <ui:repeat  value="#{avaliacaoControle.avaliacoes2}" var="a" varStatus="q">
+                                <img class="img-responsive" src="#{a.usuario.perfil}" style="width: 25px; height: 25px; display: inline;" />
+                                <p style="display: inline;">#{a.usuario.email}</p>
+                                <p:rating value="#{a.nota}" readonly="true"/>
+                                <p>#{a.comentario}</p>
+                                <br/>
+                            </ui:repeat>
+                        </h:form>
+                        <!-- Checagem de usuario -->
+                        <h:form id="f" style="display: none">
+                            <p:panel id="panel">
+                                <p:inputText id="email" value="#{usuarioControle.usuario.email}"/>
+                                <p:inputText id="idR" value="#{usuarioControle.usuario.idR}"/>
+                                <p:inputText id="perfil" value="#{usuarioControle.usuario.perfil}"/>
+                                <p:commandButton value="Salvar" 
+                                                 id="registra"
+                                                 class="btn btn-default"
+                                                 action="#{usuarioControle.salvar}">
+                                </p:commandButton>
+                            </p:panel>
+                        </h:form>
+                        <h:form id="f1" style="display: none">
+                            <p:panel id="panel">
+                                <p:inputText id="tipoUser" value="#{usuarioControle.tipo}"/>
+                                <p:inputText id="idR" value="#{usuarioControle.idR}"/>
+                                <p:inputText id="idUsuario" value="#{usuarioControle.idUsuario}"/>
+                                <p:inputText id="idMusica" value="#{buscaControle.musica.idMusica}"/>
+                                <p:commandButton value="Salvar" 
+                                                 id="registra"
+                                                 class="btn btn-default"
+                                                 update="f1"
+                                                 actionListener="#{usuarioControle.pegerIdR()}">    
+                                </p:commandButton>
+                            </p:panel>
+                        </h:form>
+                        <h:form id="fodasse" style="display: none">
+                            <p:commandButton value="fodasse"
+                                             id="fodasse"
+                                             update="fodasse"
+                                             action="#{usuarioControle.nullar()}"/>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+            <!-- botao do login parte 2 -->
+            <div id="loginIfBlock" style="display: none">
+                <p:commandLink value="Log In"
+                               styleClass="btn btn-default" 
+                               style="padding: 8px; margin-top: 6px; margin-right: 6px;"
+                               onclick="$('#myModal').modal('show');"
+                               update=":memes:myMemes"
+                               immediate="true" />
+                <a href="#" onclick="signOut();">Sign out</a>
+            </div>
+            <!-- MODAL LOGIN -->
+            <h:form id="memes">
+                <div class="modal fade" 
+                     id="myModal"
+                     tabindex="-1" role="dialog"
+                     aria-labelledby="myModal" 
+                     aria-hidden="true" 
+                     data-keyboard="false" 
+                     data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <h:form id="myMemes">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&#215;</button>
+                                    <h4 class="modal-title">Login</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="g-signin2" style="margin-left: 25%" data-onsuccess="onSignIn"></div>
+                                </div>
+                                <h:panelGroup layout="block" styleClass="modal-footer">
+                                    <p:commandLink value="Close" immediate="true" styleClass="btn btn-default" oncomplete="$('#myModal').modal('hide');" />
+                                </h:panelGroup>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+        <script type="text/javascript">
+            var currentPath = window.location.pathname;
+            var currentPge = window.location.href;
+            var block = document.getElementById("block");
+            var loginIfBlock = document.getElementById("loginIfBlock");
+            var tipo = document.getElementById("f1:tipoUser").value;
+            var admUser = document.getElementById("admUser");
+            var idR = document.getElementById('f:idR');
+            var idR2 = document.getElementById('f1:idR');
+            var login = document.getElementById("login");
+            var optionsUser = document.getElementById("optionsUser");
+            var email = document.getElementById('f:email');
+            var perfil = document.getElementById('f:perfil');
+            var idRGet;
+            //ID Usuario, Música
+            var idUsuario = document.getElementById('f1:idUsuario').value;
+            var idMusica = document.getElementById('f1:idMusica').value;
+            //Avaliação
+            var avUsuario = document.getElementById('avaliacao:idUser');
+            var avMusica = document.getElementById('avaliacao:idMus');
+            //ID -> Avaliação
+            avUsuario.value = idUsuario;
+            avMusica.value = idMusica;
+            
+            if (currentPath === "/memes/faces/cadastroGeneroT.xhtml" ||
+                    currentPath === "/memes/faces/cadastroGeneroT.xhtml#") {
+                if (tipo === "0") {
+                    block.style.display = "none";
+                    loginIfBlock.style.display = "inline";
+                } else {
+                    loginIfBlock.style.display = "none";
+                    block.style.display = "inline";
+                }
+            }
+            ;
+
+            function admin() {
+                tipo = document.getElementById("f1:tipoUser").value;
+                if (tipo === "0") {
+                    admUser.style.display = "none";
+                } else if (tipo === "1" || tipo === "2") {
+                    admUser.style.display = "inline";
+                }
+                ;
+            }
+
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                    login.style.display = "inline";
+                    optionsUser.style.display = "none";
+                });
+                idRGet = null;
+                idR.value = idRGet;
+                idR2.value = idRGet;
+                document.getElementById('fodasse:fodasse').click();
+                location.reload();
+            }
+
+            function onSignIn(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                if (profile.getId() !== null) {
+                    idRGet = profile.getId();
+                    login.style.display = "none";
+                    optionsUser.style.display = "inline";
+                    email.value = profile.getEmail();
+                    idR.value = idRGet;
+                    idR2.value = idRGet;
+                    perfil.value = profile.getImageUrl();
+                    document.getElementById('f:registra').click();
+                    document.getElementById('f1:registra').click();
+                }
+                setTimeout(admin, 1000);
+                $('#myModal').modal('hide');
+            }
+        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+        <script>
+            function vozes() {
+                console.log('ta passando aqui carai');
+                var textInput = document.getElementById("busca:txt");
+                if (annyang) {
+
+                    annyang.addCallback('result', function (phrases) {
+                        console.log("I think the user said: ", phrases[0]);
+                        textInput.value = phrases[0];
+                        console.log("But then again, it could be any of the following: ", phrases);
+
+                    });
+
+                    // Start listening.
+                    annyang.start();
+                }
+            }
+        </script>
+    </h:body>
+</html>

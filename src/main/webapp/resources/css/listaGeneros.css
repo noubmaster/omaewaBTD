@@ -1,0 +1,18 @@
+.cGThead{
+    width: 100%;
+    display: inline-table;
+    height:60px;
+    table-layout: fixed;
+}
+
+.cGTable{
+    height:300px; 
+    display: -moz-groupbox;
+}
+
+.cGTbody{
+    overflow-y: scroll;
+    height: 200px;
+    width: 100%;
+    position: absolute;
+}

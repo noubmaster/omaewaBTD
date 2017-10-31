@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css"/>
+        <meta name="google-signin-client_id" content="488287116710-mg5d2db5prvt3gep4l6a037k2jclguoa.apps.googleusercontent.com"/>
+        <script src="https://apis.google.com/js/platform.js" async="async"></script>
+        <h:outputStylesheet library="css" name="navbar.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <div id="block">
+                <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-danger">
+                    <a class="navbar-brand" href="#">BTheD</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-sm-2">
+                            <li class="dropdown">
+                                <button class="btn btn-outline-light dropdown-toggle" style="box-shadow: none; display: none;" id="admUser" type="button" data-toggle="dropdown"> Admin Options
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/memes/faces/cadastroMusicaT.xhtml">Cadastro Musica</a></li>
+                                    <li><a class="dropdown-item" href="/memes/faces/cadastroGeneroT.xhtml">Cadastro Genero</a></li>
+                                    <li><a class="dropdown-item" href="/memes/faces/cadastroAlbumT.xhtml">Cadastro Album</a></li>
+                                    <li><a class="dropdown-item" href="/memes/faces/cadastroArtistaT.xhtml">Cadastro Artista</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav mr-auto">
+                            <li>
+                                <h:form id="busca">
+                                    <div class="input-group">
+                                        <p:inputText style="box-shadow: none;  border-color: white;" id="txt" value="#{buscaControle.webInput}" placeholder="Pesquisa" class="form-control mr-sm-0"/>
+                                        <span class="input-group-btn">
+                                            <p:commandLink onclick="vozes();" class="btn btn-danger" style="box-shadow: none; border-color: white;"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
+                                            <p:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" action="index.xhtml" styleClass="btn btn-light"><i class="fa fa-search" aria-hidden="true"></i></p:commandLink>
+                                        </span>
+                                    </div>
+                                </h:form>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li><p:commandLink value="Log In" 
+                                               id="login"
+                                               styleClass="btn btn-light" 
+                                               onclick="$('#loginModal').modal('show');"
+                                               update=":myMemes"
+                                               immediate="true" /></li>
+                            <li class="dropdown">
+                                <button class="btn btn-light dropdown-toggle" id="optionsUser" style="display: none;" type="button" data-toggle="dropdown">Options
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" onclick="signOut();">Sign out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div style="height: 56px"/>
+                <!-- Fim Navbar -->
+
+                <!-- Checagem de usuario -->
+                <h:form id="f" style="">
+                    <p:panel id="panel">
+                        <p:inputText id="email" value="#{usuarioControle.usuario.email}"/>
+                        <p:inputText id="idR" value="#{usuarioControle.usuario.idR}"/>
+                        <p:inputText id="perfil" value="#{usuarioControle.usuario.perfil}"/>
+                        <p:commandButton value="Salvar" 
+                                         id="registra"
+                                         class="btn btn-default"
+                                         action="#{usuarioControle.salvar}">
+                        </p:commandButton>
+                    </p:panel>
+                </h:form>
+                <h:form id="f1" style="">
+                    <p:panel id="panel">
+                        <p:inputText id="tipoUser" value="#{usuarioControle.tipo}"/>
+                        <p:inputText id="idR" value="#{usuarioControle.idR}"/>
+                        <p:commandButton value="Salvar" 
+                                         id="registra"
+                                         class="btn btn-default"
+                                         update="f1"
+                                         actionListener="#{usuarioControle.pegerIdR()}">
+                        </p:commandButton>
+                    </p:panel>
+                </h:form>
+                <h:form id="fodasse" style="">
+                    <p:commandButton value="fodasse"
+                                     id="fodasse"
+                                     update="fodasse"
+                                     action="#{usuarioControle.nullar()}"/>
+                </h:form>
+            </div>
+            <!-- botao do login parte 2 -->
+            <div id="loginIfBlock" style="display: none">
+                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#loginModal">
+                    Launch demo modal
+                </button>
+                <a href="#" onclick="signOut();">Sign out</a>
+            </div>
+            <!-- MODAL LOGIN -->
+            <div class="modal fade bd-example-modal-sm" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <h:form id="myMemes">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Login</h5>
+                                <button type="button" class="close" data-dismiss="modal">&#215;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="g-signin2" style="margin-left: 25%" data-onsuccess="onSignIn">
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="height: 1000px"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+                    var currentPath = window.location.pathname;
+                    var currentPge = window.location.href;
+                    var block = document.getElementById("block");
+                    var loginIfBlock = document.getElementById("loginIfBlock");
+                    var tipo = document.getElementById("f1:tipoUser").value;
+                    var admUser = document.getElementById("admUser");
+                    var idR = document.getElementById('f:idR');
+                    var idR2 = document.getElementById('f1:idR');
+                    var login = document.getElementById("login");
+                    var optionsUser = document.getElementById("optionsUser");
+                    var email = document.getElementById('f:email');
+                    var perfil = document.getElementById('f:perfil');
+                    var idRGet;
+
+                    function admin() {
+                        tipo = document.getElementById("f1:tipoUser").value;
+                        if (tipo === "0") {
+                            admUser.style.display = "none";
+                        } else if (tipo === "1" || tipo === "2") {
+                            admUser.style.display = "inline";
+                        }
+                        ;
+                    }
+                    function signOut() {
+                        var auth2 = gapi.auth2.getAuthInstance();
+                        auth2.signOut().then(function () {
+                            console.log('User signed out.');
+                            login.style.display = "inline";
+                            optionsUser.style.display = "none";
+                        });
+                        idRGet = null;
+                        idR.value = idRGet;
+                        idR2.value = idRGet;
+                        document.getElementById('fodasse:fodasse').click();
+                        location.reload();
+                    }
+
+                    function onSignIn(googleUser) {
+                        var profile = googleUser.getBasicProfile();
+                        if (profile.getId() !== null) {
+                            idRGet = profile.getId();
+                            login.style.display = "none";
+                            optionsUser.style.display = "inline";
+                            email.value = profile.getEmail();
+                            idR.value = idRGet;
+                            idR2.value = idRGet;
+                            perfil.value = profile.getImageUrl();
+                            document.getElementById('f:registra').click();
+                            document.getElementById('f1:registra').click();
+                        }
+                        setTimeout(admin, 1000);
+                        $('#loginModal').modal('hide');
+                    }
+        </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+        <h:outputScript library="js" name="buscaVox.js" />
+    </h:body>
+</html>
