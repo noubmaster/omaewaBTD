@@ -145,10 +145,9 @@
                                                                    onclick="$('#modalParCom').modal('show');" 
                                                                    update=":parcomento">
                                                         <p:resetInput target=":parcomento:painel" />
-                                                        <f:setPropertyActionListener value="#{q}" target="#{musicaControle.musica}" />
+                                                        <f:setPropertyActionListener value="#{q.idMusica}" target="#{participaControle.idMusica}" />
                                                         <i class="glyphicon glyphicon-pencil"/>
                                                         <f:ajax listener="#{participaControle.preparaIncluir()}"/>
-                                                        <f:ajax listener="#{composicaoControle.preparaIncluir()}"/>
                                                     </p:commandLink>
                                                 </div>
                                             </td>
@@ -272,7 +271,7 @@
                                     id="id"
                                     required="true"
                                     maxlength="30"
-                                    value="#{musicaControle.musica.idMusica}"></p:inputText>
+                                    value="#{participaControle.idMusica}"></p:inputText>
                                 <h:outputLabel for="participante" value="Participante:" />
                                 <p:selectCheckboxMenu appendTo="participante" id="participante" value="#{participaControle.pId}" label="Artistas" multiple="true"
                                                       filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
@@ -285,7 +284,7 @@
                                            class="btn btn-default"
                                            update=":tabelaMusica"
                                            oncomplete="$('#modalParCom').modal('hide');">
-                                <f:ajax listener="#{participaControle.salvarP()}"/>
+                                <f:ajax listener="#{participaControle.salvarP}"/>
                             </p:commandLink>
                             <p:commandLink value="Fechar" 
                                            immediate="true" 

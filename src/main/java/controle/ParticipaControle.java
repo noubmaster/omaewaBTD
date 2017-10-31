@@ -50,9 +50,7 @@ public class ParticipaControle {
     public void preparaIncluir() {
         salvar = true;
         participa = new Participa();
-        System.out.println(idMusica);
         idArtista = 0;
-
     }
 
     public void preparaAlterar() {
@@ -65,13 +63,14 @@ public class ParticipaControle {
     public void salvarP() {
         Musica musica = new Musica();
         musica.setIdMusica(idMusica);
-        participa.setMusica(musica);
+        System.out.println(idMusica);
         if (salvar) {
             try {
                 for (int i = 0; i < pId.length; i++) {
                     Artista artista = new Artista();
                     artista.setIdArtista(pId[i]);
                     participa.setArtista(artista);
+                    participa.setMusica(musica);
                     participa.setPapel("Participante");
                     ParticipaDAO.inserir(participa);
                 }
