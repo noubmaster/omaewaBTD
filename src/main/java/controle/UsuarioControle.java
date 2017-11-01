@@ -50,8 +50,6 @@ public class UsuarioControle {
             atualizarUsuarios();
             tipo = usuario.getTipo();
             idUsuario = usuario.getIdUsuario();
-            System.out.println(tipo);
-            System.out.println(idUsuario);
         } catch (SQLException e) {
             e.printStackTrace();
         }

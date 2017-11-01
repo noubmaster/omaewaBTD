@@ -82,3 +82,8 @@
     background-color: #c82333;
     border-color: #cccccc;
 }
+.btn-primary ,.btn-primary-custom {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+}

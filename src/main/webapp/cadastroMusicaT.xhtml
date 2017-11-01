@@ -55,7 +55,7 @@
                                         <div class="input-group">
                                             <p:inputText id="txt" value="#{buscaControle.webInput}" placeholder="Search" class="form-control"/>
                                             <span class="input-group-btn">
-                                                <p:commandLink onclick="vozes()" class="btn btn-primary btn-outline"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
+                                                <p:commandLink onclick="vozes()" class="btn btn-primary btn-outline btn-primary-custom"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
                                                 <h:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" action="index.xhtml" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></h:commandLink>
                                             </span>
                                         </div>
@@ -290,17 +290,17 @@
                         </div>
                         <div class="modal-body">
                             <p:panelGrid columns="2" id="painel" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
-                                <label style="margin-right: 50px" for="id">Id</label>
+                                <label style="margin-right: 50px; display: none" for="id">Id</label>
                                 <p:inputText 
-                                    style="width: 225px"
+                                    style="width: 225px; display: none"
                                     styleClass="form-control"
                                     id="id"
                                     required="true"
                                     maxlength="30"
                                     value="#{participaControle.idMusica}"></p:inputText>
-                                <label style="margin-right: 50px" for="idc">Id</label>
+                                <label style="margin-right: 50px; display: none" for="idc">Id</label>
                                 <p:inputText 
-                                    style="width: 225px"
+                                    style="width: 225px; display: none"
                                     styleClass="form-control"
                                     id="idc"
                                     required="true"

@@ -25,9 +25,6 @@ public class UsuarioDAO {
         stmt.setString(2, usuario.getIdR());
         stmt.setString(3, usuario.getPerfil());
 
-        System.out.println("Login: " + usuario.getEmail());
-        System.out.println("Perfil: " + usuario.getIdR());
-
         stmt.execute();
         stmt.close();
         con.close();

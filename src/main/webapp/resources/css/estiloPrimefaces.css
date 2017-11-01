@@ -35,7 +35,7 @@
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
     background: #fff;
     color: #4f4f4f;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+    text-shadow: 0 0 0;
 }
 .ui-selectcheckboxmenu-header {
     margin-bottom: 0px;
@@ -49,9 +49,29 @@
     padding-top: 2px;
 }
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
-    border: 1px solid #7096ab;
-    background-color: #31b0d5;
+    border: 1px solid #a5a5a5;
+    background: #c4c4c461;
     font-weight: bold;
-    color: #1c4257;
+    color: #574f57;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+}
+.ui-selectcheckboxmenu-header .ui-chkbox {
+    float: left;
+    cursor: pointer;
+    margin-left: 2px;
+    margin-top: 3px;
+}
+.ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-close {
+    float: right;
+    padding: 1px;
+    margin-right: 2px;
+    margin-top: 2px;
+    display: block;
+}
+.ui-widget-header {
+    border: 1px solid #a8a8a8;
+    background: #c4c4c461;
+    color: #333;
+    font-weight: bold;
     text-shadow: 0 1px 0 rgba(255,255,255,0.7);
 }
