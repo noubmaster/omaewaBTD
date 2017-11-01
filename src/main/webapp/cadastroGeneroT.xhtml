@@ -117,6 +117,9 @@
                             <li><a href="/omaewa/cadastroArtistaT.xhtml">Cadastro de Artistas</a></li>
                             <li><a href="/omaewa/cadastroMusicaT.xhtml">Cadastro de Músicas</a></li>
                         </ul>
+                        <ul class="nav nav-sidebar" id="su" style="display: none;">
+                            <li><a href="/omaewa/manutencaoUser.xhtml">Manutenção de Usuários</a></li>
+                        </ul>
                     </div>
                     <h:form id="tabelaGenero">
                         <div class="col-sm-6 col-sm-offset-3 col-md-9 col-md-offset-2 main">
@@ -318,6 +321,12 @@
                     admUser.style.display = "none";
                 } else if (tipo === "1" || tipo === "2") {
                     admUser.style.display = "inline";
+                }
+                ;
+                if (tipo === "0" || tipo === "1") {
+                    su.style.display = "none";
+                } else if (tipo === "2") {
+                    su.style.display = "block";
                 }
                 ;
             }

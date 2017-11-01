@@ -18,7 +18,6 @@
         <script src="https://apis.google.com/js/platform.js"></script>
         <link rel="stylesheet" href="resources/css/navbarC.css"/>
         <link rel="stylesheet" href="resources/css/lista.css"/>
-        
     </h:head>
     <h:body>
         <div id="block" >
@@ -55,7 +54,7 @@
                                         <div class="input-group">
                                             <p:inputText id="txt" value="#{buscaControle.webInput}" placeholder="Search" class="form-control"/>
                                             <span class="input-group-btn">
-                                                <p:commandLink onclick="vozes()" class="btn btn-primary btn-outline btn-primary-custom"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
+                                                <p:commandLink onclick="vozes()" class="btn btn-primary btn-outline"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
                                                 <h:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" action="index.xhtml" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></h:commandLink>
                                             </span>
                                         </div>
@@ -116,73 +115,50 @@
                             <li><a href="/omaewa/cadastroGeneroT.xhtml">Cadastro de Generos</a></li>
                             <li><a href="/omaewa/cadastroAlbumT.xhtml">Cadastro de Albuns</a></li>
                             <li><a href="/omaewa/cadastroArtistaT.xhtml">Cadastro de Artistas</a></li>
-                            <li class="active"><a href="#">Cadastro de Músicas<span class="sr-only">(current)</span></a></li>
+                            <li><a href="/omaewa/cadastroMusicaT.xhtml">Cadastro de Músicas</a></li>
                         </ul>
-                        <ul class="nav nav-sidebar" id="su" style="display: none;">
-                            <li><a href="/omaewa/manutencaoUser.xhtml">Manutenção de Usuários</a></li>
+                        <ul class="nav nav-sidebar" id="su">
+                            <li class="active"><a href="#">Manutenção de Usuários<span class="sr-only">(current)</span></a></li>
                         </ul>
                     </div>
-
-                    <h:form id="tabelaMusica">
+                    <h:form id="tabelaGenero">
                         <div class="col-sm-6 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-                            <h1 class="page-header" style="display: inline">Cadastro de Músicas</h1>
+                            <h1 class="page-header" style="display: inline">Manutenção de Usuários</h1>
                         </div>
-                        <!-- Botao do Modal de cadastro -->
-                        <p:commandLink value="Novo" 
-                                       class="btn btn-lg btn-default" 
-                                       style="margin-top: 20px;"
-                                       action="#{musicaControle.preparaIncluir()}" 
-                                       onclick="$('#modalCadastro').modal('show');" 
-                                       update=":cadastramento">
-                            <p:resetInput target=":cadastramento:painel" />
-                        </p:commandLink>
-
+                        
                         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Nomes</th>
-                                            <th>Genero</th>
-                                            <th>Album</th>
+                                            <th>Imagem</th>
+                                            <th>Nome</th>
                                             <th>Opções</th>
                                         </tr>
                                     </thead>
-                                    <tbody >
-                                        <ui:repeat value="#{musicaControle.musicas}" var="q">
+                                    <tbody>
+                                        <ui:repeat value="#{usuarioControle.usuarios}" var="q">
                                             <tr>
-                                                <td>#{q.nomeMusica}</td>
-                                                <td>#{q.genero.nome}</td>
-                                                <td>#{q.album.nomeAlbum}</td>
-                                                <td>
+                                                <td style="width: 5%"><img class="img-responsive" src="#{q.perfil}" style="width: 25px; height: 25px; display: inline;" /></td>
+                                                <td>#{q.email}</td>
+                                                <td style="width: 10%"> 
                                                     <div class="btn-group">
                                                         <!-- Botao do Modal de excluir -->
                                                         <p:commandLink
                                                             styleClass="btn btn-info btn-sm"
                                                             onclick="$('#modalExcluir').modal('show');"
                                                             immediate="true" >
-                                                            <f:setPropertyActionListener value="#{q}" target="#{musicaControle.musica}" />
+                                                            <f:setPropertyActionListener value="#{q}" target="#{usuarioControle.usuario}" />
                                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                                         </p:commandLink>
                                                         <!-- Botao do Modal de Alterar -->
                                                         <p:commandLink class="btn btn-info btn-sm" 
-                                                                       action="#{musicaControle.preparaAlterar()}" 
+                                                                       action="#{usuarioControle.preparaAlterar()}" 
                                                                        onclick="$('#modalCadastro').modal('show');" 
                                                                        update=":cadastramento">
                                                             <p:resetInput target=":cadastramento:painel" />
-                                                            <f:setPropertyActionListener value="#{q}" target="#{musicaControle.musica}" />
+                                                            <f:setPropertyActionListener value="#{q}" target="#{usuarioControle.usuario}" />
                                                             <i class="fa fa-cog" aria-hidden="true"></i>
-                                                        </p:commandLink>
-                                                        <!-- Botao do Modal de PC -->
-                                                        <p:commandLink class="btn btn-info btn-sm" 
-                                                                       onclick="$('#modalParCom').modal('show');" 
-                                                                       update=":parcomento">
-                                                            <p:resetInput target=":parcomento:painel" />
-                                                            <f:setPropertyActionListener value="#{q.idMusica}" target="#{participaControle.idMusica}" />
-                                                            <f:setPropertyActionListener value="#{q.idMusica}" target="#{composicaoControle.idMusica}" />
-                                                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                            <f:ajax listener="#{participaControle.preparaIncluir()}"/>
-                                                            <f:ajax listener="#{composicaoControle.preparaIncluir()}"/>
                                                         </p:commandLink>
                                                     </div>
                                                 </td>
@@ -205,7 +181,7 @@
              aria-hidden="true" 
              data-keyboard="false" 
              data-backdrop="static">
-            <div class="modal-dialog modal-md">
+            <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <h:form id="cadastramento">
                         <div class="modal-header">
@@ -213,132 +189,31 @@
                             <h4 class="modal-title">Registrar</h4>
                         </div>
                         <div class="modal-body">
-                            <p:panelGrid columns="2" id="painel" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
-                                <label style="margin-right: 50px" for="nome">Nome</label>
-                                <p:inputText 
-                                    style="width: 225px"
-                                    styleClass="form-control"
-                                    id="nome"
-                                    required="true"
-                                    maxlength="30"
-                                    value="#{musicaControle.musica.nomeMusica}"></p:inputText>
-                                <label style="margin-right: 50px" for="faixa">Faixa</label>
-                                <p:inputText 
-                                    style="width: 225px"
-                                    styleClass="form-control"
-                                    id="faixa"
-                                    required="true"
-                                    maxlength="3"
-                                    value="#{musicaControle.musica.faixa}"></p:inputText>
-                                <label for="genero">Genero</label>
-                                <h:selectOneMenu 
-                                    style="width: 225px" 
-                                    required="true" id="genero" 
-                                    class="btn btn-default dropdown-toggle" 
-                                    value="#{musicaControle.idGenero}">
-                                    <f:selectItem itemValue="Selecione"/>
-                                    <f:selectItems value="#{generoControle.generos}" var="aux" itemValue="#{aux.idGenero}" itemLabel="#{aux.nome}"></f:selectItems>
-                                </h:selectOneMenu>
-                                <label for="album">Albums</label>
-                                <h:selectOneMenu 
-                                    style="width: 225px" 
-                                    required="true" id="album" 
-                                    class="btn btn-default dropdown-toggle" 
-                                    value="#{musicaControle.idAlbum}">
-                                    <f:selectItem itemValue="Selecione"/>
-                                    <f:selectItems value="#{albumControle.albums}" var="aux" itemValue="#{aux.idAlbum}" itemLabel="#{aux.nomeAlbum}"></f:selectItems>
-                                </h:selectOneMenu>
-                                <label for="letra">Letra</label>
-                                <p:inputTextarea 
-                                    style="resize: none;" 
-                                    styleClass="form-control"
-                                    id="letra"
-                                    rows="5"
-                                    cols="33"
-                                    required="true"
-                                    value="#{musicaControle.musica.letra}"></p:inputTextarea>
-                            </p:panelGrid>
+                            <h:panelGrid columns="2" id="painel">
+                                <label style="margin-right: 2px" for="tipo">Tipo</label>
+                                    <h:selectOneMenu 
+                                        style="width: 225px" 
+                                        required="true" id="tipo" 
+                                        class="btn btn-default dropdown-toggle" 
+                                        value="#{usuarioControle.usuario.tipo}">
+                                        <f:selectItem itemValue="Selecione"/>
+                                        <f:selectItem itemValue="0" itemLabel="Usuário"></f:selectItem>
+                                        <f:selectItem itemValue="1" itemLabel="Moderador"></f:selectItem>
+                                        <f:selectItem itemValue="2" itemLabel="Administrador"></f:selectItem>
+                                    </h:selectOneMenu>
+                            </h:panelGrid>
                         </div>
                         <div class="modal-footer">
                             <p:commandLink value="Salvar" 
                                            class="btn btn-default"
-                                           update=":tabelaMusica"
-                                           action="#{musicaControle.salvar}"
+                                           update=":tabelaGenero"
+                                           action="#{usuarioControle.salvar}"
                                            oncomplete="$('#modalCadastro').modal('hide');"
                                            />
-                            <p:commandLink value="Fechar" 
+                            <p:commandLink value="Não" 
                                            immediate="true" 
                                            styleClass="btn btn-default" 
-                                           oncomplete="$('#modalCadastro').modal('hide');"/>
-                        </div>
-                    </h:form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Participa/Composição -->
-        <div class="modal fade" 
-             id="modalParCom" 
-             tabindex="-1" role="dialog" 
-             aria-labelledby="modalParCom" 
-             aria-hidden="true" 
-             data-keyboard="false" 
-             data-backdrop="static">
-            <div class="modal-dialog modal-md">
-                <div class="modal-content">
-                    <h:form id="parcomento">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&#215;</button>
-                            <h4 class="modal-title">Registrar</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p:panelGrid columns="2" id="painel" columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid" styleClass="ui-panelgrid-blank">
-                                <label style="margin-right: 50px; display: none" for="id">Id</label>
-                                <p:inputText 
-                                    style="width: 225px; display: none"
-                                    styleClass="form-control"
-                                    id="id"
-                                    required="true"
-                                    maxlength="30"
-                                    value="#{participaControle.idMusica}"></p:inputText>
-                                <label style="margin-right: 50px; display: none" for="idc">Id</label>
-                                <p:inputText 
-                                    style="width: 225px; display: none"
-                                    styleClass="form-control"
-                                    id="idc"
-                                    required="true"
-                                    maxlength="30"
-                                    value="#{composicaoControle.idMusica}"></p:inputText>
-                                <h:outputLabel for="participante" value="Participante:" />
-                                <p:selectCheckboxMenu appendTo="participante" id="participante" value="#{participaControle.pId}" label="Artistas" multiple="true"
-                                                      filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                                    <f:selectItems value="#{artistaControle.artistas}" var="aux" itemValue="#{aux.idArtista}" itemLabel="#{aux.nomeArtista}"></f:selectItems>
-                                </p:selectCheckboxMenu>
-                                <h:outputLabel for="interprete" value="Interprete:" />
-                                <p:selectCheckboxMenu appendTo="interprete" id="interprete" value="#{participaControle.iId}" label="Artistas" multiple="true"
-                                                      filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                                    <f:selectItems value="#{artistaControle.artistas}" var="aux" itemValue="#{aux.idArtista}" itemLabel="#{aux.nomeArtista}"></f:selectItems>
-                                </p:selectCheckboxMenu>
-                                <h:outputLabel for="compositor" value="Composição:" />
-                                <p:selectCheckboxMenu appendTo="compositor" id="compositor" value="#{composicaoControle.cId}" label="Artistas" multiple="true"
-                                                      filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                                    <f:selectItems value="#{artistaControle.artistas}" var="aux" itemValue="#{aux.idArtista}" itemLabel="#{aux.nomeArtista}"></f:selectItems>
-                                </p:selectCheckboxMenu>
-                            </p:panelGrid>
-                        </div>
-                        <div class="modal-footer">
-                            <p:commandLink value="Salvar" 
-                                           class="btn btn-default"
-                                           update=":tabelaMusica"
-                                           oncomplete="$('#modalParCom').modal('hide');">
-                                <f:ajax listener="#{participaControle.salvarP()}"/>
-                                <f:ajax listener="#{participaControle.salvarI()}"/>
-                                <f:ajax listener="#{composicaoControle.salvar()}"/>
-                            </p:commandLink>
-                            <p:commandLink value="Fechar" 
-                                           immediate="true" 
-                                           styleClass="btn btn-default" 
-                                           oncomplete="$('#modalParCom').modal('hide');"/>
+                                           oncomplete="$('#modalCadastro').modal('hide');"/> 
                         </div>
                     </h:form>
                 </div>
@@ -365,8 +240,8 @@
                                 <p:commandLink value="Sim" 
                                                styleClass="btn btn-danger"
                                                oncomplete="$('#modalExcluir').modal('hide');" 
-                                               update=":tabelaMusica"  
-                                               actionListener="#{musicaControle.excluir()}"/>
+                                               update=":tabelaGenero"  
+                                               actionListener="#{generoControle.excluir()}"/>
                                 <p:commandLink value="Não" 
                                                immediate="true" 
                                                styleClass="btn btn-default" 
@@ -379,7 +254,7 @@
         </h:form>
         <!-- Fim Pagina de cadastro -->
         <!-- botao do login parte 2 -->
-        <div id="loginIfBlock">
+        <div id="loginIfBlock" >
             <p:commandLink value="Log In"
                            styleClass="btn btn-default" 
                            style="padding: 8px; margin-top: 6px; margin-right: 6px;"
@@ -423,19 +298,15 @@
             var tipo = document.getElementById("f1:tipoUser").value;
             var admUser = document.getElementById("admUser");
             var su = document.getElementById("su");
-
-
-
-
             function bloquear() {
-                if (currentPath === "/omaewa/cadastroMusicaT.xhtml" ||
-                        currentPath === "/omaewa/cadastroMusicaT.xhtml#") {
+                if (currentPath === "/omaewa/manutencaoUser.xhtml" ||
+                        currentPath === "/omaewa/manutencaoUser.xhtml#") {
                     tipo = document.getElementById("f1:tipoUser").value;
                     console.log(tipo);
-                    if (tipo === "0") {
+                    if (tipo === "0" || tipo === "1") {
                         block.style.display = "none";
                         loginIfBlock.style.display = "inline";
-                    } else {
+                    } else if (tipo === "2") {
                         loginIfBlock.style.display = "none";
                         block.style.display = "inline";
                     }
@@ -443,7 +314,6 @@
                 ;
             }
             bloquear();
-
             function admin() {
                 tipo = document.getElementById("f1:tipoUser").value;
                 console.log(tipo);
