@@ -33,11 +33,25 @@
     -webkit-box-shadow: 0 0 5px #85b2cb;
 }
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-    
-    /* background: #c4c4c4 url(/omaewa/javax.faces.resource/images/ui-bg_highlight-hard_80_c4c4c4_1x100.png.xhtml?ln=primefaces-aristo) 50% 50% repeat-x; */
-    background: #fff;
-    /* background: #c4c4c4 -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0.8)),to(rgba(255,255,255,0))); */
     background: #fff;
     color: #4f4f4f;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+}
+.ui-selectcheckboxmenu-header {
+    margin-bottom: 0px;
+    padding: 0px;
+}
+.ui-selectcheckboxmenu-header .ui-inputfield {
+    padding: 0px 0px 0px 0px;
+}
+.ui-selectcheckboxmenu-header {
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    border: 1px solid #7096ab;
+    background-color: #31b0d5;
+    font-weight: bold;
+    color: #1c4257;
     text-shadow: 0 1px 0 rgba(255,255,255,0.7);
 }

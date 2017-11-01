@@ -153,7 +153,7 @@
                                                             onclick="$('#modalExcluir').modal('show');"
                                                             immediate="true" >
                                                             <f:setPropertyActionListener value="#{q}" target="#{artistaControle.artista}" />
-                                                            <i class="glyphicon glyphicon-trash"/>
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
                                                         </p:commandLink>
                                                         <!-- Botao do Modal de Alterar -->
                                                         <p:commandLink class="btn btn-info btn-sm" 
@@ -162,7 +162,7 @@
                                                                        update=":cadastramento">
                                                             <p:resetInput target=":cadastramento:painel" />
                                                             <f:setPropertyActionListener value="#{q}" target="#{artistaControle.artista}" />
-                                                            <i class="glyphicon glyphicon-cog"/>
+                                                            <i class="fa fa-cog" aria-hidden="true"></i>
                                                         </p:commandLink>
                                                     </div>
                                                 </td>
