@@ -38,16 +38,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <button class="btn btn-default dropdown-toggle btn-outline" id="admUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown"> Admin Options
-                                <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="/omaewa/cadastroMusicaT.xhtml">Cadastro Musica</a></li>
-                                <li><a href="/omaewa/cadastroGeneroT.xhtml">Cadastro Genero</a></li>
-                                <li><a href="/omaewa/cadastroAlbumT.xhtml">Cadastro Album</a></li>
-                                <li><a href="/omaewa/cadastroArtistaT.xhtml">Cadastro Artista</a></li>
-                            </ul>
-                        </li>
+                        
                     </ul>
                     <div class="navbar-form navbar-left">
                         <ul class="nav navbar-nav">
@@ -75,6 +66,10 @@
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li><a href="#" onclick="signOut();">Sign out</a></li>
+                                <div id="admUser" style="display: none;">
+                                    <li class="divider"></li>
+                                    <li><a href="/omaewa/cadastroT.xhtml">Administração</a></li>
+                                </div>
                             </ul>
                         </li>
                     </ul>
@@ -82,10 +77,10 @@
             </div><!-- /.container-fluid -->
         </nav>
         <div style="height: 51px;"/>
-        
+
         <div class="container">
             <div id="block" >
-                
+
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 bgcool">
                         <div class="page-header">
@@ -220,7 +215,7 @@
             //ID -> Avaliação
             avUsuario.value = idUsuario;
             avMusica.value = idMusica;
-            
+
             if (currentPath === "/memes/faces/cadastroGeneroT.xhtml" ||
                     currentPath === "/memes/faces/cadastroGeneroT.xhtml#") {
                 if (tipo === "0") {
