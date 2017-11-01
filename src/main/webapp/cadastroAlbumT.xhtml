@@ -12,10 +12,11 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <h:outputStylesheet library="css" name="admTable.css"/>
-        <h:outputStylesheet library="css" name="lista.css"/>
+        <link rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css"/>
         <meta name="google-signin-client_id" content="488287116710-mg5d2db5prvt3gep4l6a037k2jclguoa.apps.googleusercontent.com"/>
         <script src="https://apis.google.com/js/platform.js"></script>
+        <link rel="stylesheet" href="resources/css/navbarC.css"/>
+        <link rel="stylesheet" href="resources/css/lista.css"/>
     </h:head>
     <h:body>
         <div id="block" >
@@ -48,9 +49,14 @@
                         </ul>
                         <div class="navbar-form navbar-left">
                             <ul class="nav navbar-nav">
-                                <li><h:form>
-                                        <p:inputText style="width: 180px" value="#{buscaControle.webInput}" placeholder="Search" class="form-control"/>
-                                        <h:commandLink type="submit" value="Submit" action="#{buscaControle.buscar}" class="btn btn-default"></h:commandLink>
+                                <li><h:form id="busca">
+                                        <div class="input-group">
+                                            <p:inputText id="txt" value="#{buscaControle.webInput}" placeholder="Search" class="form-control"/>
+                                            <span class="input-group-btn">
+                                                <p:commandLink onclick="vozes()" class="btn btn-primary btn-outline"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
+                                                <h:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" action="index.xhtml" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></h:commandLink>
+                                            </span>
+                                        </div>
                                     </h:form></li>
                             </ul>
                         </div>
@@ -73,7 +79,6 @@
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
-            <div style="height: 51px;"/>
             <!-- Checagem de usuario -->
             <h:form id="f" style="display: none">
                 <h:inputText id="email" value="#{usuarioControle.usuario.email}"/>
@@ -102,23 +107,43 @@
                                  action="#{usuarioControle.nullar()}"/>
             </h:form>
             <!-- Inicio Pagina de cadastro -->
-            <div>
-                <h1>Cadastro Albums Musicais</h1>
-                <h:form id="tabelaAlbum">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <table class="table table-hover cTable">
-                                    <thead class="cThead">
-                                        <tr class="cThead">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-3 col-md-2 sidebar">
+                        <ul class="nav nav-sidebar">
+                            <li><a href="/omaewa/cadastroGeneroT.xhtml">Cadastro de Generos</a></li>
+                            <li class="active"><a href="#">Cadastro de Albuns<span class="sr-only">(current)</span></a></li>
+                            <li><a href="/omaewa/cadastroArtistaT.xhtml">Cadastro de Artistas</a></li>
+                            <li><a href="/omaewa/cadastroMusicaT.xhtml">Cadastro de Músicas</a></li>
+                        </ul>
+                    </div>
+                    <h:form id="tabelaAlbum">
+                        <div class="col-sm-6 col-sm-offset-3 col-md-9 col-md-offset-2 main">
+                            <h1 class="page-header" style="display: inline">Cadastro de Albums</h1>
+                        </div>
+                        <!-- Botao do Modal de cadastro -->
+                        <p:commandLink value="Novo" 
+                                       class="btn btn-lg btn-default" 
+                                       style="margin-top: 20px;"
+                                       action="#{albumControle.preparaIncluir()}" 
+                                       onclick="$('#modalCadastro').modal('show');" 
+                                       update=":cadastramento">
+                            <p:resetInput target=":cadastramento:painel" />
+                        </p:commandLink>
+
+                        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
                                             <th>Nomes</th>
                                             <th>Anos</th>
                                             <th>Opções</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="cTbody">
+                                    <tbody>
                                         <ui:repeat value="#{albumControle.albums}" var="q">
-                                            <tr class="cThead">
+                                            <tr>
                                                 <td>#{q.nomeAlbum}</td>
                                                 <td>#{q.ano}</td>
                                                 <td>
@@ -143,19 +168,12 @@
                                             </tr>
                                         </ui:repeat>
                                     </tbody>
-                                </table>                                        
-                            </div>                       
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Botao do Modal de cadastro -->
-                    <p:commandLink value="Novo" 
-                                   class="btn btn-lg btn-default" 
-                                   action="#{albumControle.preparaIncluir()}" 
-                                   onclick="$('#modalCadastro').modal('show');" 
-                                   update=":cadastramento">
-                        <p:resetInput target=":cadastramento:painel" />
-                    </p:commandLink>
-                </h:form>
+                    </h:form>
+
+                </div>
             </div>
         </div>
         <!-- Modal Cadastro -->
