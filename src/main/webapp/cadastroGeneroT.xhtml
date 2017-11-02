@@ -9,6 +9,7 @@
     <h:head>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <link rel="stylesheet" href="resources/css/estiloPrimefaces.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -145,23 +146,25 @@
                                             <tr>
                                                 <td>#{q.nome}</td>
                                                 <td>
-                                                    <!-- Botao do Modal de excluir -->
-                                                    <p:commandLink
-                                                        styleClass="btn btn-info btn-sm"
-                                                        onclick="$('#modalExcluir').modal('show');"
-                                                        immediate="true" >
-                                                        <f:setPropertyActionListener value="#{q}" target="#{generoControle.genero}" />
-                                                        <i class="glyphicon glyphicon-trash"/>
-                                                    </p:commandLink>
-                                                    <!-- Botao do Modal de Alterar -->
-                                                    <p:commandLink class="btn btn-info btn-sm" 
-                                                                   action="#{generoControle.preparaAlterar()}" 
-                                                                   onclick="$('#modalCadastro').modal('show');" 
-                                                                   update=":cadastramento">
-                                                        <p:resetInput target=":cadastramento:painel" />
-                                                        <f:setPropertyActionListener value="#{q}" target="#{generoControle.genero}" />
-                                                        <i class="glyphicon glyphicon-cog"/>
-                                                    </p:commandLink>
+                                                    <div class="btn-group">
+                                                        <!-- Botao do Modal de excluir -->
+                                                        <p:commandLink
+                                                            styleClass="btn btn-info btn-sm"
+                                                            onclick="$('#modalExcluir').modal('show');"
+                                                            immediate="true" >
+                                                            <f:setPropertyActionListener value="#{q}" target="#{generoControle.genero}" />
+                                                            <i class="glyphicon glyphicon-trash"/>
+                                                        </p:commandLink>
+                                                        <!-- Botao do Modal de Alterar -->
+                                                        <p:commandLink class="btn btn-info btn-sm" 
+                                                                       action="#{generoControle.preparaAlterar()}" 
+                                                                       onclick="$('#modalCadastro').modal('show');" 
+                                                                       update=":cadastramento">
+                                                            <p:resetInput target=":cadastramento:painel" />
+                                                            <f:setPropertyActionListener value="#{q}" target="#{generoControle.genero}" />
+                                                            <i class="glyphicon glyphicon-cog"/>
+                                                        </p:commandLink>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </ui:repeat>
