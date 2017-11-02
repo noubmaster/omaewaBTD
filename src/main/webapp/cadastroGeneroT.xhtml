@@ -10,12 +10,11 @@
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <link rel="stylesheet" href="resources/css/estiloPrimefaces.css"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css"/>
         <meta name="google-signin-client_id" content="488287116710-mg5d2db5prvt3gep4l6a037k2jclguoa.apps.googleusercontent.com"/>
-        <script src="https://apis.google.com/js/platform.js"></script>
+        <script src="https://apis.google.com/js/platform.js" async="async"></script>
         <link rel="stylesheet" href="resources/css/navbarC.css"/>
         <link rel="stylesheet" href="resources/css/lista.css"/>
     </h:head>
@@ -288,85 +287,11 @@
                 </div>
             </div>
         </h:form>
-        <script type="text/javascript">
-            var currentPath = window.location.pathname;
-            var currentPge = window.location.href;
-            var block = document.getElementById("block");
-            var loginIfBlock = document.getElementById("loginIfBlock");
-            var tipo = document.getElementById("f1:tipoUser").value;
-            var admUser = document.getElementsByClassName("admUser");
-            var su = document.getElementById("su");
-            function bloquear() {
-                if (currentPath === "/omaewa/cadastroGeneroT.xhtml" ||
-                        currentPath === "/omaewa/cadastroGeneroT.xhtml#") {
-                    tipo = document.getElementById("f1:tipoUser").value;
-                    console.log(tipo);
-                    if (tipo === "0") {
-                        block.style.display = "none";
-                        loginIfBlock.style.display = "inline";
-                    } else {
-                        loginIfBlock.style.display = "none";
-                        block.style.display = "inline";
-                    }
-                }
-                ;
-            }
-            bloquear();
-            function admin() {
-                tipo = document.getElementById("f1:tipoUser").value;
-                console.log(tipo);
-                if (tipo === "0") {
-                    admUser.style.display = "none";
-                } else if (tipo === "1" || tipo === "2") {
-                    $(admUser).fadeIn().css("display", "block");
-                }
-                ;
-                if (tipo === "0" || tipo === "1") {
-                    su.style.display = "none";
-                } else if (tipo === "2") {
-                    $(su).fadeIn().css("display", "block");
-                }
-                ;
-            }
-
-            function signOut() {
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function () {
-                    console.log('User signed out.');
-                    login.style.display = "inline";
-                    optionsUser.style.display = "none";
-
-                });
-                document.getElementById('fodasse:fodasse').click();
-                location.reload();
-            }
-
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                var login = document.getElementById("login");
-                var optionsUser = document.getElementById("optionsUser");
-                var email = document.getElementById('f:email');
-                var idR = document.getElementById('f:idR');
-                var idR2 = document.getElementById('f1:idR');
-                var perfil = document.getElementById('f:perfil');
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-                if (profile.getId() !== null) {
-                    login.style.display = "none";
-                    optionsUser.style.display = "inline";
-                    console.log('ID: ' + profile.getId());
-                    email.value = profile.getEmail();
-                    idR.value = profile.getId();
-                    idR2.value = profile.getId();
-                    perfil.value = profile.getImageUrl();
-                    document.getElementById('f:registra').click();
-                    document.getElementById('f1:registra').click();
-                }
-                setTimeout(admin, 1000);
-                setTimeout(bloquear, 1000);
-                $('#myModal').modal('hide');
-            }
-        </script>
+        <script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <script src="resources/js/admBlock.js"></script>
+        <script src="resources/js/pageBlock.js"></script>
+        <script src="resources/js/googleLogin.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+        <script src="resources/js/buscaVox.js"></script>
     </h:body>
 </html>

@@ -8,228 +8,162 @@
     <h:head>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/css/estiloPrimefaces.css"/>
+        <link rel="stylesheet" href="resources/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css"/>
         <meta name="google-signin-client_id" content="488287116710-mg5d2db5prvt3gep4l6a037k2jclguoa.apps.googleusercontent.com"/>
         <script src="https://apis.google.com/js/platform.js" async="async"></script>
         <title>BitesTheDust</title>
         <h:outputStylesheet library="css" name="musicP.css"/>
-        <link rel="stylesheet" href="resources/css/home.css"/>
         <link rel="stylesheet" href="resources/css/navbar.css"/>
+        <h:outputStylesheet library="css" name="searchBoxes.css"/>
     </h:head>
     <h:body>
-        <div class="site-wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/omaewa/index.xhtml">BTheD</a>
+                </div>
 
-            <div class="site-wrapper-inner">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                    <div class="navbar-form navbar-left">
+                        <ul class="nav navbar-nav">
 
-                <div class="cover-container">
-                    <div class="masthead clearfix">
-                        <div class="inner">
-                            <div id="block" >
-                                <nav>
-                                    <ul class="nav nav-pills pull-left">
-                                        <li class="dropdown">
-                                            <button class="btn btn-danger dropdown-toggle" id="admUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown"> Admin Options
-                                                <span class="caret"></span></button>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="/omaewa/cadastroMusicaT.xhtml">Cadastro Musica</a></li>
-                                                <li><a href="/omaewa/cadastroGeneroT.xhtml">Cadastro Genero</a></li>
-                                                <li><a href="/omaewa/cadastroAlbumT.xhtml">Cadastro Album</a></li>
-                                                <li><a href="/omaewa/cadastroArtistaT.xhtml">Cadastro Artista</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul class="nav nav-pills pull-right">
-                                        <li><p:commandLink value="Log In" 
-                                                           id="login"
-                                                           styleClass="btn btn-danger" 
-                                                           style="padding: 8px; margin-top: 6px; margin-right: 6px;"
-                                                           onclick="$('#myModal').modal('show');"
-                                                           update=":memes:myMemes"
-                                                           immediate="true" /></li>
-                                        <li class="dropdown">
-                                            <button class="btn btn-danger dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
-                                                <span class="caret"></span></button>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#" onclick="signOut();">Sign out</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
-                                <div class="row">
-                                    <ul style="list-style: none;">
-
-                                    </ul>
-
-                                </div>
-                                <!-- Checagem de usuario -->
-                                <h:form id="f" style="display: none">
-                                    <p:panel id="panel">
-                                        <p:inputText id="email" value="#{usuarioControle.usuario.email}"/>
-                                        <p:inputText id="idR" value="#{usuarioControle.usuario.idR}"/>
-                                        <p:inputText id="perfil" value="#{usuarioControle.usuario.perfil}"/>
-                                        <p:commandButton value="Salvar" 
-                                                         id="registra"
-                                                         class="btn btn-default"
-                                                         action="#{usuarioControle.salvar}">
-                                        </p:commandButton>
-                                    </p:panel>
-                                </h:form>
-                                <h:form id="f1" style="display: none">
-                                    <p:panel id="panel">
-                                        <p:inputText id="tipoUser" value="#{usuarioControle.tipo}"/>
-                                        <p:inputText id="idR" value="#{usuarioControle.idR}"/>
-                                        <p:commandButton value="Salvar" 
-                                                         id="registra"
-                                                         class="btn btn-default"
-                                                         update="f1"
-                                                         actionListener="#{usuarioControle.pegerIdR()}">
-                                        </p:commandButton>
-                                    </p:panel>
-                                </h:form>
-                                <h:form id="fodasse" style="display: none">
-                                    <p:commandButton value="fodasse"
-                                                     id="fodasse"
-                                                     update="fodasse"
-                                                     action="#{usuarioControle.nullar()}"/>
-                                </h:form>
-                            </div>
-                            <!-- botao do login parte 2 -->
-                            <div id="loginIfBlock" style="display: none">
-                                <p:commandLink value="Log In"
-                                               styleClass="btn btn-default" 
-                                               style="padding: 8px; margin-top: 6px; margin-right: 6px;"
-                                               onclick="$('#myModal').modal('show');"
-                                               update=":memes:myMemes"
-                                               immediate="true" />
-                                <a href="#" onclick="signOut();">Sign out</a>
-                            </div>
-                            <!-- MODAL LOGIN -->
-                            <h:form id="memes">
-                                <div class="modal fade" 
-                                     id="myModal"
-                                     tabindex="-1" role="dialog"
-                                     aria-labelledby="myModal" 
-                                     aria-hidden="true" 
-                                     data-keyboard="false" 
-                                     data-backdrop="static">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <h:form id="myMemes">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal">&#215;</button>
-                                                    <h4 class="modal-title">Login</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="g-signin2" style="margin-left: 25%" data-onsuccess="onSignIn">
-                                                    </div>
-                                                </div>
-                                                <h:panelGroup layout="block" styleClass="modal-footer">
-                                                    <p:commandLink value="Close" immediate="true" styleClass="btn btn-default" oncomplete="$('#myModal').modal('hide');" />
-                                                </h:panelGroup>
-                                            </h:form>
-                                        </div>
+                        </ul>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav">
+                            <li><p:commandButton value="Log In" 
+                                                 id="login"
+                                                 styleClass="btn btn-default" 
+                                                 style=" margin-top: 6px; padding: 6px 0px 6px 0px; margin-right: 6px;"
+                                                 onclick="$('#myModal').modal('show');"
+                                                 update=":memes:myMemes"
+                                                 immediate="true" /></li>
+                            <li class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" onclick="signOut();">Sign out</a></li>
+                                    <div class="admUser" style="display: none">
+                                        <li class="divider"></li>
                                     </div>
+                                    <li class="admUser" style="display: none"><a href="/omaewa/cadastroT.xhtml">Administração</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div style="height: 51px;"/>
+
+        <div class="container">
+            <div id="block" >
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <img class="img-responsive" src="resources/svg/logo2.svg" alt="Chania"/>
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <h:form id="busca">
+                                <div class="input-group">
+                                    <p:inputText id="txt" value="#{buscaControle.webInput}" placeholder="Search" class="form-control"/>
+                                    <span class="input-group-btn">
+                                        <p:commandLink onclick="vozes()" class="btn btn-default btn-outline"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
+                                        <h:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" action="index.xhtml" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></h:commandLink>
+                                    </span>
                                 </div>
                             </h:form>
                         </div>
                     </div>
                 </div>
+                <!-- Checagem de usuario -->
+                <h:form id="f" style="display: none">
+                    <p:panel id="panel">
+                        <p:inputText id="email" value="#{usuarioControle.usuario.email}"/>
+                        <p:inputText id="idR" value="#{usuarioControle.usuario.idR}"/>
+                        <p:inputText id="perfil" value="#{usuarioControle.usuario.perfil}"/>
+                        <p:commandButton value="Salvar" 
+                                         id="registra"
+                                         class="btn btn-default"
+                                         action="#{usuarioControle.salvar}">
+                        </p:commandButton>
+                    </p:panel>
+                </h:form>
+                <h:form id="f1" style="display: none">
+                    <p:panel id="panel">
+                        <p:inputText id="tipoUser" value="#{usuarioControle.tipo}"/>
+                        <p:inputText id="idR" value="#{usuarioControle.idR}"/>
+                        <p:commandButton value="Salvar" 
+                                         id="registra"
+                                         class="btn btn-default"
+                                         update="f1"
+                                         actionListener="#{usuarioControle.pegerIdR()}">
+                        </p:commandButton>
+                    </p:panel>
+                </h:form>
+                <h:form id="fodasse" style="display: none">
+                    <p:commandButton value="fodasse"
+                                     id="fodasse"
+                                     update="fodasse"
+                                     action="#{usuarioControle.nullar()}"/>
+                </h:form>
             </div>
+            <!-- botao do login parte 2 -->
+            <div id="loginIfBlock" style="display: none">
+                <p:commandLink value="Log In"
+                               styleClass="btn btn-default" 
+                               style="padding: 8px; margin-top: 6px; margin-right: 6px;"
+                               onclick="$('#myModal').modal('show');"
+                               update=":memes:myMemes"
+                               immediate="true" />
+                <a href="#" onclick="signOut();">Sign out</a>
+            </div>
+            <!-- MODAL LOGIN -->
+            <h:form id="memes">
+                <div class="modal fade" 
+                     id="myModal"
+                     tabindex="-1" role="dialog"
+                     aria-labelledby="myModal" 
+                     aria-hidden="true" 
+                     data-keyboard="false" 
+                     data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <h:form id="myMemes">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&#215;</button>
+                                    <h4 class="modal-title">Login</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="g-signin2" style="margin-left: 25%" data-onsuccess="onSignIn">
+                                    </div>
+                                </div>
+                                <h:panelGroup layout="block" styleClass="modal-footer">
+                                    <p:commandLink value="Close" immediate="true" styleClass="btn btn-default" oncomplete="$('#myModal').modal('hide');" />
+                                </h:panelGroup>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
         </div>
-        <script type="text/javascript">
-            var currentPath = window.location.pathname;
-            var currentPge = window.location.href;
-            var block = document.getElementById("block");
-            var loginIfBlock = document.getElementById("loginIfBlock");
-            var tipo = document.getElementById("f1:tipoUser").value;
-            var admUser = document.getElementById("admUser");
-            var idR = document.getElementById('f:idR');
-            var idR2 = document.getElementById('f1:idR');
-            var login = document.getElementById("login");
-            var optionsUser = document.getElementById("optionsUser");
-            var email = document.getElementById('f:email');
-            var perfil = document.getElementById('f:perfil');
-            var idRGet;
-
-            if (currentPath === "/memes/faces/cadastroGeneroT.xhtml" ||
-                    currentPath === "/memes/faces/cadastroGeneroT.xhtml#") {
-                if (tipo === "0") {
-                    block.style.display = "none";
-                    loginIfBlock.style.display = "inline";
-                } else {
-                    loginIfBlock.style.display = "none";
-                    block.style.display = "inline";
-                }
-            }
-            ;
-            function admin() {
-                tipo = document.getElementById("f1:tipoUser").value;
-                if (tipo === "0") {
-                    admUser.style.display = "none";
-                } else if (tipo === "1" || tipo === "2") {
-                    admUser.style.display = "inline";
-                }
-                ;
-            }
-
-            function signOut() {
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function () {
-                    console.log('User signed out.');
-                    login.style.display = "inline";
-                    optionsUser.style.display = "none";
-                });
-                idRGet = null;
-                idR.value = idRGet;
-                idR2.value = idRGet;
-                document.getElementById('fodasse:fodasse').click();
-                location.reload();
-            }
-
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                if (profile.getId() !== null) {
-                    idRGet = profile.getId();
-                    login.style.display = "none";
-                    optionsUser.style.display = "inline";
-                    email.value = profile.getEmail();
-                    idR.value = idRGet;
-                    idR2.value = idRGet;
-                    perfil.value = profile.getImageUrl();
-                    document.getElementById('f:registra').click();
-                    document.getElementById('f1:registra').click();
-                }
-                setTimeout(admin, 1000);
-                $('#myModal').modal('hide');
-            }
-
-            dimLetras();
-            function dimLetras() {
-                $("div.panel-body").text(function (index, currentText) {
-                    return currentText.substr(0, 175) + "...";
-                });
-            }
-        </script>
+        <script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <script src="resources/js/admBlock.js"></script>
+        <script src="resources/js/pageBlock.js"></script>
+        <script src="resources/js/googleLogin.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
-        <script>
-            function vozes() {
-                var textInput = document.getElementById("busca:txt");
-                if (annyang) {
-
-                    annyang.addCallback('result', function (phrases) {
-                        console.log("I think the user said: ", phrases[0]);
-                        textInput.value = phrases[0];
-                        console.log("But then again, it could be any of the following: ", phrases);
-
-                    });
-
-                    // Start listening.
-                    annyang.start();
-                }
-            }
-        </script>
+        <script src="resources/js/buscaVox.js"></script>
     </h:body>
 </html>
