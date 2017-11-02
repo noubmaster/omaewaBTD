@@ -34,7 +34,7 @@ public class UsuarioControle {
     }
 
     public void preparaIncluir() {
-        System.out.println("ta passando pelo incluir");
+        
         salvar = true;
         usuario = new Usuario();
     }
@@ -66,16 +66,16 @@ public class UsuarioControle {
         if (salvar) {
             try {
                 UsuarioDAO.inserir(usuario);
-                System.out.println("usuario incluido");
+                
             } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e) {
-                System.out.println("este usuario ja foi cadastrado :D");
+                
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
             try {
                 UsuarioDAO.alterar(usuario);
-                System.out.println("usuario alterado");
+                
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -88,7 +88,7 @@ public class UsuarioControle {
         try {
             UsuarioDAO.excluir(usuario);
             atualizarUsuarios();
-            System.out.println("usuario excluido");
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }

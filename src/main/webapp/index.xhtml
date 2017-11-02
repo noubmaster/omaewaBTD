@@ -8,6 +8,7 @@
     <h:head>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <link rel="stylesheet" href="resources/css/estiloPrimefaces.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -51,24 +52,27 @@
                         </ul>
                     </div>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><p:commandLink value="Log In" 
-                                           id="login"
-                                           styleClass="btn btn-default" 
-                                           style="padding: 8px; margin-top: 6px; margin-right: 6px;"
-                                           onclick="$('#myModal').modal('show');"
-                                           update=":memes:myMemes"
-                                           immediate="true" /></li>
-                        <li class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
-                                <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" onclick="signOut();">Sign out</a></li>
-                                <div id="admUser" style="display: none;">
-                                    <li class="divider"></li>
-                                    <li><a href="/omaewa/cadastroT.xhtml">Administração</a></li>
-                                </div>
-                            </ul>
-                        </li>
+                        <ul class="nav navbar-nav">
+                            <li><p:commandButton value="Log In" 
+                                                 id="login"
+                                                 styleClass="btn btn-default" 
+                                                 style=" margin-top: 6px; padding: 6px 0px 6px 0px; margin-right: 6px;"
+                                                 onclick="$('#myModal').modal('show');"
+                                                 update=":memes:myMemes"
+                                                 immediate="true" /></li>
+                            <li class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" onclick="signOut();">Sign out</a></li>
+                                    <div class="admUser" style="display: none">
+                                        <li class="divider"></li>
+                                    </div>
+                                    <li class="admUser" style="display: none"><a href="/omaewa/cadastroT.xhtml">Administração</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -175,7 +179,7 @@
             var block = document.getElementById("block");
             var loginIfBlock = document.getElementById("loginIfBlock");
             var tipo = document.getElementById("f1:tipoUser").value;
-            var admUser = document.getElementById("admUser");
+            var admUser = document.getElementsByClassName("admUser");
             var idR = document.getElementById('f:idR');
             var idR2 = document.getElementById('f1:idR');
             var login = document.getElementById("login");
@@ -196,11 +200,10 @@
             }
             ;
             function admin() {
-                tipo = document.getElementById("f1:tipoUser").value;
                 if (tipo === "0") {
                     admUser.style.display = "none";
                 } else if (tipo === "1" || tipo === "2") {
-                    admUser.style.display = "inline";
+                    $(admUser).fadeIn().css("display", "block");
                 }
                 ;
             }
