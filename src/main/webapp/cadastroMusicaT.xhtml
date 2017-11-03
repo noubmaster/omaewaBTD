@@ -17,7 +17,7 @@
         <script src="https://apis.google.com/js/platform.js" async="async"></script>
         <link rel="stylesheet" href="resources/css/navbarC.css"/>
         <link rel="stylesheet" href="resources/css/lista.css"/>
-
+        <link rel="stylesheet" href="resources/css/footer.css"/>
     </h:head>
     <h:body>
 
@@ -150,7 +150,7 @@
                                                 <td>#{q.nomeMusica}</td>
                                                 <td>#{q.genero.nome}</td>
                                                 <td>#{q.album.nomeAlbum}</td>
-                                                <td style="width: 10%">
+                                                <td style="width: 15%">
                                                     <div class="btn-group">
                                                         <!-- Botao do Modal de excluir -->
                                                         <p:commandLink
@@ -219,13 +219,7 @@
                                     maxlength="30"
                                     value="#{musicaControle.musica.nomeMusica}"></p:inputText>
                                 <label style="margin-right: 50px" for="faixa">Faixa</label>
-                                <p:inputText 
-                                    style="width: 225px"
-                                    styleClass="form-control"
-                                    id="faixa"
-                                    required="true"
-                                    maxlength="3"
-                                    value="#{musicaControle.musica.faixa}"></p:inputText>
+                                <p:spinner id="faixa" value="#{musicaControle.musica.faixa}" style="padding-right: 6px;" min="0" max="100" />
                                 <label for="genero">Genero</label>
                                 <h:selectOneMenu 
                                     style="width: 225px" 
@@ -245,14 +239,14 @@
                                     <f:selectItems value="#{albumControle.albums}" var="aux" itemValue="#{aux.idAlbum}" itemLabel="#{aux.nomeAlbum}"></f:selectItems>
                                 </h:selectOneMenu>
                                 <label for="letra">Letra</label>
-                                <p:inputTextarea 
+                                <h:inputTextarea
                                     style="resize: none;" 
                                     styleClass="form-control"
                                     id="letra"
                                     rows="5"
                                     cols="33"
                                     required="true"
-                                    value="#{musicaControle.musica.letra}"></p:inputTextarea>
+                                    value="#{musicaControle.musica.letra}"></h:inputTextarea>
                             </p:panelGrid>
                         </div>
                         <div class="modal-footer">
@@ -374,6 +368,26 @@
             </div>
         </h:form>
         <!-- Fim Pagina de cadastro -->
+        <footer class="footer">
+            <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a class="navbar-brand" href="home.xhtml">BitesTheDust</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+        </footer>
         <!-- botao do login parte 2 -->
         <div id="loginIfBlock">
             <p:commandLink value="Log In"

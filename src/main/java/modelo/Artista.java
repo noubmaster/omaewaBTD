@@ -7,7 +7,7 @@ package modelo;
 public class Artista {
 
     private int idArtista;
-    private String nomeArtista;
+    private String nomeArtista, foto;
 
     public int getIdArtista() {
         return idArtista;
@@ -23,6 +23,14 @@ public class Artista {
 
     public void setNomeArtista(String nomeArtista) {
         this.nomeArtista = nomeArtista;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
 }

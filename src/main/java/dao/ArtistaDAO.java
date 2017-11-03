@@ -17,9 +17,10 @@ public class ArtistaDAO {
      public static void inserir(Artista artista) throws SQLException{
         Connection con = Conexao.getConnection();
         String sql
-                = "INSERT INTO `memes`.`artista` (`nomeArtista`) VALUES (?);";
+                = "INSERT INTO `memes`.`artista` (`nomeArtista`, `foto`) VALUES (?, ?);";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, artista.getNomeArtista());
+        stmt.setString(2, artista.getFoto());
         
         stmt.execute();
         stmt.close();
@@ -30,10 +31,11 @@ public class ArtistaDAO {
     public static void alterar(Artista artista) throws SQLException{
         Connection con = Conexao.getConnection();
         String sql
-                = "UPDATE `memes`.`artista` SET `nomeArtista`=? WHERE  `idArtista`=?;";
+                = "UPDATE `memes`.`artista` SET `nomeArtista`=?, `foto`=? WHERE  `idArtista`=?;";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, artista.getNomeArtista());
-        stmt.setInt(2, artista.getIdArtista());
+        stmt.setString(2, artista.getFoto());
+        stmt.setInt(3, artista.getIdArtista());
         
         stmt.execute();
         stmt.close();
@@ -54,13 +56,14 @@ public class ArtistaDAO {
     public static List<Artista> getLista() throws SQLException {
         List<Artista> lista = new ArrayList<Artista>();
         Connection con = Conexao.getConnection();
-        String sql = "SELECT * FROM artista ORDER BY idArtista";
+        String sql = "SELECT * FROM artista ORDER BY nomeArtista";
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             Artista artista = new Artista();
             artista.setIdArtista(rs.getInt("idArtista"));
             artista.setNomeArtista(rs.getString("nomeArtista"));
+            artista.setFoto(rs.getString("foto"));
             lista.add(artista);
         }
         stmt.close();

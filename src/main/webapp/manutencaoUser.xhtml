@@ -17,6 +17,7 @@
         <script src="https://apis.google.com/js/platform.js" async="async"></script>
         <link rel="stylesheet" href="resources/css/navbarC.css"/>
         <link rel="stylesheet" href="resources/css/lista.css"/>
+        <link rel="stylesheet" href="resources/css/footer.css"/>
     </h:head>
     <h:body>
 
@@ -169,6 +170,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Modal Cadastro -->
         <div class="modal fade" 
              id="modalCadastro" 
@@ -249,6 +251,26 @@
             </div>
         </h:form>
         <!-- Fim Pagina de cadastro -->
+        <footer class="footer">
+            <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a class="navbar-brand" href="home.xhtml">BitesTheDust</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+        </footer>
         <!-- botao do login parte 2 -->
         <div id="loginIfBlock" >
             <p:commandLink value="Log In"

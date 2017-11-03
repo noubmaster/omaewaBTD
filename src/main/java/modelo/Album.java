@@ -8,6 +8,7 @@ public class Album {
     private String nomeAlbum;
     private int ano;
     private int idAlbum;
+    private String capa;
 
     public int getIdAlbum() {
         return idAlbum;
@@ -31,6 +32,14 @@ public class Album {
 
     public void setAno(int ano) {
         this.ano = ano;
+    }
+
+    public String getCapa() {
+        return capa;
+    }
+
+    public void setCapa(String capa) {
+        this.capa = capa;
     }
 
 }

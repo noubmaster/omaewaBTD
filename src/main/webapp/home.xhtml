@@ -15,9 +15,9 @@
         <meta name="google-signin-client_id" content="488287116710-mg5d2db5prvt3gep4l6a037k2jclguoa.apps.googleusercontent.com"/>
         <script src="https://apis.google.com/js/platform.js" async="async"></script>
         <title>BitesTheDust</title>
-        <h:outputStylesheet library="css" name="musicP.css"/>
+        <link rel="stylesheet" href="resources/css/home.css"/>
         <link rel="stylesheet" href="resources/css/navbar.css"/>
-        <h:outputStylesheet library="css" name="searchBoxes.css"/>
+        <link rel="stylesheet" href="resources/css/footer.css"/>
     </h:head>
     <h:body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -30,29 +30,22 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/omaewa/index.xhtml">BTheD</a>
+                    <a class="navbar-brand" href="#">BTheD</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                    </ul>
-                    <div class="navbar-form navbar-left">
-                        <ul class="nav navbar-nav">
-
-                        </ul>
-                    </div>
                     <ul class="nav navbar-nav navbar-right">
                         <ul class="nav navbar-nav">
                             <li><p:commandButton value="Log In" 
                                                  id="login"
                                                  styleClass="btn btn-default" 
-                                                 style=" margin-top: 6px; padding: 6px 0px 6px 0px; margin-right: 6px;"
+                                                 style=" margin-top: 6px; padding: 6px 0px 6px 0px; margin-right: 6px; margin-left: 20px;"
                                                  onclick="$('#myModal').modal('show');"
                                                  update=":memes:myMemes"
                                                  immediate="true" /></li>
                             <li class="dropdown">
-                                <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
+                                <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px; margin-left: 20px;" type="button" data-toggle="dropdown">Options
                                     <span class="caret"></span></button>
                                 <ul class="dropdown-menu">
                                     <li><a href="#" onclick="signOut();">Sign out</a></li>
@@ -74,20 +67,41 @@
             <div id="block" >
                 <div class="row">
                     <div class="col-md-12 ">
-                        <img class="img-responsive" src="resources/svg/logo2.svg" alt="Chania"/>
-                        <div class="col-sm-8 col-sm-offset-2">
+                        <img class="img-responsive logoMid" src="resources/svg/logo2.svg" alt="Chania"/>
+                        <div class="col-sm-8 col-sm-offset-2 vcenter">
                             <h:form id="busca">
                                 <div class="input-group">
-                                    <p:inputText id="txt" value="#{buscaControle.webInput}" placeholder="Search" class="form-control"/>
+                                    <p:inputText id="txt" value="#{buscaControle.webInput}" placeholder="Search" class="form-control input-radius-l-corner"/>
                                     <span class="input-group-btn">
                                         <p:commandLink onclick="vozes()" class="btn btn-default btn-outline"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
-                                        <h:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" action="index.xhtml" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></h:commandLink>
+                                        <h:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" action="index.xhtml" class="btn btn-default btn-radius-r-corner"><i class="fa fa-search" aria-hidden="true"></i></h:commandLink>
                                     </span>
                                 </div>
                             </h:form>
                         </div>
                     </div>
                 </div>
+                
+                <footer class="footer">
+                    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse navbar-ex1-collapse">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a class="navbar-brand" href="#">BitesTheDust</a></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </nav>
+                </footer>
                 <!-- Checagem de usuario -->
                 <h:form id="f" style="display: none">
                     <p:panel id="panel">

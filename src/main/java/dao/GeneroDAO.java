@@ -54,7 +54,7 @@ public class GeneroDAO {
     public static List<Genero> getLista() throws SQLException {
         List<Genero> lista = new ArrayList<Genero>();
         Connection con = Conexao.getConnection();
-        String sql = "SELECT * FROM genero ORDER BY idGenero";
+        String sql = "SELECT * FROM genero ORDER BY nomeGenero";
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {

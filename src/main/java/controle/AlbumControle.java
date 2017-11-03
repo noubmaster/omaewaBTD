@@ -31,13 +31,11 @@ public class AlbumControle {
     }
 
     public void preparaIncluir() {
-        System.out.println("passando pelo incluir");
         salvar = true;
         album = new Album();
     }
 
     public void preparaAlterar() {
-        System.out.println("passando pelo alterar");
         salvar = false;
     }
 
@@ -45,29 +43,23 @@ public class AlbumControle {
         if (salvar) {
             try {
                 AlbumDAO.inserir(album);
-                System.out.println("album incluido");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
             try {
                 AlbumDAO.alterar(album);
-                System.out.println("album alterado");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         atualizarAlbums();
-        for(Album a : albums) {
-            System.out.println(a.getNomeAlbum());
-        }
     }
 
     public void excluir() {
         try {
             AlbumDAO.excluir(album);
             atualizarAlbums();
-            System.out.println("album excluido");
         } catch (SQLException e) {
             e.printStackTrace();
         }

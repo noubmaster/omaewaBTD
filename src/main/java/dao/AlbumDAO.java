@@ -18,10 +18,12 @@ public class AlbumDAO {
     public static void inserir(Album album) throws SQLException{
         Connection con = Conexao.getConnection();
         String sql
-                = "INSERT INTO album (`nomeAlbum`, `ano`) VALUES (?, ?)";
+                = "INSERT INTO album (`nomeAlbum`, `ano`, `capa`) VALUES (?, ?, ?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, album.getNomeAlbum());
         stmt.setInt(2, album.getAno());
+        stmt.setString(3, album.getCapa());
+        
         
         stmt.execute();
         stmt.close();
@@ -31,11 +33,12 @@ public class AlbumDAO {
     public static void alterar(Album album) throws SQLException{
         Connection con = Conexao.getConnection();
         String sql
-                = "UPDATE `memes`.`album` SET `nomeAlbum`=?, `ano`=? WHERE  `idAlbum`=?;";
+                = "UPDATE `memes`.`album` SET `nomeAlbum`=?, `ano`=?, `capa`=? WHERE  `idAlbum`=?;";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, album.getNomeAlbum());
         stmt.setInt(2, album.getAno());
-        stmt.setInt(3, album.getIdAlbum());
+        stmt.setString(3, album.getCapa());
+        stmt.setInt(4, album.getIdAlbum());
         
         stmt.execute();
         stmt.close();
@@ -56,7 +59,7 @@ public class AlbumDAO {
     public static List<Album> getLista() throws SQLException {
         List<Album> lista = new ArrayList<Album>();
         Connection con = Conexao.getConnection();
-        String sql = "SELECT * FROM album ORDER BY idAlbum";
+        String sql = "SELECT * FROM album ORDER BY nomeAlbum";
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
@@ -64,6 +67,7 @@ public class AlbumDAO {
             album.setIdAlbum(rs.getInt("idAlbum"));
             album.setNomeAlbum(rs.getString("nomeAlbum"));
             album.setAno(rs.getInt("ano"));
+            album.setCapa(rs.getString("capa"));
             lista.add(album);
         }
         stmt.close();
@@ -82,6 +86,7 @@ public class AlbumDAO {
                 System.out.println("ID....: "+m.getIdAlbum());
                 System.out.println("NOME......: "+m.getNomeAlbum());
                 System.out.println("ANO......: "+m.getAno());
+                System.out.println("CAPA......: "+m.getCapa());
                 System.out.println("-----------------------------------");
             }
         } catch (SQLException e) {
