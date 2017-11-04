@@ -1,15 +1,21 @@
-.footer {
-    position: relative;
-    margin-bottom: -51px;
-    bottom: 0;
-    /* Set the fixed height of the footer here */
-    height: 52px;
-    width: 100%
+* {
+  margin: 0;
 }
-body > .container {
-    padding: 60px 15px 0;
+html, body {
+  height: 100%;
 }
-
+.container {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -52px; 
+}
+.container:after {
+  content: "";
+  display: block;
+}
+.footer, .container:after {
+  height: 52px; 
+}
 .footer .text-center{
     padding-top: 12px;
 }
