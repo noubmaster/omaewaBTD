@@ -42,7 +42,9 @@ public class BuscaDAO {
                 + "ge.nomeGenero like CONCAT('%', ?, '%') or\n"
                 + "al.nomeAlbum like CONCAT('%', ?, '%')\n"
                 + "GROUP BY\n"
-                + "m.idMusica";
+                + "m.idMusica "
+                + "ORDER BY\n"
+                + " m.score DESC;";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, webInput);
         stmt.setString(2, webInput);
@@ -70,6 +72,7 @@ public class BuscaDAO {
             album.setIdAlbum(rs.getInt("idAlbum"));
             album.setNomeAlbum(rs.getString("nomeAlbum"));
             album.setAno(rs.getInt("ano"));
+            album.setCapa(rs.getString("capa"));
 
             Genero genero = new Genero();
             genero.setIdGenero(rs.getInt("idGenero"));
@@ -102,6 +105,7 @@ public class BuscaDAO {
             album.setIdAlbum(rs.getInt("idAlbum"));
             album.setNomeAlbum(rs.getString("nomeAlbum"));
             album.setAno(rs.getInt("ano"));
+            album.setCapa(rs.getString("capa"));
 
             Genero genero = new Genero();
             genero.setIdGenero(rs.getInt("idGenero"));
@@ -135,6 +139,7 @@ public class BuscaDAO {
             album.setIdAlbum(rs.getInt("idAlbum"));
             album.setNomeAlbum(rs.getString("nomeAlbum"));
             album.setAno(rs.getInt("ano"));
+            album.setCapa(rs.getString("capa"));
 
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
@@ -162,7 +167,7 @@ public class BuscaDAO {
     public static List<Album> getArtistAlbumsByID(int idArtista) throws SQLException {
         List<Album> lista = new ArrayList<Album>();
         Connection con = Conexao.getConnection();
-        String sql = "SELECT al.idAlbum, al.nomeAlbum, al.ano FROM artista ar, participa pa, musica mu, album al WHERE mu.idAlbumMusica = al.idAlbum AND ar.idArtista = pa.Artista_idArtista AND pa.Musica_idMusica = mu.idMusica AND ar.idArtista = ? GROUP BY al.idAlbum";
+        String sql = "SELECT al.idAlbum, al.nomeAlbum, al.ano, al.capa FROM artista ar, participa pa, musica mu, album al WHERE mu.idAlbumMusica = al.idAlbum AND ar.idArtista = pa.Artista_idArtista AND pa.Musica_idMusica = mu.idMusica AND ar.idArtista = ? GROUP BY al.idAlbum";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, idArtista);
         ResultSet rs = stmt.executeQuery();
@@ -171,6 +176,7 @@ public class BuscaDAO {
             album.setIdAlbum(rs.getInt("idAlbum"));
             album.setNomeAlbum(rs.getString("nomeAlbum"));
             album.setAno(rs.getInt("ano"));
+            album.setCapa(rs.getString("capa"));
             lista.add(album);
         }
         stmt.close();
@@ -191,6 +197,7 @@ public class BuscaDAO {
             album.setIdAlbum(rs.getInt("idAlbum"));
             album.setNomeAlbum(rs.getString("nomeAlbum"));
             album.setAno(rs.getInt("ano"));
+            album.setCapa(rs.getString("capa"));
 
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
@@ -218,6 +225,7 @@ public class BuscaDAO {
             album.setIdAlbum(rs.getInt("idAlbum"));
             album.setNomeAlbum(rs.getString("nomeAlbum"));
             album.setAno(rs.getInt("ano"));
+            album.setCapa(rs.getString("capa"));
 
             Genero genero = new Genero();
             genero.setIdGenero(rs.getInt("idGenero"));

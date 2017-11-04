@@ -9,16 +9,16 @@
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <link rel="stylesheet" href="resources/css/estiloPrimefaces.css"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css"/>
         <meta name="google-signin-client_id" content="488287116710-mg5d2db5prvt3gep4l6a037k2jclguoa.apps.googleusercontent.com"/>
         <script src="https://apis.google.com/js/platform.js" async="async"></script>
+        <link rel="icon" href="resources/png/favicon.png"/>
         <title>BitesTheDust</title>
-        <h:outputStylesheet library="css" name="musicP.css"/>
+        <link rel="stylesheet" href="resources/css/fonte.css"/>
+        <link rel="stylesheet" href="resources/css/home.css"/>
         <link rel="stylesheet" href="resources/css/navbar.css"/>
-        <h:outputStylesheet library="css" name="searchBoxes.css"/>
     </h:head>
     <h:body>
         <nav class="navbar navbar-default navbar-fixed-top">
@@ -82,25 +82,26 @@
         <div class="container">
             <div id="block" >
                 <div class="row">
-
-                    <ui:repeat value="#{buscaControle.result}" var="a" varStatus="q">
-                        <h:form id="dadosMusica">
-                            <div class="col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica)}"><h4>#{a.musica.nomeMusica}</h4></h:commandLink>
-                                        <h:commandLink action="#{buscaControle.getArtistaRedirect(a.musica.idMusica)}">#{a.artista.nomeArtista}</h:commandLink>
-                                        / 
-                                        <h:commandLink action="#{buscaControle.getAlbumRedirect(a.album.idAlbum)}">#{a.album.nomeAlbum}</h:commandLink>
-                                    </div>
-                                    <div class="panel-body">
-                                        <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica)}"><h6 id="letras">#{a.musica.letra}</h6></h:commandLink>
+                    <div class="col-md-12 ">
+                        <ui:repeat value="#{buscaControle.result}" var="a" varStatus="q">
+                            <h:form id="dadosMusica">
+                                <div class="col-md-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <img class="img-responsive" src="#{a.album.capa}" style="width: 100px; height: 100px;" />
+                                            <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica)}"><h4>#{a.musica.nomeMusica}</h4></h:commandLink>
+                                            <h:commandLink action="#{buscaControle.getArtistaRedirect(a.musica.idMusica)}">#{a.artista.nomeArtista}</h:commandLink>
+                                            / 
+                                            <h:commandLink action="#{buscaControle.getAlbumRedirect(a.album.idAlbum)}">#{a.album.nomeAlbum}</h:commandLink>
+                                        </div>
+                                        <div class="panel-body">
+                                            <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica)}"><h6 id="letras">#{a.musica.letra}</h6></h:commandLink>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </h:form>
-                    </ui:repeat>
-
+                            </h:form>
+                        </ui:repeat>
+                    </div>
                 </div>
                 <!-- Checagem de usuario -->
                 <h:form id="f" style="display: none">
@@ -174,71 +175,6 @@
             </h:form>
         </div>
         <script type="text/javascript">
-            var currentPath = window.location.pathname;
-            var currentPge = window.location.href;
-            var block = document.getElementById("block");
-            var loginIfBlock = document.getElementById("loginIfBlock");
-            var tipo = document.getElementById("f1:tipoUser").value;
-            var admUser = document.getElementsByClassName("admUser");
-            var idR = document.getElementById('f:idR');
-            var idR2 = document.getElementById('f1:idR');
-            var login = document.getElementById("login");
-            var optionsUser = document.getElementById("optionsUser");
-            var email = document.getElementById('f:email');
-            var perfil = document.getElementById('f:perfil');
-            var idRGet;
-
-            if (currentPath === "/memes/faces/cadastroGeneroT.xhtml" ||
-                    currentPath === "/memes/faces/cadastroGeneroT.xhtml#") {
-                if (tipo === "0") {
-                    block.style.display = "none";
-                    loginIfBlock.style.display = "inline";
-                } else {
-                    loginIfBlock.style.display = "none";
-                    block.style.display = "inline";
-                }
-            }
-            ;
-            function admin() {
-                if (tipo === "0") {
-                    admUser.style.display = "none";
-                } else if (tipo === "1" || tipo === "2") {
-                    $(admUser).fadeIn().css("display", "block");
-                }
-                ;
-            }
-
-            function signOut() {
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function () {
-                    console.log('User signed out.');
-                    login.style.display = "inline";
-                    optionsUser.style.display = "none";
-                });
-                idRGet = null;
-                idR.value = idRGet;
-                idR2.value = idRGet;
-                document.getElementById('fodasse:fodasse').click();
-                location.reload();
-            }
-
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                if (profile.getId() !== null) {
-                    idRGet = profile.getId();
-                    login.style.display = "none";
-                    optionsUser.style.display = "inline";
-                    email.value = profile.getEmail();
-                    idR.value = idRGet;
-                    idR2.value = idRGet;
-                    perfil.value = profile.getImageUrl();
-                    document.getElementById('f:registra').click();
-                    document.getElementById('f1:registra').click();
-                }
-                setTimeout(admin, 1000);
-                $('#myModal').modal('hide');
-            }
-
             dimLetras();
             function dimLetras() {
                 $("div.panel-body").text(function (index, currentText) {
@@ -246,23 +182,11 @@
                 });
             }
         </script>
+        <script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <script src="resources/js/admBlock.js"></script>
+        <script src="resources/js/pageBlock.js"></script>
+        <script src="resources/js/googleLogin.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
-        <script>
-            function vozes() {
-                var textInput = document.getElementById("busca:txt");
-                if (annyang) {
-
-                    annyang.addCallback('result', function (phrases) {
-                        console.log("I think the user said: ", phrases[0]);
-                        textInput.value = phrases[0];
-                        console.log("But then again, it could be any of the following: ", phrases);
-
-                    });
-
-                    // Start listening.
-                    annyang.start();
-                }
-            }
-        </script>
+        <script src="resources/js/buscaVox.js"></script>
     </h:body>
 </html>

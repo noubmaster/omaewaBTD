@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+body{
+    font-family: 'PT Sans', sans-serif;
+}
+@font-face{
+    font-family: 'PT Sans', sans-serif;
+}
+.ui-widget {
+    font-family: 'PT Sans', sans-serif;
+}
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button {
+  font-family: 'PT Sans', sans-serif;
+}
