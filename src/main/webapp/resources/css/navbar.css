@@ -86,3 +86,11 @@ body {
     background-color: #c82333;
     border-color: #cccccc;
 }
+.footer{
+    background-color: #dc3545;
+}
+.footer a{
+    border: solid #c82333 1px;
+    background-color: #c82333;
+    color: #ffbbbc;
+}

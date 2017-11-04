@@ -87,3 +87,11 @@
     background-color: #5bc0de;
     border-color: #5bc0de;
 }
+.footer{
+    background-color: #5bc0de;
+}
+.footer a{
+    border: solid #31b0d5 1px;
+    background-color: #31b0d5;
+    color: #bbfff9;
+}
