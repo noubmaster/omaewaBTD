@@ -77,7 +77,7 @@ public class MusicaDAO {
     public static List<Musica> getLista() throws SQLException {
         List<Musica> lista = new ArrayList<Musica>();
         Connection con = Conexao.getConnection();
-        String sql = "SELECT * FROM musica mu, album al, genero ge WHERE mu.idAlbumMusica = al.idAlbum AND mu.idGeneroMusica = idGenero";
+        String sql = "SELECT * FROM musica mu, album al, genero ge WHERE mu.idAlbumMusica = al.idAlbum AND mu.idGeneroMusica = idGenero ORDER BY al.nomeAlbum, mu.faixa";
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {

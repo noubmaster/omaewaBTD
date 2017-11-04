@@ -139,18 +139,20 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
+                                            <th>Faixa</th>
                                             <th>Nomes</th>
-                                            <th>Genero</th>
                                             <th>Album</th>
+                                            <th>Genero</th>
                                             <th>Opções</th>
                                         </tr>
                                     </thead>
                                     <tbody >
                                         <ui:repeat value="#{musicaControle.musicas}" var="q">
                                             <tr>
+                                                <td>#{q.faixa}</td>
                                                 <td>#{q.nomeMusica}</td>
-                                                <td>#{q.genero.nome}</td>
                                                 <td>#{q.album.nomeAlbum}</td>
+                                                <td>#{q.genero.nome}</td>
                                                 <td style="width: 15%">
                                                     <div class="btn-group">
                                                         <!-- Botao do Modal de excluir -->
