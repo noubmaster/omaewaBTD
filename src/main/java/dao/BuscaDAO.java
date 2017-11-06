@@ -96,7 +96,7 @@ public class BuscaDAO {
     public static Musica getMusicaByID(int idMusica) throws SQLException {
         Musica musica = new Musica();
         Connection con = Conexao.getConnection();
-        String sql = "SELECT * FROM musica m, album a, genero g WHERE m.idMusica = ?";
+        String sql = "SELECT * FROM artista ar, participa pa, composicao co, musica m, album a, genero g WHERE m.idMusica = ? and m.idAlbumMusica = a.idAlbum and m.idGeneroMusica = g.idGenero and pa.Musica_idMusica = m.idMusica and pa.Artista_idArtista = ar.idArtista and co.Artista_idArtista = ar.idArtista and co.Musica_idMusica = m.idMusica;";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, idMusica);
         ResultSet rs = stmt.executeQuery();
@@ -115,6 +115,19 @@ public class BuscaDAO {
             musica.setNomeMusica(rs.getString("nomeMusica"));
             musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
+            
+            Artista artista = new Artista();
+            artista.setIdArtista(rs.getInt("idArtista"));
+            artista.setNomeArtista(rs.getString("nomeArtista"));
+            
+            Participa participa = new Participa();
+            participa.setPapel(rs.getString("papel"));
+            participa.setArtista(artista);
+            participa.setMusica(musica);
+            
+            Composicao composicao = new Composicao();
+            composicao.setArtista(artista);
+            composicao.setMusica(musica);
 
             musica.setAlbum(album);
             musica.setGenero(genero);
