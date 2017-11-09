@@ -163,6 +163,7 @@ public class BuscaDAO {
 
             artista.setIdArtista(rs.getInt("idArtista"));
             artista.setNomeArtista(rs.getString("nomeArtista"));
+            artista.setFoto(rs.getString("foto"));
 
             Participa participa = new Participa();
             participa.setPapel(rs.getString("papel"));

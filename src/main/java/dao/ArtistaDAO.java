@@ -48,7 +48,6 @@ public class ArtistaDAO {
                 = "DELETE FROM `memes`.`artista` WHERE  `idArtista`=?;";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, artista.getIdArtista());
-        System.out.println("id:" + artista.getIdArtista());
         stmt.execute();
         stmt.close();
         con.close();
