@@ -223,7 +223,6 @@ public class BuscaDAO {
         stmt.close();
         rs.close();
         con.close();
-        System.out.println(album.getNomeAlbum());
         return album;
     }
 

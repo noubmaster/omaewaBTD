@@ -35,7 +35,6 @@ public class MusicaDAO {
         ResultSet rs = stmt2.executeQuery();
         rs.first();
         int ultimaMusica = rs.getInt("idMusica");
-        System.out.println(ultimaMusica);
         stmt2.execute();
         
         stmt2.close();

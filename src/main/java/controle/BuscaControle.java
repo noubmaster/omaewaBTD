@@ -72,7 +72,6 @@ public class BuscaControle {
     public String getAlbumRedirect(int idMusica) {
         try {
             album = BuscaDAO.getAlbumByID(idMusica);
-            System.out.println(idMusica);
         } catch (SQLException e) {
             e.printStackTrace();
         }

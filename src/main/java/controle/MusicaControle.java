@@ -59,7 +59,6 @@ public class MusicaControle {
         salvar = false;
         idGenero = musica.getGenero().getIdGenero();
         idAlbum = musica.getAlbum().getIdAlbum();
-        System.out.println(musica.getNomeMusica());
     }
 
     public void salvar() {

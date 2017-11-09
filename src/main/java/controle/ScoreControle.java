@@ -49,7 +49,6 @@ public class ScoreControle {
     public void listAsd(int idMusicaC) {
         try {
             scores2 = ScoreDAO.getListaAsd(idMusicaC);
-            System.out.println(idMusicaC);
         } catch (SQLException e) {
             e.printStackTrace();
         }

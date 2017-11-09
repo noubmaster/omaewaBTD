@@ -49,7 +49,6 @@ public class AvaliacaoControle {
     public void listAsd(int idMusicaC) {
         try {
             avaliacoes2 = AvaliacaoDAO.getListaAsd(idMusicaC);
-            System.out.println(idMusicaC);
         } catch (SQLException e) {
             e.printStackTrace();
         }
