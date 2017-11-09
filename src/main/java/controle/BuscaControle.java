@@ -45,6 +45,7 @@ public class BuscaControle {
     public String getMusicaRedirect(int idMusica) {
         try {
             musica = BuscaDAO.getMusicaByID(idMusica);
+            artista = BuscaDAO.getArtistByID(idMusica);
         } catch (SQLException e) {
             e.printStackTrace();
         }

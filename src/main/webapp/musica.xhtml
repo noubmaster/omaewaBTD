@@ -121,9 +121,19 @@
                                 </ui:repeat>
                             </h:form>
                         </div>
-                        <div class="col-md-3 placeholder">
+                        <div class="col-md-3 placeholder info">
                             <img src="#{buscaControle.musica.album.capa}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
-                            <h4>#{buscaControle.musica.album.nomeAlbum}</h4>
+                            <h4>
+                                <h:form>
+                                    <h:commandLink class="text-muted" action="#{buscaControle.getAlbumRedirect(buscaControle.musica.album.idAlbum)}">#{buscaControle.musica.album.nomeAlbum}</h:commandLink>
+                                </h:form>
+                            </h4>
+                            <img src="#{buscaControle.artista.foto}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
+                            <h4>
+                                <h:form>
+                                    <h:commandLink class="text-muted" action="#{buscaControle.getAlbumRedirect(buscaControle.musica.album.idAlbum)}">#{buscaControle.artista.nomeArtista}</h:commandLink>
+                                </h:form>
+                            </h4>
                         </div>
                         <!-- Checagem de usuario -->
                         <h:form id="f" style="display: none">
