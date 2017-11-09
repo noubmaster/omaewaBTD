@@ -68,10 +68,11 @@
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li><a href="#" onclick="signOut();">Sign out</a></li>
-                                <div id="admUser" style="display: none;">
+                                <div class="admUser" style="display: none">
                                     <li class="divider"></li>
-                                    <li><a href="/omaewa/cadastroT.xhtml">Administração</a></li>
                                 </div>
+                                <li class="admUser" style="display: none"><a href="/omaewa/cadastroT.xhtml">Administração</a></li>
+
                             </ul>
                         </li>
                     </ul>
@@ -134,6 +135,11 @@
                                     <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(buscaControle.artista.idArtista)}">#{buscaControle.artista.nomeArtista}</h:commandLink>
                                 </h:form>
                             </h4>
+                            <h:form id="score">
+                                <h5>musica top</h5>
+                                <p:inputText id="idUserS" value="#{scoreControle.idUsuario}"/>
+                                <p:inputText id="idMusS" value="#{scoreControle.idMusica}"/>
+                            </h:form>
                         </div>
                         <!-- Checagem de usuario -->
                         <h:form id="f" style="display: none">
@@ -225,9 +231,15 @@
                     //Avaliação
                     var avUsuario = document.getElementById('avaliacao:idUser');
                     var avMusica = document.getElementById('avaliacao:idMus');
+                    //Score
+                    var sUsuario = document.getElementById('score:idUserS');
+                    var sMusica = document.getElementById('score:idMusS');
                     //ID -> Avaliação
                     avUsuario.value = idUsuario;
                     avMusica.value = idMusica;
+                    //ID -> Score
+                    sUsuario.value = idUsuario;
+                    sMusica.value = idMusica;
         </script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
         <script src="resources/js/buscaVox.js"></script>
