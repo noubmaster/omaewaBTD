@@ -56,7 +56,7 @@ public class ScoreDAO {
     }
 
     public static int socoreGet(int idMusica, int idUsuario) throws SQLException {
-        int foda = 0;
+        int getS = 0;
         List<Score> lista = new ArrayList<Score>();
         Musica musica = new Musica();
         Connection con = Conexao.getConnection();
@@ -64,7 +64,6 @@ public class ScoreDAO {
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, idUsuario);
         stmt.setInt(2, idMusica);
-        System.out.println(idMusica + "foda2" + idUsuario);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             musica.setIdMusica(rs.getInt("idMusica"));
@@ -88,18 +87,16 @@ public class ScoreDAO {
             
         }
         if(lista.isEmpty()){
-            foda=1;
-            System.out.println("foda"+foda);
+            getS=1;
             
         } else{
-            foda=2;
-            System.out.println("super foda"+foda);
+            getS=2;
         }
         stmt.close();
         rs.close();
         con.close();
 
-        return foda;
+        return getS;
     }
 
     public static List<Score> getLista() throws SQLException {

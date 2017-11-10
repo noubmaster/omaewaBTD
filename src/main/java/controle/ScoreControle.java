@@ -52,9 +52,7 @@ public class ScoreControle {
         try {
             idMusica = this.idMusica;
             idUsuario = this.idUsuario;
-            System.out.println(idMusica + "foda" + idUsuario);
             scoreSet = ScoreDAO.socoreGet(idMusica, idUsuario);
-            System.out.println(scoreSet + "foda");
             if(scoreSet == 1){
                 disable = false;
             } else {
