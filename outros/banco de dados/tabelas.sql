@@ -1,21 +1,20 @@
 -- --------------------------------------------------------
 -- Servidor:                     127.0.0.1
--- Versão do servidor:           5.7.19-log - MySQL Community Server (GPL)
+-- Versão do servidor:           5.7.11-log - MySQL Community Server (GPL)
 -- OS do Servidor:               Win64
--- HeidiSQL Versão:              9.4.0.5125
+-- HeidiSQL Versão:              9.3.0.4984
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
 
 -- Copiando estrutura do banco de dados para memes
 DROP DATABASE IF EXISTS `memes`;
 CREATE DATABASE IF NOT EXISTS `memes` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `memes`;
+
 
 -- Copiando estrutura para tabela memes.album
 DROP TABLE IF EXISTS `album`;
@@ -39,6 +38,7 @@ INSERT INTO `album` (`idAlbum`, `nomeAlbum`, `ano`, `capa`) VALUES
 	(9, 'News of the World', '1977', 'https://img.discogs.com/Jiwtt1dIc_1gFTSFBafv7kgXEK4=/fit-in/600x606/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-475599-1454715265-7842.jpeg.jpg'),
 	(10, 'War', '1983', 'https://img.discogs.com/azJ76FI4uR51Y0Lp7TnKkLR4gno=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-11052113-1508951794-5928.jpeg.jpg');
 /*!40000 ALTER TABLE `album` ENABLE KEYS */;
+
 
 -- Copiando estrutura para tabela memes.artista
 DROP TABLE IF EXISTS `artista`;
@@ -65,6 +65,7 @@ INSERT INTO `artista` (`idArtista`, `nomeArtista`, `foto`) VALUES
 	(11, 'Steve Porcaro', 'https://img.discogs.com/PAGZsD1gZgURcwpsUcHjH3Qx5jA=/369x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-299163-1146652884.jpeg.jpg'),
 	(12, 'John Bettis', 'https://img.discogs.com/KrQ2A-tZMQUjKv71jagW_kkwSz0=/168x168/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-617010-1328648662.jpeg.jpg');
 /*!40000 ALTER TABLE `artista` ENABLE KEYS */;
+
 
 -- Copiando estrutura para tabela memes.avaliacao
 DROP TABLE IF EXISTS `avaliacao`;
@@ -134,6 +135,7 @@ INSERT INTO `avaliacao` (`idAvaliacao`, `nota`, `comentario`, `revisao`, `idMusi
 	(52, 5, 'asd', 0, 1, 15);
 /*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
 
+
 -- Copiando estrutura para tabela memes.composicao
 DROP TABLE IF EXISTS `composicao`;
 CREATE TABLE IF NOT EXISTS `composicao` (
@@ -171,6 +173,7 @@ INSERT INTO `composicao` (`Artista_idArtista`, `Musica_idMusica`) VALUES
 	(10, 28),
 	(8, 29);
 /*!40000 ALTER TABLE `composicao` ENABLE KEYS */;
+
 
 -- Copiando estrutura para tabela memes.genero
 DROP TABLE IF EXISTS `genero`;
@@ -236,6 +239,7 @@ INSERT INTO `genero` (`idGenero`, `nomeGenero`) VALUES
 	(270, 'Metal');
 /*!40000 ALTER TABLE `genero` ENABLE KEYS */;
 
+
 -- Copiando estrutura para tabela memes.musica
 DROP TABLE IF EXISTS `musica`;
 CREATE TABLE IF NOT EXISTS `musica` (
@@ -258,7 +262,7 @@ DELETE FROM `musica`;
 /*!40000 ALTER TABLE `musica` DISABLE KEYS */;
 INSERT INTO `musica` (`idMusica`, `nomeMusica`, `score`, `letra`, `faixa`, `idAlbumMusica`, `idGeneroMusica`) VALUES
 	(1, 'Jump', 10003, 'I get up, and nothing gets me down.\r\nYou got it tough. I\'ve seen the toughest all around.\r\nAnd I know, baby, just how you feel.\r\nYou\'ve got to roll with the punches to get to what\'s real\r\nOh can\'t you see me standing here,\r\nI\'ve got my back against the record machine\r\nI ain\'t the worst that you\'ve seen.\r\nOh can\'t you see what I mean?\r\nMight as well jump. Jump!\r\nMight as well jump.\r\nGo ahead, jump. Jump!\r\nGo ahead, jump.\r\nAaa-ohh Hey you! Who said that?\r\nBaby how you been?\r\nYou say you don\'t know, you won\'t know until you begin.\r\nWell can\'t you see me standing here,\r\nI\'ve got my back against the record machine\r\nI ain\'t the worst that you\'ve seen.\r\nOh can\'t you see what I mean?\r\nMight as well jump. Jump!\r\nGo ahead, jump.\r\nMight as well jump. Jump!\r\nGo ahead, jump.\r\n\r\n[Guitar solo]\r\n\r\n[Keyboard solo]\r\n\r\nMight as well jump. Jump!\r\nGo ahead, jump.\r\nGet it and jump. Jump!\r\nGo ahead, jump.', 2, 3, 244),
-	(2, 'We Are The Champions', 0, 'I\'ve paid my dues\r\nTime after time\r\nI\'ve done my sentence\r\nBut committed no crime\r\n\r\nAnd bad mistakes\r\nI\'ve made a few\r\nI\'ve had my share of sand\r\nKicked in my face\r\nBut I\'ve come through\r\nAnd we mean to go on and on and on and on\r\n\r\nWe are the champions, my friends\r\nAnd we\'ll keep on fighting\r\n\'Till the end\r\nWe are the champions\r\nWe are the champions\r\nNo time for losers\r\n\'Cause we are the champions of the world\r\n\r\nI\'ve taken my bows\r\nAnd my curtain calls\r\nYou brought me fame and fortune\r\nAnd everything that goes with it\r\nI thank you all\r\n\r\nBut it\'s been no bed of roses\r\nNo pleasure cruise\r\nI consider it a challenge before\r\nThe whole human race\r\nAnd I ain\'t gonna lose\r\nAnd we mean to go on and on and on and on\r\n\r\nWe are the champions, my friends\r\nAnd we\'ll keep on fighting\r\n\'Till the end\r\nWe are the champions\r\nWe are the champions\r\nNo time for losers\r\n\'Cause we are the champions of the world\r\n\r\nWe are the champions, my friends\r\nAnd we\'ll keep on fighting\r\n\'Till the end\r\nWe are the champions\r\nWe are the champions\r\nNo time for losers\r\n\'Cause we are the champions', 2, 9, 244),
+	(2, 'We Are The Champions', 2, 'I\'ve paid my dues\r\nTime after time\r\nI\'ve done my sentence\r\nBut committed no crime\r\n\r\nAnd bad mistakes\r\nI\'ve made a few\r\nI\'ve had my share of sand\r\nKicked in my face\r\nBut I\'ve come through\r\nAnd we mean to go on and on and on and on\r\n\r\nWe are the champions, my friends\r\nAnd we\'ll keep on fighting\r\n\'Till the end\r\nWe are the champions\r\nWe are the champions\r\nNo time for losers\r\n\'Cause we are the champions of the world\r\n\r\nI\'ve taken my bows\r\nAnd my curtain calls\r\nYou brought me fame and fortune\r\nAnd everything that goes with it\r\nI thank you all\r\n\r\nBut it\'s been no bed of roses\r\nNo pleasure cruise\r\nI consider it a challenge before\r\nThe whole human race\r\nAnd I ain\'t gonna lose\r\nAnd we mean to go on and on and on and on\r\n\r\nWe are the champions, my friends\r\nAnd we\'ll keep on fighting\r\n\'Till the end\r\nWe are the champions\r\nWe are the champions\r\nNo time for losers\r\n\'Cause we are the champions of the world\r\n\r\nWe are the champions, my friends\r\nAnd we\'ll keep on fighting\r\n\'Till the end\r\nWe are the champions\r\nWe are the champions\r\nNo time for losers\r\n\'Cause we are the champions', 2, 9, 244),
 	(11, 'Sunday Bloody Sunday', 2, 'I can\'t believe the news today\r\nI can\'t close my eyes, make them go away\r\n\r\nHow long?\r\nHow long must we sing this song?\r\nHow long\r\nHow long?\r\nTonight we can be as one\r\nTonight\r\n\r\nBroken bottles under children\'s feet\r\nAnd bodies strewn across a dead end street\r\nBut I won\'t heed the battle call\r\nIt puts my back up, puts my back up\r\nAgainst the wall!\r\n\r\nSunday bloody sunday\r\nSunday bloody sunday\r\nSunday bloody sunday\r\n\r\nAnd the battles just begun\r\nThere\'s many lost\r\nBut tell me who has won?\r\nThe trenches dug within our hearts\r\nAnd mothers, children, brothers, sisters torn apart\r\n\r\nSunday bloody sunday\r\nSunday bloody sunday\r\n\r\nHow long?\r\nHow long must we sing this song?\r\nHow long\r\nHow long?\r\nCause tonight we can be as one\r\nTonight\r\n\r\nTonight\r\nTonight\r\nTonight\r\nTonight\r\n\r\nWipe the tears of your eyes\r\nWipe your tears away\r\nWipe your tears away\r\nWipe bloodshot eyes\r\n\r\nSunday bloody sunday\r\nSunday bloody sunday\r\nSunday bloody sunday\r\nSunday bloody sunday\r\nSunday bloody sunday\r\nSunday bloody sunday\r\n\r\nAnd it\'s true we are immune\r\nWhen fact is fiction and Tv is reality\r\nAnd today the millions cry\r\nWe eat and drink while tomorrow they die\r\nThe real battle just begun\r\nTo claim the victory Jesus won\r\nOn a sunday, bloody sunday\r\n\r\nSunday bloody sunday\r\nSunday bloody sunday\r\nSunday bloody sunday\r\nSunday bloody sunday\r\nSunday bloody sunday', 1, 10, 228),
 	(12, 'Billie Jean', 5, 'She was more like a beauty queen\r\nFrom a movie scene\r\nI said, "Don\'t mind, but what do you mean\r\nI am the one\r\nWho will dance on the floor in the round?"\r\nShe said I am the one\r\nWho will dance on the floor in the round\r\n\r\nShe told me her name was Billie Jean\r\nAs she caused a scene\r\nThen every head turned with eyes that dreamed of being the one\r\nWho will dance on the floor in the round\r\n\r\nPeople always told me, "Be careful of what you do.\r\nAnd don\'t go around breaking young girls\' hearts."\r\nAnd mother always told me, "A-be careful of who you love,\r\nAnd be careful of what you do\r\n\'Cause the lie becomes the truth."\r\n\r\nBillie Jean is not my lover\r\nShe\'s just a girl who claims that I am the one\r\nBut the kid is not my son\r\nShe says I am the one\r\nBut the kid is not my son\r\n\r\nFor forty days and for forty nights\r\nLaw was on her side\r\nBut who can stand\r\nWhen she\'s in demand\r\nHer schemes and plans\r\n\'Cause we danced on the floor in the round\r\nSo take my strong advice\r\nJust remember to always think twice\r\n(Do think twice, do think twice.)\r\n\r\nShe told, "My baby, we\'d danced \'til three."\r\nThen she looked at me\r\nThen showed a photo of a baby cry\r\nHis eyes looked like mine, oh, no\r\nDo a dance on the floor in the round, baby\r\n\r\nA-people always told me, "Be careful of what you do\r\nAnd don\'t go around breaking young girls\' hearts."\r\n(Don\'t break no heart.)\r\nA-but she came and stood right by me\r\nAnd just the smell of sweet perfume\r\nAnd this happened much too soon\r\nAnd she called me to her room\r\n\r\nBillie Jean is not my lover\r\nShe\'s just a girl who claims that I am the one\r\nBut the kid is not my son\r\n(No, no, no, no, no, no, no, no.)\r\nBillie Jean is not my lover\r\nShe\'s just a girl who claims that I am the one\r\nBut the kid is not my son\r\nShe says I am the one\r\nBut the kid is not my son\r\n\r\nShe says I am the one\r\nBut the kid is not my son\r\n\r\nNo, no, no\r\n\r\nBillie Jean is not my lover\r\nShe\'s just a girl who claims that I am the one\r\n(No, there\'s not me, baby.)\r\nBut the kid is not my son\r\n(No, no, no, no, no, no, no.)\r\nShe says I am the one (No, babe.)\r\nBut the kid is not my son, no, no, no\r\n\r\nShe says I am the one\r\nYou know what you did\r\nShe says he is my son\r\nBreaking my heart, babe\r\nShe says I am the one\r\n\r\nBillie Jean is not my lover\r\nBillie Jean is not my lover\r\nBillie Jean is not my lover\r\nShe is the one\r\nBillie Jean is not my lover\r\nShe is the one\r\nDon\'t call me Billie Jean\r\nShe is the one\r\nBillie Jean is not my lover\r\nShe is the one\r\nBillie Jean is not my lover', 6, 8, 224),
 	(13, 'Hot For Teacher', 0, '[Spoken:]\r\n"Oh wow, man !" \r\n"Wait a second man. Whaddaya think the teacher\'s gonna look like this year ?" \r\n"My butt, man !" \r\nT-T-Teacher stop that screaming, teacher don\'t you see ? \r\nDon\'t wanna be no uptown fool. \r\nMaybe I should go to hell, but I\'m doin\' well, teacher needs to see me after school. \r\n\r\n[Chorus:]\r\nI think of all the education that I missed. \r\nBut then my homework was never quite like this. \r\nGot it bad, got it bad, got it bad, \r\nI\'m hot for teacher. \r\nI got it bad, so bad, \r\nI\'m hot for teacher. \r\n\r\n[Spoken:]\r\n"Hey, I heard you missed us, we\'re back !" \r\n"I brought my pencil" \r\n"Gimme something to write on, man" \r\nI heard about your lessons, but lessons are so cold. \r\nI know about this school. \r\nLittle girl from cherry lane, how did you get so bold ? \r\nHow did you know that golden rule ? \r\n\r\n[Chorus:]\r\n\r\n[Guitar solo]\r\n\r\n"Oh man, I think the clock is slow" \r\n"I don\'t feel tardy" \r\n"Class dismissed"', 6, 3, 244),
@@ -279,6 +283,7 @@ INSERT INTO `musica` (`idMusica`, `nomeMusica`, `score`, `letra`, `faixa`, `idAl
 	(28, 'P.Y.T. (Pretty Young Thing)', 0, 'You know, you—you make me feel so good inside.\r\nI always wanted a girl just like you.\r\nYou\'re such a P.Y.T. pretty young thing.\r\n\r\nWhere did you come from baby\r\nAnd ooh won\'t you take me there?\r\nRight away won\'t you baby\r\nTender only you\'ve got to be\r\nSpark my nature\r\nSugar fly with me\r\n\r\nDon\'t you know now is the perfect time\r\nWe can make it right\r\nHit the city lights\r\n\r\nThen tonight ease the love and pain\r\nLet me take you to the max\r\n\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there\r\n\r\nAnywhere you wanna go (Yes, I will.)\r\n\r\nNothin\' can stop this burnin\'\r\nDesire to be with you\r\nGotta get to you baby\r\nWon\'t you come, it\'s emergency\r\nCool my fire yearnin\'\r\nHoney, come set me free\r\n\r\nDon\'t you know now is the perfect time\r\nWe can dim the lights\r\nJust to make it right\r\n\r\nIn the night hit the lovin\' spot\r\nI\'ll give you all that I\'ve got\r\n\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there (Yes, I will.)\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there\r\n\r\nPretty young things\r\nPretty young things\r\nPretty young things\r\nPretty young things\r\n\r\nPretty young things, repeat after me\r\n[Michael] Say "Na, na, na."\r\n[P.Y.T.\'s] Na, na, na\r\n[Michael] Na, na, na, na\r\n[P.Y.T.\'s] Na, na, na, na\r\n[Michael] Say "Na, na, na."\r\n[P.Y.T.\'s] Na, na, na\r\n[Michael] Na, na, na, na, na\r\n[P.Y.T.\'s] Na, na, na, na, na\r\n[Michael] I\'ll take you there, take you there\r\n\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there\r\n\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there, take you there\r\n\r\n[Ad-lib and fade-out:]\r\nYou know I think you are really nice.\r\nYou and I could\'ve just put together.\r\nYou\'re such a P.Y.T. Pretty young thing.\r\n\r\nI just wanna love you, you know, it\'s...\r\nI\'d give you all', 8, 8, 224),
 	(29, 'The Lady In My Life', 0, 'There\'ll be no darkness tonight\r\nLady our love will shine\r\n(lighting the night)\r\nJust put your trust in my heart\r\nAnd meet me in paradise\r\n(now is the time)\r\nGirl, you\'re every wonder in this world to me\r\nA treasure time won\'t steal away\r\n\r\nSo listen to my heart\r\nLay your body close to mine\r\nLet me fill you with my dreams\r\nI can make you feel alright\r\nAnd baby through the years gonna love you more each day\r\nSo I promise you tonight that you will always be the lady in my life\r\n\r\nLay back in my tenderness\r\nLet\'s make this a night we won\'t forget\r\nGirl, I need your sweet caress, oh\r\nReach out to a fantasy\r\nTwo hearts in a beat of ecstasy\r\nCome to me, girl\r\n\r\nAnd I will keep you warm\r\nThrough the shadows of the night\r\nLet me touch you with my love\r\nI can make you feel so right\r\nAnd baby through the years\r\nEven when we\'re old and gray\r\nI will love you more each day\r\n\'Cause you will always be the lady in my life\r\n\r\nStay with me\r\nI want you to stay with me\r\nI need you by my side\r\nDon\'t you go nowhere\r\n(ooh girl let me keep you warm)\r\nLet me keep you warm\r\n(you are the lady in my life)\r\nYou\'re my lady\r\n(fill you with the sweetest love)\r\nThe sweetest love\r\n(always the lady in my life)\r\nI wanna touch you baby\r\n\r\n(lay back in my tenderness)\r\n(you are the lady in my life)\r\nDoo doo doo\r\n(rock me with your sweet caress)\r\n(always the lady in my life)\r\nYou\'re my lady and I love you girl\r\n\r\n(ooh girl let me keep you warm)\r\n(you are the lady in my life)\r\nDon\'t you go nowhere\r\n(fill you with the sweetest love)\r\nI love you I love you\r\n(always the lady in my life)\r\nI need you I want you, baby\r\n\r\n(lay back in my tenderness)\r\nStay with me\r\n(you are the lady in my life)\r\nDon\'t you go no where\r\n(rock me with your sweet caress)\r\nAnd I love you baby\r\n(always the lady in my life)\r\nWoo\r\n\r\nOoh baby\r\nDon\'t you go nowhere\r\nYou\'re my lady\r\nAll through the night\r\n\r\n(ooh girl let me keep you warm)\r\nI wanna give you all\r\n(you are the lady in my life)\r\nIn my life\r\n(fill you with the sweetest love)\r\nLet me fill you baby\r\n(always the lady in my life)\r\nAll over all over all over\r\n\r\n(lay back in my tenderness)\r\nLay back with me\r\n(you are the lady in my life)\r\nLet me touch you girl\r\n(rock me with your sweet caress)\r\nLay back with me\r\n(always the lady in my life)\r\nAll over [7x]\r\n\r\n(ooh girl let me keep you warm)\r\nBaby\r\n(you are the lady in my life)\r\nWoo\r\n(fill you with the sweetest love)\r\n(always the lady in my life)\r\nYou\'re my lady\r\n\r\n(lay back in my tenderness)\r\nYou\'re my lady baby', 9, 8, 224);
 /*!40000 ALTER TABLE `musica` ENABLE KEYS */;
+
 
 -- Copiando estrutura para tabela memes.participa
 DROP TABLE IF EXISTS `participa`;
@@ -321,23 +326,30 @@ INSERT INTO `participa` (`Musica_idMusica`, `Artista_idArtista`, `papel`) VALUES
 	(29, 4, 'Intérprete');
 /*!40000 ALTER TABLE `participa` ENABLE KEYS */;
 
+
 -- Copiando estrutura para tabela memes.score
 DROP TABLE IF EXISTS `score`;
 CREATE TABLE IF NOT EXISTS `score` (
   `idScore` int(11) NOT NULL AUTO_INCREMENT,
   `idUsuarioScore` int(11) NOT NULL,
   `idMusicaScore` int(11) NOT NULL,
+  `data` datetime DEFAULT NULL,
   PRIMARY KEY (`idScore`),
   KEY `idUsuarioScore` (`idUsuarioScore`),
   KEY `idMusicaScore` (`idMusicaScore`),
   CONSTRAINT `idMusicaScore` FOREIGN KEY (`idMusicaScore`) REFERENCES `musica` (`idMusica`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `idUsuarioScore` FOREIGN KEY (`idUsuarioScore`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.score: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela memes.score: ~8 rows (aproximadamente)
 DELETE FROM `score`;
 /*!40000 ALTER TABLE `score` DISABLE KEYS */;
+INSERT INTO `score` (`idScore`, `idUsuarioScore`, `idMusicaScore`, `data`) VALUES
+	(16, 15, 13, '2017-11-10 10:48:19'),
+	(17, 15, 1, '2017-11-10 10:54:33'),
+	(18, 15, 2, '2017-11-10 10:54:49');
 /*!40000 ALTER TABLE `score` ENABLE KEYS */;
+
 
 -- Copiando estrutura para tabela memes.usuario
 DROP TABLE IF EXISTS `usuario`;
@@ -350,9 +362,9 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `idR` (`idR`)
-) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=418 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.usuario: ~5 rows (aproximadamente)
+-- Copiando dados para a tabela memes.usuario: ~4 rows (aproximadamente)
 DELETE FROM `usuario`;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` (`idUsuario`, `email`, `idR`, `tipo`, `perfil`) VALUES
@@ -361,7 +373,6 @@ INSERT INTO `usuario` (`idUsuario`, `email`, `idR`, `tipo`, `perfil`) VALUES
 	(76, 'elishaphp@gmail.com', '107170213645449942722', 1, 'https://lh5.googleusercontent.com/-eTfe1uR0mnE/AAAAAAAAAAI/AAAAAAAAAHw/w1BgcRuJhT0/s96-c/photo.jpg'),
 	(90, 'eliseuphp@gmail.com', '112355985130332857702', 0, 'https://lh3.googleusercontent.com/-snpJLNdEd6U/AAAAAAAAAAI/AAAAAAAAAAA/ACnBePbyntDY-nS4Z_lMbSjJToCLirOF7w/s96-c/photo.jpg');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
-
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
