@@ -57,12 +57,12 @@
                     </div>
                     <ul class="nav navbar-nav navbar-right">
                         <li><p:commandButton value="Log In" 
-                                                 id="login"
-                                                 styleClass="btn btn-default" 
-                                                 style=" margin-top: 6px; padding: 6px 0px 6px 0px; margin-right: 6px;"
-                                                 onclick="$('#myModal').modal('show');"
-                                                 update=":memes:myMemes"
-                                                 immediate="true" /></li>
+                                             id="login"
+                                             styleClass="btn btn-default" 
+                                             style=" margin-top: 6px; padding: 6px 0px 6px 0px; margin-right: 6px;"
+                                             onclick="$('#myModal').modal('show');"
+                                             update=":memes:myMemes"
+                                             immediate="true" /></li>
                         <li class="dropdown">
                             <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
                                 <span class="caret"></span></button>
@@ -136,14 +136,18 @@
                                 </h:form>
                             </h4>
                             <h:form id="score">
-                                <h5>musica top</h5>
-                                <p:inputText id="idUserS" value="#{scoreControle.idUsuario}"/>
-                                <p:inputText id="idMusS" value="#{scoreControle.idMusica}"/>
+                                <h4 style="display: inline">gostou dessa musica: </h4>
+                                <p:inputText style="display: none" id="idUserS" value="#{scoreControle.idUsuario}"/>
+                                <p:inputText style="display: none" id="idMusS" value="#{scoreControle.idMusica}"/>
+                                <p:inputText style="display: none" id="scoreGet" value="#{scoreControle.scoreSet}"/>
                                 <p:commandButton 
+                                    style="display: none"
                                     id="a"
                                     class="btn btn-default"
-                                    action="#{scoreControle.socoreGet(idMusica, idUsuario)}"/>
-                                <p:inputText id="scoreGet" value="#{scoreControle.scoreSet}"/>
+                                    update="score"
+                                    action="#{scoreControle.socoreGet(idMusica, idUsuario)}"
+                                    onclick="setTimeout(getScore, 1000);"/>
+                                <h:commandLink style="display: inline" id="salvarS" disabled="#{scoreControle.disable}" action="#{scoreControle.salvar()}"><i class="fa fa-thumbs-up" aria-hidden="true"></i></h:commandLink>
                             </h:form>
                         </div>
                         <!-- Checagem de usuario -->
@@ -239,14 +243,20 @@
                     //Score
                     var sUsuario = document.getElementById('score:idUserS');
                     var sMusica = document.getElementById('score:idMusS');
-                    // click
-                    document.getElementById('score:a').click();
                     //ID -> Avaliação
                     avUsuario.value = idUsuario;
                     avMusica.value = idMusica;
                     //ID -> Score
                     sUsuario.value = idUsuario;
                     sMusica.value = idMusica;
+                    // click
+                    document.getElementById('score:a').click();
+                    //like
+                    function getScore() {
+                        var ifScore = document.getElementById('score:scoreGet').value;
+                        console.log(ifScore);
+                    }
+                    ;
         </script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
         <script src="resources/js/buscaVox.js"></script>

@@ -20,7 +20,7 @@ public class ScoreDAO {
     public static void inserir(Score score) throws SQLException {
         Connection con = Conexao.getConnection();
         String sql
-                = "INSERT INTO `memes`.`score` (`idMusicaScore`, `idUsuarioScore`) VALUES (?, ?);";
+                = "INSERT INTO `memes`.`score` (`idMusicaScore`, `idUsuarioScore`,data) VALUES (?, ?, CURRENT_TIMESTAMP());";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, score.getMusica().getIdMusica());
         stmt.setInt(2, score.getUsuario().getIdUsuario());

@@ -19,6 +19,7 @@ public class ScoreControle {
     private List<Score> scores2 = new ArrayList<Score>();
     private Score score = new Score();
     private boolean salvar = true;
+    private boolean disable = true;
     private int idUsuario = 0;
     private int scoreSet = 0;
     private int idMusica = 0;
@@ -54,6 +55,11 @@ public class ScoreControle {
             System.out.println(idMusica + "foda" + idUsuario);
             scoreSet = ScoreDAO.socoreGet(idMusica, idUsuario);
             System.out.println(scoreSet + "foda");
+            if(scoreSet == 1){
+                disable = false;
+            } else {
+                disable = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -143,6 +149,14 @@ public class ScoreControle {
 
     public void setScoreSet(int scoreSet) {
         this.scoreSet = scoreSet;
+    }
+
+    public boolean isDisable() {
+        return disable;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
     }
 
 }
