@@ -55,24 +55,16 @@ public class ScoreDAO {
         con.close();
     }
 
-    public static List<Score> getListaAsd(int idMusica) throws SQLException {
+    public static int socoreGet(int idMusica, int idUsuario) throws SQLException {
+        int foda = 0;
         List<Score> lista = new ArrayList<Score>();
         Musica musica = new Musica();
         Connection con = Conexao.getConnection();
-        String sql = "select\n"
-                + "*\n"
-                + "from\n"
-                + "score av, \n"
-                + "musica mu, \n"
-                + "usuario us \n"
-                + "WHERE\n"
-                + "av.idMusicaScore = mu.idMusica AND \n"
-                + "av.idUsuarioScore = us.idUsuario AND\n"
-                + "mu.idMusica = ?\n"
-                + "ORDER BY\n"
-                + "av.idScore DESC";
+        String sql = "select * from score sc, usuario us, musica mu where us.idUsuario = sc.idUsuarioScore and us.idUsuario = ? and mu.idMusica = sc.idMusicaScore and mu.idMusica = ?;";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setInt(1, idMusica);
+        stmt.setInt(1, idUsuario);
+        stmt.setInt(2, idMusica);
+        System.out.println(idMusica + "foda2" + idUsuario);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             musica.setIdMusica(rs.getInt("idMusica"));
@@ -93,12 +85,21 @@ public class ScoreDAO {
             score.setMusica(musica);
             score.setUsuario(usuario);
             lista.add(score);
+            
+        }
+        if(lista.isEmpty()){
+            foda=1;
+            System.out.println("foda"+foda);
+            
+        } else{
+            foda=2;
+            System.out.println("super foda"+foda);
         }
         stmt.close();
         rs.close();
         con.close();
 
-        return lista;
+        return foda;
     }
 
     public static List<Score> getLista() throws SQLException {

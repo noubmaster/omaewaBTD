@@ -56,13 +56,13 @@
                         </ul>
                     </div>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><p:commandLink value="Log In" 
-                                           id="login"
-                                           styleClass="btn btn-default" 
-                                           style="padding: 8px; margin-top: 6px; margin-right: 6px;"
-                                           onclick="$('#myModal').modal('show');"
-                                           update=":memes:myMemes"
-                                           immediate="true" /></li>
+                        <li><p:commandButton value="Log In" 
+                                                 id="login"
+                                                 styleClass="btn btn-default" 
+                                                 style=" margin-top: 6px; padding: 6px 0px 6px 0px; margin-right: 6px;"
+                                                 onclick="$('#myModal').modal('show');"
+                                                 update=":memes:myMemes"
+                                                 immediate="true" /></li>
                         <li class="dropdown">
                             <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
                                 <span class="caret"></span></button>
@@ -139,6 +139,11 @@
                                 <h5>musica top</h5>
                                 <p:inputText id="idUserS" value="#{scoreControle.idUsuario}"/>
                                 <p:inputText id="idMusS" value="#{scoreControle.idMusica}"/>
+                                <p:commandButton 
+                                    id="a"
+                                    class="btn btn-default"
+                                    action="#{scoreControle.socoreGet(idMusica, idUsuario)}"/>
+                                <p:inputText id="scoreGet" value="#{scoreControle.scoreSet}"/>
                             </h:form>
                         </div>
                         <!-- Checagem de usuario -->
@@ -234,6 +239,8 @@
                     //Score
                     var sUsuario = document.getElementById('score:idUserS');
                     var sMusica = document.getElementById('score:idMusS');
+                    // click
+                    document.getElementById('score:a').click();
                     //ID -> Avaliação
                     avUsuario.value = idUsuario;
                     avMusica.value = idMusica;

@@ -20,6 +20,7 @@ public class ScoreControle {
     private Score score = new Score();
     private boolean salvar = true;
     private int idUsuario = 0;
+    private int scoreSet = 0;
     private int idMusica = 0;
 
     public int getIdUsuario() {
@@ -46,9 +47,13 @@ public class ScoreControle {
         idMusica = 0;
     }
 
-    public void listAsd(int idMusicaC) {
+    public void socoreGet(int idMusica, int idUsuario) {
         try {
-            scores2 = ScoreDAO.getListaAsd(idMusicaC);
+            idMusica = this.idMusica;
+            idUsuario = this.idUsuario;
+            System.out.println(idMusica + "foda" + idUsuario);
+            scoreSet = ScoreDAO.socoreGet(idMusica, idUsuario);
+            System.out.println(scoreSet + "foda");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -100,14 +105,6 @@ public class ScoreControle {
         }
     }
 
-    public List<Score> getAvaliacoes() {
-        return scores;
-    }
-
-    public void setAvaliacoes(List<Score> scores) {
-        this.scores = scores;
-    }
-
     public Score getScore() {
         return score;
     }
@@ -116,20 +113,36 @@ public class ScoreControle {
         this.score = score;
     }
 
-    public List<Score> getAvaliacoes2() {
-        return scores2;
-    }
-
-    public void setAvaliacoes2(List<Score> scores2) {
-        this.scores2 = scores2;
-    }
-
     public int getIdMusica() {
         return idMusica;
     }
 
     public void setIdMusica(int idMusica) {
         this.idMusica = idMusica;
+    }
+
+    public List<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
+    }
+
+    public List<Score> getScores2() {
+        return scores2;
+    }
+
+    public void setScores2(List<Score> scores2) {
+        this.scores2 = scores2;
+    }
+
+    public int getScoreSet() {
+        return scoreSet;
+    }
+
+    public void setScoreSet(int scoreSet) {
+        this.scoreSet = scoreSet;
     }
 
 }
