@@ -132,11 +132,12 @@
                             <img src="#{buscaControle.artista.foto}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
                             <h4>
                                 <h:form>
-                                    <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(buscaControle.artista.idArtista)}">#{buscaControle.artista.nomeArtista}</h:commandLink>
+                                    <p>#{buscaControle.musica.idMusica}</p>
+                                    <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(buscaControle.musica.idMusica)}">#{buscaControle.artista.nomeArtista}</h:commandLink>
                                 </h:form>
                             </h4>
                             <h:form id="score">
-                                <h4 style="display: inline">gostou dessa musica: </h4>
+                                <h5 style="display: inline">Gostou dessa musica: </h5>
                                 <p:inputText style="display: none" id="idUserS" value="#{scoreControle.idUsuario}"/>
                                 <p:inputText style="display: none" id="idMusS" value="#{scoreControle.idMusica}"/>
                                 <p:inputText style="display: none" id="scoreGet" value="#{scoreControle.scoreSet}"/>
