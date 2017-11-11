@@ -27,6 +27,7 @@ public class BuscaControle {
 
     private List<Busca> result = new ArrayList<Busca>();
     private List<Album> albumsArtist = new ArrayList<Album>();
+    private List<Artista> artistas = new ArrayList<Artista>();
     private List<Musica> musicasAlbum = new ArrayList<Musica>();
     private String webInput = "";
     private Musica musica = new Musica();
@@ -42,19 +43,21 @@ public class BuscaControle {
         }
     }
 
-    public String getMusicaRedirect(int idMusica) {
+    public String getMusicaRedirect(int idMusica, int idArtista) {
         try {
             musica = BuscaDAO.getMusicaByID(idMusica);
-            artista = BuscaDAO.getArtistByID(idMusica);
+            artistas = BuscaDAO.getArtistListByID(idMusica);
+            artista = BuscaDAO.getArtistByID(idArtista);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return "musica.xhtml?faces-redirect=true";
     }
 
-    public String getArtistaRedirect(int idMusica) {
+    public String getArtistaRedirect(int idArtista) {
         try {
-            artista = BuscaDAO.getArtistByID(idMusica);
+            System.out.println("idArtista: " + idArtista);
+            artista = BuscaDAO.getArtistByID(idArtista);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,7 +69,7 @@ public class BuscaControle {
             musicasAlbum = BuscaDAO.getListaMusicaByAlbum(idAlbum);
         } catch (SQLException e) {
             e.printStackTrace();
-        }       
+        }
     }
 
     public String getAlbumRedirect(int idMusica) {
@@ -81,7 +84,7 @@ public class BuscaControle {
     public void getArtistsAlbum(int idArtista) {
         try {
             albumsArtist = BuscaDAO.getArtistAlbumsByID(idArtista);
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -142,6 +145,13 @@ public class BuscaControle {
     public void setMusicasAlbum(List<Musica> musicasAlbum) {
         this.musicasAlbum = musicasAlbum;
     }
-    
-    
+
+    public List<Artista> getArtistas() {
+        return artistas;
+    }
+
+    public void setArtistas(List<Artista> artistas) {
+        this.artistas = artistas;
+    }
+
 }

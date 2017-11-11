@@ -115,16 +115,16 @@ public class BuscaDAO {
             musica.setNomeMusica(rs.getString("nomeMusica"));
             musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
-            
+
             Artista artista = new Artista();
             artista.setIdArtista(rs.getInt("idArtista"));
             artista.setNomeArtista(rs.getString("nomeArtista"));
-            
+
             Participa participa = new Participa();
             participa.setPapel(rs.getString("papel"));
             participa.setArtista(artista);
             participa.setMusica(musica);
-            
+
             musica.setAlbum(album);
             musica.setGenero(genero);
 
@@ -135,11 +135,23 @@ public class BuscaDAO {
         return musica;
     }
 
-    public static Artista getArtistByID(int idMusica) throws SQLException {
-        Musica musica = new Musica();
-        Artista artista = new Artista();
+    public static List<Artista> getArtistListByID(int idMusica) throws SQLException {
+        List<Artista> lista = new ArrayList<Artista>();
         Connection con = Conexao.getConnection();
-        String sql = "SELECT * FROM album al, musica m, participa p, artista a WHERE m.idMusica = p.Musica_idMusica AND p.Artista_idArtista = a.idArtista AND m.idMusica = ? group by m.idMusica";
+        String sql = "SELECT\n"
+                + "*\n"
+                + "FROM\n"
+                + "participa p,\n"
+                + "artista a,\n"
+                + "musica m,\n"
+                + "album al\n"
+                + "WHERE\n"
+                + "p.Musica_idMusica = ? AND\n"
+                + "p.Musica_idMusica = m.idMusica AND\n"
+                + "a.idArtista = p.Artista_idArtista AND\n"
+                + "al.idAlbum = m.idAlbumMusica\n"
+                + "ORDER BY\n"
+                + "p.papel;";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, idMusica);
         ResultSet rs = stmt.executeQuery();
@@ -150,6 +162,61 @@ public class BuscaDAO {
             album.setAno(rs.getInt("ano"));
             album.setCapa(rs.getString("capa"));
 
+            Musica musica = new Musica();
+            musica.setIdMusica(rs.getInt("idMusica"));
+            musica.setNomeMusica(rs.getString("nomeMusica"));
+            musica.setScore(rs.getFloat("score"));
+            musica.setLetra(rs.getString("letra"));
+
+            Artista artista = new Artista();
+            artista.setIdArtista(rs.getInt("idArtista"));
+            artista.setNomeArtista(rs.getString("nomeArtista"));
+            artista.setFoto(rs.getString("foto"));
+
+            Participa participa = new Participa();
+            participa.setPapel(rs.getString("papel"));
+
+            musica.setAlbum(album);
+            participa.setArtista(artista);
+            participa.setMusica(musica);
+            lista.add(artista);
+        }
+        stmt.close();
+        rs.close();
+        con.close();
+        return lista;
+    }
+
+    public static Artista getArtistByID(int idMusica) throws SQLException {
+        Artista artista = new Artista();
+        Connection con = Conexao.getConnection();
+        String sql = "SELECT\n"
+                + "*\n"
+                + "FROM\n"
+                + "participa p,\n"
+                + "artista a,\n"
+                + "musica m,\n"
+                + "album al\n"
+                + "WHERE\n"
+                + "p.Artista_idArtista = ? AND\n"
+                + "p.Musica_idMusica = m.idMusica AND\n"
+                + "a.idArtista = p.Artista_idArtista AND\n"
+                + "al.idAlbum = m.idAlbumMusica\n"
+                + "GROUP BY\n"
+                + "a.idArtista\n"
+                + "ORDER BY\n"
+                + "p.papel; ";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idMusica);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Album album = new Album();
+            album.setIdAlbum(rs.getInt("idAlbum"));
+            album.setNomeAlbum(rs.getString("nomeAlbum"));
+            album.setAno(rs.getInt("ano"));
+            album.setCapa(rs.getString("capa"));
+
+            Musica musica = new Musica();
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
             musica.setScore(rs.getFloat("score"));
@@ -177,7 +244,7 @@ public class BuscaDAO {
     public static List<Album> getArtistAlbumsByID(int idArtista) throws SQLException {
         List<Album> lista = new ArrayList<Album>();
         Connection con = Conexao.getConnection();
-        String sql = "SELECT al.idAlbum, al.nomeAlbum, al.ano, al.capa FROM artista ar, participa pa, musica mu, album al WHERE mu.idAlbumMusica = al.idAlbum AND ar.idArtista = pa.Artista_idArtista AND pa.Musica_idMusica = mu.idMusica AND ar.idArtista = ? GROUP BY al.idAlbum";
+        String sql = "SELECT al.idAlbum, al.nomeAlbum, al.ano, al.capa FROM artista ar, participa pa, musica mu, album al WHERE mu.idAlbumMusica = al.idAlbum AND ar.idArtista = pa.Artista_idArtista AND pa.Musica_idMusica = mu.idMusica AND ar.idArtista = ? GROUP BY al.idAlbum ORDER BY al.ano";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, idArtista);
         ResultSet rs = stmt.executeQuery();

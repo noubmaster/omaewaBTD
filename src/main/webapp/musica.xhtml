@@ -129,13 +129,15 @@
                                     <h:commandLink class="text-muted" action="#{buscaControle.getAlbumRedirect(buscaControle.musica.album.idAlbum)}">#{buscaControle.musica.album.nomeAlbum}</h:commandLink>
                                 </h:form>
                             </h4>
-                            <img src="#{buscaControle.artista.foto}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
-                            <h4>
-                                <h:form>
-                                    <p>#{buscaControle.musica.idMusica}</p>
-                                    <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(buscaControle.musica.idMusica)}">#{buscaControle.artista.nomeArtista}</h:commandLink>
-                                </h:form>
-                            </h4>
+                            <h:form>
+                                <ui:repeat value="#{buscaControle.artistas}" var="q" varStatus="a">
+                                    <img src="#{q.foto}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
+                                    <p>#{q.idArtista}</p>
+                                    <h4>
+                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(q.idArtista)}">#{q.nomeArtista}</h:commandLink>
+                                    </h4>
+                                </ui:repeat>
+                            </h:form>
                             <h:form id="score">
                                 <h5 style="display: inline">Gostou dessa musica: </h5>
                                 <p:inputText style="display: none" id="idUserS" value="#{scoreControle.idUsuario}"/>
