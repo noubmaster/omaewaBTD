@@ -56,7 +56,6 @@ public class BuscaControle {
 
     public String getArtistaRedirect(int idArtista) {
         try {
-            System.out.println("idArtista: " + idArtista);
             artista = BuscaDAO.getArtistByID(idArtista);
         } catch (SQLException e) {
             e.printStackTrace();
