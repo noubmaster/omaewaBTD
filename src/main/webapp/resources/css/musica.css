@@ -1,7 +1,28 @@
 .info{
     margin-top: 40px;
 }
+
 .info h4{
     padding-top: 9px;
     border-top: 1px solid #eee;
+}
+
+.duzentos{
+    height: 200px; 
+    width: 200px;
+}
+
+.vinteecinco{
+    height: 25px; 
+    width: 25px;
+    margin-right: 5px;
+}
+
+.info h5{
+    margin-bottom: 15px;
+}
+
+.avaliacoes{
+        border-top: 1px solid #eee;
+        border-bottom: none;
 }

@@ -135,6 +135,47 @@ public class BuscaDAO {
         return musica;
     }
 
+    public static List<Composicao> getArtistComposicaoListByID(int idMusica) throws SQLException {
+        List<Composicao> lista = new ArrayList<Composicao>();
+        Connection con = Conexao.getConnection();
+        String sql = "SELECT\n"
+                + "	*\n"
+                + "FROM\n"
+                + "	artista ar,\n"
+                + "	composicao co,\n"
+                + "	musica m\n"
+                + "WHERE\n"
+                + "	m.idMusica = co.Musica_idMusica AND\n"
+                + "	ar.idArtista = co.Artista_idArtista AND\n"
+                + "	m.idMusica = ?\n"
+                + "GROUP BY\n"
+                + "	ar.nomeArtista;";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idMusica);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Musica musica = new Musica();
+            musica.setIdMusica(rs.getInt("idMusica"));
+            musica.setNomeMusica(rs.getString("nomeMusica"));
+            musica.setScore(rs.getFloat("score"));
+            musica.setLetra(rs.getString("letra"));
+
+            Artista artista = new Artista();
+            artista.setIdArtista(rs.getInt("idArtista"));
+            artista.setNomeArtista(rs.getString("nomeArtista"));
+            artista.setFoto(rs.getString("foto"));
+
+            Composicao composicao = new Composicao();
+            composicao.setArtista(artista);
+            composicao.setMusica(musica);
+            lista.add(composicao);
+        }
+        stmt.close();
+        rs.close();
+        con.close();
+        return lista;
+    }
+
     public static List<Artista> getArtistListByID(int idMusica) throws SQLException {
         List<Artista> lista = new ArrayList<Artista>();
         Connection con = Conexao.getConnection();

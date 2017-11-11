@@ -24,7 +24,7 @@ public class AvaliacaoDAO {
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, avaliacao.getNota());
         stmt.setString(2, avaliacao.getComentario());
-        stmt.setInt(3, avaliacao.getRevisao());
+        stmt.setBoolean(3, avaliacao.isRevisao());
         stmt.setInt(4, avaliacao.getMusica().getIdMusica());
         stmt.setInt(5, avaliacao.getUsuario().getIdUsuario());
 
@@ -40,7 +40,7 @@ public class AvaliacaoDAO {
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, avaliacao.getNota());
         stmt.setString(2, avaliacao.getComentario());
-        stmt.setInt(3, avaliacao.getRevisao());
+        stmt.setBoolean(3, avaliacao.isRevisao());
         stmt.setInt(4, avaliacao.getMusica().getIdMusica());
         stmt.setInt(5, avaliacao.getUsuario().getIdUsuario());
         stmt.setInt(6, avaliacao.getIdAvaliacao());
@@ -97,7 +97,7 @@ public class AvaliacaoDAO {
             avaliacao.setIdAvaliacao(rs.getInt("idAvaliacao"));
             avaliacao.setNota(rs.getInt("nota"));
             avaliacao.setComentario(rs.getString("comentario"));
-            avaliacao.setRevisao(rs.getInt("revisao"));
+            avaliacao.setRevisao(rs.getBoolean("revisao"));
 
             avaliacao.setMusica(musica);
             avaliacao.setUsuario(usuario);
@@ -134,7 +134,7 @@ public class AvaliacaoDAO {
             avaliacao.setIdAvaliacao(rs.getInt("idAvaliacao"));
             avaliacao.setNota(rs.getInt("nota"));
             avaliacao.setComentario(rs.getString("comentario"));
-            avaliacao.setRevisao(rs.getInt("revisao"));
+            avaliacao.setRevisao(rs.getBoolean("revisao"));
 
             avaliacao.setMusica(musica);
             avaliacao.setUsuario(usuario);

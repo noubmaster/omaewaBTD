@@ -1,4 +1,5 @@
 /* global admin, bloquear */
+var currentPath = window.location.pathname;
 var login = document.getElementById("login");
 var optionsUser = document.getElementById("optionsUser");
 

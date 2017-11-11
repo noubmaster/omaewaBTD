@@ -19,6 +19,8 @@ public class AvaliacaoControle {
     private List<Avaliacao> avaliacoes2 = new ArrayList<Avaliacao>();
     private Avaliacao avaliacao = new Avaliacao();
     private boolean salvar = true;
+    private boolean logado = true;
+    private int iduserLogado = 0;
     private int idUsuario = 0;
     private int idMusica = 0;
 
@@ -53,6 +55,14 @@ public class AvaliacaoControle {
             e.printStackTrace();
         }
 
+    }
+    public void verificar(int user) {
+        user = iduserLogado;
+        if(user == 0){
+            logado = true;
+        } else{
+            logado = false;
+        }
     }
 
     public void preparaAlterar() {
@@ -130,6 +140,22 @@ public class AvaliacaoControle {
 
     public void setIdMusica(int idMusica) {
         this.idMusica = idMusica;
+    }
+
+    public boolean isLogado() {
+        return logado;
+    }
+
+    public void setLogado(boolean logado) {
+        this.logado = logado;
+    }
+
+    public int getIduserLogado() {
+        return iduserLogado;
+    }
+
+    public void setIduserLogado(int iduserLogado) {
+        this.iduserLogado = iduserLogado;
     }
 
 }

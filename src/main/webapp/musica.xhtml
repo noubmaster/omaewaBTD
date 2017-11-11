@@ -91,24 +91,47 @@
                             </div>
                             <p style="white-space: pre-wrap;">#{buscaControle.musica.letra}</p>
                             <!-- Avaliação -->
+                            <div class="page-header avaliacoes">
+                                <h1>Avaliações</h1>
+                            </div>
+                            <h:form id="verfUserAv">
+                                <p:inputText style="display: none" id="idUserS" value="#{avaliacaoControle.iduserLogado}"/>
+                                <p:commandButton 
+                                    style="display: none"
+                                    id="a"
+                                    class="btn btn-default"
+                                    update="avaliacao"
+                                    action="#{avaliacaoControle.verificar(user)}"/>
+                            </h:form>
                             <h:form id="avaliacao">
-                                <h:panelGrid  id="panelA" styleClass="panel">
-                                    <p:rating value="#{avaliacaoControle.avaliacao.nota}" />
+                                <h:panelGrid id="panelA" styleClass="panel" cellpadding="5">
+                                    <h:panelGrid columns="2">
+                                        <h:outputText value="Nota: " />
+                                        <p:rating value="#{avaliacaoControle.avaliacao.nota}" disabled="#{avaliacaoControle.logado}" style="margin-left: 130px" id="nota" required="true"/>
+
+                                        <h:outputText value="Revisao: "/>
+                                        <p:selectBooleanCheckbox id="bool" style="margin-left: 130px" disabled="#{avaliacaoControle.logado}" value="#{avaliacaoControle.avaliacao.revisao}"/>
+                                    </h:panelGrid>
                                     <p:inputTextarea style="resize: none;" 
                                                      styleClass="form-control"
                                                      id="comentario"
+                                                     disabled="#{avaliacaoControle.logado}"
                                                      rows="3"
                                                      cols="33"
+                                                     maxlength="200"
                                                      required="true"
-                                                     value="#{avaliacaoControle.avaliacao.comentario}"></p:inputTextarea>
+                                                     placeholder=""
+                                                     value="#{avaliacaoControle.avaliacao.comentario}">
+                                    </p:inputTextarea>
                                     <p:inputText style="display: none" id="idUser" value="#{avaliacaoControle.idUsuario}"/>
-                                    <p:inputText style="display: none" id="idMus" value="#{avaliacaoControle.idMusica}"/>
                                     <p:commandButton value="Salvar" 
+                                                     disabled="#{avaliacaoControle.logado}"
                                                      class="btn btn-default"
                                                      action="#{avaliacaoControle.salvar}"
                                                      >
                                         <p:resetInput target=":avaliacao:panelA" />
                                     </p:commandButton>
+                                    <p:inputText style="display: none" id="idMus" value="#{avaliacaoControle.idMusica}"/>
                                 </h:panelGrid>
                             </h:form>
                             <!--Lista de Avaliação -->
@@ -123,7 +146,7 @@
                             </h:form>
                         </div>
                         <div class="col-md-3 placeholder info">
-                            <img src="#{buscaControle.musica.album.capa}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
+                            <img src="#{buscaControle.musica.album.capa}" width="200" height="200" class="img-responsive duzentos" alt="Generic placeholder thumbnail"/>
                             <h4>
                                 <h:form>
                                     <h:commandLink class="text-muted" action="#{buscaControle.getAlbumRedirect(buscaControle.musica.album.idAlbum, buscaControle.artista.idArtista, buscaControle.musica.idMusica)}">#{buscaControle.musica.album.nomeAlbum}</h:commandLink>
@@ -131,11 +154,14 @@
                             </h4>
                             <h:form>
                                 <ui:repeat value="#{buscaControle.artistas}" var="q" varStatus="a">
-                                    <img src="#{q.foto}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
-                                    <p>#{q.idArtista}</p>
+                                    <img src="#{q.foto}" class="img-responsive duzentos" alt="Generic placeholder thumbnail"/>
                                     <h4>
                                         <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(q.idArtista)}">#{q.nomeArtista}</h:commandLink>
                                     </h4>
+                                </ui:repeat>
+                                <h4>Composição</h4>
+                                <ui:repeat var="a" value="#{buscaControle.compositores}">
+                                    <h5><img src="#{a.artista.foto}" class="img-responsive vinteecinco" alt="Generic placeholder thumbnail" style="height: 25px; width: 25px;"/>#{a.artista.nomeArtista}</h5>
                                 </ui:repeat>
                             </h:form>
                             <h:form id="score">
@@ -148,8 +174,7 @@
                                     id="a"
                                     class="btn btn-default"
                                     update="score"
-                                    action="#{scoreControle.socoreGet(idMusica, idUsuario)}"
-                                    onclick="setTimeout(getScore, 1000);"/>
+                                    action="#{scoreControle.socoreGet(idMusica, idUsuario)}"/>
                                 <h:commandLink style="display: inline" id="salvarS" disabled="#{scoreControle.disable}" action="#{scoreControle.salvar()}"><i class="fa fa-thumbs-up" aria-hidden="true"></i></h:commandLink>
                             </h:form>
                         </div>
@@ -236,31 +261,7 @@
         <script src="resources/js/admBlock.js"></script>
         <script src="resources/js/pageBlock.js"></script>
         <script src="resources/js/googleLogin.js"></script>
-        <script type="text/javascript">
-                    //ID Usuario, Música
-                    var idUsuario = document.getElementById('f1:idUsuario').value;
-                    var idMusica = document.getElementById('f1:idMusica').value;
-                    //Avaliação
-                    var avUsuario = document.getElementById('avaliacao:idUser');
-                    var avMusica = document.getElementById('avaliacao:idMus');
-                    //Score
-                    var sUsuario = document.getElementById('score:idUserS');
-                    var sMusica = document.getElementById('score:idMusS');
-                    //ID -> Avaliação
-                    avUsuario.value = idUsuario;
-                    avMusica.value = idMusica;
-                    //ID -> Score
-                    sUsuario.value = idUsuario;
-                    sMusica.value = idMusica;
-                    // click
-                    document.getElementById('score:a').click();
-                    //like
-                    function getScore() {
-                        var ifScore = document.getElementById('score:scoreGet').value;
-                        console.log(ifScore);
-                    }
-                    ;
-        </script>
+        <script src="resources/js/scoreAvaliaçao.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
         <script src="resources/js/buscaVox.js"></script>
     </h:body>

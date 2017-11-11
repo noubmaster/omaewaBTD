@@ -17,7 +17,7 @@ function bloquear() {
             currentPath === "/omaewa/manutencaoUser.xhtml" ||
             currentPath === "/omaewa/manutencaoUser.xhtml#") {
         tipo = document.getElementById("f1:tipoUser").value;
-        if (tipo === "0") {
+        if (tipo === "0" || tipo === "1") {
             block.style.display = "none";
             loginIfBlock.style.display = "inline";
         } else {

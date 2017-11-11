@@ -88,18 +88,20 @@
                             <div class="page-header text-center placeholder">
                                 <img src="#{buscaControle.album.capa}" width="200" height="200" class="img-responsive img-centered img-border" alt="Generic placeholder thumbnail"/>
                                 <h1>#{buscaControle.album.nomeAlbum}</h1>
-                                <ui:repeat var="q" value="#{buscaControle.artistasI}">
-                                    <p>#{q.nomeArtista}</p>
-                                </ui:repeat>
-                                <h:outputLabel value="Participantes" rendered="#{buscaControle.render}"/>
-                                <ui:repeat var="q" value="#{buscaControle.artistasP}">
-                                    <p>#{q.nomeArtista}</p>
-                                </ui:repeat>
+                                <h:form>
+                                    <ui:repeat var="q" value="#{buscaControle.artistasI}">
+                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(q.idArtista)}"><h5>#{q.nomeArtista}</h5></h:commandLink>
+                                    </ui:repeat>
+                                    <h:outputLabel value="Participantes" rendered="#{buscaControle.render}"/>
+                                    <ui:repeat var="q" value="#{buscaControle.artistasP}">
+                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(q.idArtista)}"><h5>#{q.nomeArtista}</h5></h:commandLink>
+                                    </ui:repeat>
+                                </h:form>
                             </div>
                         </div>
                         <div class="col-md-9 results">
                             <h:form>
-                                <div class="panel">
+                                <div class="">
                                     <ui:repeat value="#{buscaControle.musicasAlbum}" var="q" varStatus="d">
                                         <h:commandLink action="#{buscaControle.getMusicaRedirect(q.idMusica, buscaControle.artista.idArtista)}"><p>#{q.faixa}-#{q.nomeMusica}</p></h:commandLink>
                                     </ui:repeat>

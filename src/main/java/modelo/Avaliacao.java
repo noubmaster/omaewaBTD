@@ -5,7 +5,8 @@ package modelo;
  * @author Dendi
  */
 public class Avaliacao {
-    private int idAvaliacao, nota, revisao;
+    private int idAvaliacao, nota;
+    private boolean revisao;
     private String comentario;
     private Musica musica;
     private Usuario usuario;
@@ -24,14 +25,6 @@ public class Avaliacao {
 
     public void setNota(int nota) {
         this.nota = nota;
-    }
-
-    public int getRevisao() {
-        return revisao;
-    }
-
-    public void setRevisao(int revisao) {
-        this.revisao = revisao;
     }
 
     public String getComentario() {
@@ -57,4 +50,13 @@ public class Avaliacao {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public boolean isRevisao() {
+        return revisao;
+    }
+
+    public void setRevisao(boolean revisao) {
+        this.revisao = revisao;
+    }
+    
 }

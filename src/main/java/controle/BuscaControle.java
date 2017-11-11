@@ -15,6 +15,7 @@ import javax.faces.bean.SessionScoped;
 import modelo.Artista;
 import modelo.Album;
 import modelo.Busca;
+import modelo.Composicao;
 import modelo.Musica;
 
 /**
@@ -31,6 +32,7 @@ public class BuscaControle {
     private List<Artista> artistasI = new ArrayList<Artista>();
     private List<Artista> artistasP = new ArrayList<Artista>();
     private List<Musica> musicasAlbum = new ArrayList<Musica>();
+    private List<Composicao> compositores = new ArrayList<Composicao>();
     private String webInput = "";
     private boolean render = false;
     private Musica musica = new Musica();
@@ -51,6 +53,7 @@ public class BuscaControle {
             musica = BuscaDAO.getMusicaByID(idMusica);
             artistas = BuscaDAO.getArtistListByID(idMusica);
             artista = BuscaDAO.getArtistByID(idArtista);
+            compositores = BuscaDAO.getArtistComposicaoListByID(idMusica);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -186,6 +189,14 @@ public class BuscaControle {
 
     public void setRender(boolean render) {
         this.render = render;
+    }
+
+    public List<Composicao> getCompositores() {
+        return compositores;
+    }
+
+    public void setCompositores(List<Composicao> compositores) {
+        this.compositores = compositores;
     }
 
 }
