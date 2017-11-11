@@ -126,7 +126,7 @@
                             <img src="#{buscaControle.musica.album.capa}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"/>
                             <h4>
                                 <h:form>
-                                    <h:commandLink class="text-muted" action="#{buscaControle.getAlbumRedirect(buscaControle.musica.album.idAlbum)}">#{buscaControle.musica.album.nomeAlbum}</h:commandLink>
+                                    <h:commandLink class="text-muted" action="#{buscaControle.getAlbumRedirect(buscaControle.musica.album.idAlbum, buscaControle.artista.idArtista, buscaControle.musica.idMusica)}">#{buscaControle.musica.album.nomeAlbum}</h:commandLink>
                                 </h:form>
                             </h4>
                             <h:form>

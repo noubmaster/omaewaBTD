@@ -92,7 +92,7 @@
                                             <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica, a.artista.idArtista)}"><h4>#{a.musica.nomeMusica}</h4></h:commandLink>
                                             <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(a.artista.idArtista)}">#{a.artista.nomeArtista}</h:commandLink>
                                             <div class="text-muted" style="display: inline">|</div>
-                                            <h:commandLink class="text-muted" action="#{buscaControle.getAlbumRedirect(a.album.idAlbum)}">#{a.album.nomeAlbum}</h:commandLink>
+                                            <h:commandLink class="text-muted" action="#{buscaControle.getAlbumRedirect(a.album.idAlbum, a.artista.idArtista, a.musica.idMusica)}">#{a.album.nomeAlbum}</h:commandLink>
                                         </div>
                                         <div class="panel-body">
                                             <h6 id="letras">#{a.musica.letra}</h6>

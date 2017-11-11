@@ -28,8 +28,11 @@ public class BuscaControle {
     private List<Busca> result = new ArrayList<Busca>();
     private List<Album> albumsArtist = new ArrayList<Album>();
     private List<Artista> artistas = new ArrayList<Artista>();
+    private List<Artista> artistasI = new ArrayList<Artista>();
+    private List<Artista> artistasP = new ArrayList<Artista>();
     private List<Musica> musicasAlbum = new ArrayList<Musica>();
     private String webInput = "";
+    private boolean render = false;
     private Musica musica = new Musica();
     private Artista artista = new Artista();
     private Album album = new Album();
@@ -71,9 +74,17 @@ public class BuscaControle {
         }
     }
 
-    public String getAlbumRedirect(int idMusica) {
+    public String getAlbumRedirect(int idAlbum, int idArtista, int idMusica) {
         try {
-            album = BuscaDAO.getAlbumByID(idMusica);
+            album = BuscaDAO.getAlbumByID(idAlbum);
+            artista = BuscaDAO.getArtistByID(idArtista);
+            artistasI = BuscaDAO.getArtistInterpretesInAlbumByID(idAlbum);
+            artistasP = BuscaDAO.getArtistParticipantesInAlbumByID(idAlbum);
+            if(artistasP.isEmpty()){
+                render = false;
+            } else{
+                render = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -151,6 +162,30 @@ public class BuscaControle {
 
     public void setArtistas(List<Artista> artistas) {
         this.artistas = artistas;
+    }
+
+    public List<Artista> getArtistasP() {
+        return artistasP;
+    }
+
+    public void setArtistasP(List<Artista> artistasP) {
+        this.artistasP = artistasP;
+    }
+
+    public List<Artista> getArtistasI() {
+        return artistasI;
+    }
+
+    public void setArtistasI(List<Artista> artistasI) {
+        this.artistasI = artistasI;
+    }
+
+    public boolean isRender() {
+        return render;
+    }
+
+    public void setRender(boolean render) {
+        this.render = render;
     }
 
 }
