@@ -15,6 +15,7 @@ import javax.faces.bean.SessionScoped;
 import modelo.Artista;
 import modelo.Album;
 import modelo.Busca;
+import modelo.Score;
 import modelo.Composicao;
 import modelo.Musica;
 
@@ -27,7 +28,8 @@ import modelo.Musica;
 public class BuscaControle {
 
     private List<Busca> result = new ArrayList<Busca>();
-    private List<Album> albumsArtist = new ArrayList<Album>();
+    private List<Album> albumsArtistI = new ArrayList<Album>();
+    private List<Album> albumsArtistP = new ArrayList<Album>();
     private List<Artista> artistas = new ArrayList<Artista>();
     private List<Artista> artistasI = new ArrayList<Artista>();
     private List<Artista> artistasP = new ArrayList<Artista>();
@@ -35,6 +37,8 @@ public class BuscaControle {
     private List<Composicao> compositores = new ArrayList<Composicao>();
     private String webInput = "";
     private boolean render = false;
+    private boolean renderP = false;
+    private boolean renderI = false;
     private Musica musica = new Musica();
     private Artista artista = new Artista();
     private Album album = new Album();
@@ -83,11 +87,7 @@ public class BuscaControle {
             artista = BuscaDAO.getArtistByID(idArtista);
             artistasI = BuscaDAO.getArtistInterpretesInAlbumByID(idAlbum);
             artistasP = BuscaDAO.getArtistParticipantesInAlbumByID(idAlbum);
-            if(artistasP.isEmpty()){
-                render = false;
-            } else{
-                render = true;
-            }
+            render = !artistasP.isEmpty();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -96,8 +96,10 @@ public class BuscaControle {
 
     public void getArtistsAlbum(int idArtista) {
         try {
-            albumsArtist = BuscaDAO.getArtistAlbumsByID(idArtista);
-
+            albumsArtistI = BuscaDAO.getArtistInterpreteAlbumsByID(idArtista);
+            renderI = !albumsArtistI.isEmpty();
+            albumsArtistP = BuscaDAO.getArtistParticipanteAlbumsByID(idArtista);
+            renderP = !albumsArtistP.isEmpty();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -143,12 +145,12 @@ public class BuscaControle {
         this.album = album;
     }
 
-    public List<Album> getAlbumsArtist() {
-        return albumsArtist;
+    public List<Album> getAlbumsArtistI() {
+        return albumsArtistI;
     }
 
-    public void setAlbumsArtist(List<Album> albumsArtist) {
-        this.albumsArtist = albumsArtist;
+    public void setAlbumsArtistI(List<Album> albumsArtistI) {
+        this.albumsArtistI = albumsArtistI;
     }
 
     public List<Musica> getMusicasAlbum() {
@@ -197,6 +199,30 @@ public class BuscaControle {
 
     public void setCompositores(List<Composicao> compositores) {
         this.compositores = compositores;
+    }
+
+    public List<Album> getAlbumsArtistP() {
+        return albumsArtistP;
+    }
+
+    public void setAlbumsArtistP(List<Album> albumsArtistP) {
+        this.albumsArtistP = albumsArtistP;
+    }
+
+    public boolean isRenderP() {
+        return renderP;
+    }
+
+    public void setRenderP(boolean renderP) {
+        this.renderP = renderP;
+    }
+
+    public boolean isRenderI() {
+        return renderI;
+    }
+
+    public void setRenderI(boolean renderI) {
+        this.renderI = renderI;
     }
 
 }

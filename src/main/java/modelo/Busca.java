@@ -19,6 +19,7 @@ public class Busca {
     private Musica musica;
     private Participa participa;
     private Usuario usuario;
+    private Score score;
 
     public Album getAlbum() {
         return album;
@@ -83,4 +84,13 @@ public class Busca {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public Score getScore() {
+        return score;
+    }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
+    
 }

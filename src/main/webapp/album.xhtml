@@ -58,13 +58,13 @@
                                 </ul>
                             </div>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><p:commandLink value="Log In" 
-                                                   id="login"
-                                                   styleClass="btn btn-default" 
-                                                   style="padding: 8px; margin-top: 6px; margin-right: 6px;"
-                                                   onclick="$('#myModal').modal('show');"
-                                                   update=":memes:myMemes"
-                                                   immediate="true" /></li>
+                                <li><p:commandButton value="Log In" 
+                                                     id="login"
+                                                     styleClass="btn btn-default" 
+                                                     style=" margin-top: 6px; padding: 6px 0px 6px 0px; margin-right: 6px;"
+                                                     onclick="$('#myModal').modal('show');"
+                                                     update=":memes:myMemes"
+                                                     immediate="true" /></li>
                                 <li class="dropdown">
                                     <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
                                         <span class="caret"></span></button>
@@ -86,7 +86,7 @@
                     <div class="col-md-12">
                         <div class="col-md-3">
                             <div class="page-header text-center placeholder">
-                                <img src="#{buscaControle.album.capa}" width="200" height="200" class="img-responsive img-centered img-border" alt="Generic placeholder thumbnail"/>
+                                <img src="#{buscaControle.album.capa}" width="200" height="200" class="img-responsive img-centered" alt="Generic placeholder thumbnail"/>
                                 <h1>#{buscaControle.album.nomeAlbum}</h1>
                                 <h:form>
                                     <ui:repeat var="q" value="#{buscaControle.artistasI}">

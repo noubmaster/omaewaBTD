@@ -14,6 +14,7 @@ import modelo.Avaliacao;
 import modelo.Composicao;
 import modelo.Genero;
 import modelo.Busca;
+import modelo.Score;
 import modelo.Usuario;
 
 import util.Conexao;
@@ -23,28 +24,31 @@ public class BuscaDAO {
     public static List<Busca> searchMain(String webInput) throws SQLException {
         List<Busca> lista = new ArrayList<Busca>();
         Connection con = Conexao.getConnection();
-        String sql = "SELECT\n"
-                + "*\n"
-                + "FROM\n"
-                + "musica m\n"
+        String sql = "SELECT \n"
+                + "	* ,\n"
+                + "	if(s.idScore is null,0,count(*)) as score\n"
+                + "FROM \n"
+                + "	musica m \n"
+                + "LEFT JOIN \n"
+                + "	participa p ON p.Musica_idMusica = m.idMusica \n"
+                + "LEFT JOIN \n"
+                + "	artista a ON p.Artista_idArtista = a.idArtista \n"
+                + "LEFT JOIN \n"
+                + "	album al ON al.idAlbum = m.idAlbumMusica \n"
+                + "LEFT JOIN \n"
+                + "	genero ge ON ge.idGenero = m.idGeneroMusica \n"
                 + "LEFT JOIN\n"
-                + "participa p ON p.Musica_idMusica = m.idMusica\n"
-                + "LEFT JOIN\n"
-                + "artista a ON p.Artista_idArtista = a.idArtista\n"
-                + "LEFT JOIN\n"
-                + "album al ON al.idAlbum = m.idAlbumMusica\n"
-                + "LEFT JOIN\n"
-                + "genero ge ON ge.idGenero = m.idGeneroMusica\n"
-                + "WHERE\n"
-                + "m.nomeMusica like CONCAT('%', ?, '%') or\n"
-                + "m.letra like CONCAT('%', ?, '%') or\n"
-                + "a.nomeArtista like CONCAT('%', ?, '%') or\n"
-                + "ge.nomeGenero like CONCAT('%', ?, '%') or\n"
-                + "al.nomeAlbum like CONCAT('%', ?, '%')\n"
+                + "	score s ON m.idMusica = s.idMusicaScore\n"
+                + "WHERE \n"
+                + "	m.nomeMusica like CONCAT('%', ?, '%') or \n"
+                + "	m.letra like CONCAT('%', ?, '%') or \n"
+                + "	a.nomeArtista like CONCAT('%', ?, '%') or \n"
+                + "	ge.nomeGenero like CONCAT('%', ?, '%') or \n"
+                + "	al.nomeAlbum like CONCAT('%', ?, '%') \n"
                 + "GROUP BY\n"
-                + "m.idMusica "
+                + "	m.idMusica\n"
                 + "ORDER BY\n"
-                + " m.score DESC;";
+                + "	score DESC;";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, webInput);
         stmt.setString(2, webInput);
@@ -67,6 +71,9 @@ public class BuscaDAO {
             participa.setPapel(rs.getString("papel"));
             participa.setArtista(artista);
             participa.setMusica(musica);
+            
+            Score score = new Score();
+            score.setMusica(musica);
 
             Album album = new Album();
             album.setIdAlbum(rs.getInt("idAlbum"));
@@ -80,6 +87,7 @@ public class BuscaDAO {
 
             Busca busca = new Busca();
             busca.setArtista(artista);
+            busca.setScore(score);
             busca.setMusica(musica);
             busca.setParticipa(participa);
             busca.setAlbum(album);
@@ -388,10 +396,69 @@ public class BuscaDAO {
         return artista;
     }
 
-    public static List<Album> getArtistAlbumsByID(int idArtista) throws SQLException {
+    public static List<Album> getArtistParticipanteAlbumsByID(int idArtista) throws SQLException {
         List<Album> lista = new ArrayList<Album>();
         Connection con = Conexao.getConnection();
-        String sql = "SELECT al.idAlbum, al.nomeAlbum, al.ano, al.capa FROM artista ar, participa pa, musica mu, album al WHERE mu.idAlbumMusica = al.idAlbum AND ar.idArtista = pa.Artista_idArtista AND pa.Musica_idMusica = mu.idMusica AND ar.idArtista = ? GROUP BY al.idAlbum ORDER BY al.ano";
+        String sql = "SELECT \n"
+                + "	al.idAlbum, \n"
+                + "	al.nomeAlbum, \n"
+                + "	al.ano, \n"
+                + "	al.capa \n"
+                + "FROM \n"
+                + "	artista ar, \n"
+                + "	participa pa, \n"
+                + "	musica mu, \n"
+                + "	album al \n"
+                + "WHERE \n"
+                + "	mu.idAlbumMusica = al.idAlbum AND \n"
+                + "	ar.idArtista = pa.Artista_idArtista AND \n"
+                + "	pa.Musica_idMusica = mu.idMusica AND \n"
+                + "	ar.idArtista = ? AND\n"
+                + "	pa.papel = 'Participante'\n"
+                + "GROUP BY \n"
+                + "	al.idAlbum \n"
+                + "ORDER BY \n"
+                + "	al.ano;";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idArtista);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Album album = new Album();
+            album.setIdAlbum(rs.getInt("idAlbum"));
+            album.setNomeAlbum(rs.getString("nomeAlbum"));
+            album.setAno(rs.getInt("ano"));
+            album.setCapa(rs.getString("capa"));
+            lista.add(album);
+        }
+        stmt.close();
+        rs.close();
+        con.close();
+        return lista;
+    }
+
+    public static List<Album> getArtistInterpreteAlbumsByID(int idArtista) throws SQLException {
+        List<Album> lista = new ArrayList<Album>();
+        Connection con = Conexao.getConnection();
+        String sql = "SELECT \n"
+                + "	al.idAlbum, \n"
+                + "	al.nomeAlbum, \n"
+                + "	al.ano, \n"
+                + "	al.capa \n"
+                + "FROM \n"
+                + "	artista ar, \n"
+                + "	participa pa, \n"
+                + "	musica mu, \n"
+                + "	album al \n"
+                + "WHERE \n"
+                + "	mu.idAlbumMusica = al.idAlbum AND \n"
+                + "	ar.idArtista = pa.Artista_idArtista AND \n"
+                + "	pa.Musica_idMusica = mu.idMusica AND \n"
+                + "	ar.idArtista = ? AND\n"
+                + "	pa.papel = 'Intérprete'\n"
+                + "GROUP BY \n"
+                + "	al.idAlbum \n"
+                + "ORDER BY \n"
+                + "	al.ano;";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, idArtista);
         ResultSet rs = stmt.executeQuery();

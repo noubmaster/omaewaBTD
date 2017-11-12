@@ -20,6 +20,7 @@ public class AvaliacaoControle {
     private Avaliacao avaliacao = new Avaliacao();
     private boolean salvar = true;
     private boolean logado = true;
+    private String placeholder;
     private int iduserLogado = 0;
     private int idUsuario = 0;
     private int idMusica = 0;
@@ -60,8 +61,10 @@ public class AvaliacaoControle {
         user = iduserLogado;
         if(user == 0){
             logado = true;
+            placeholder = "Favor realize login ou atualize a página";
         } else{
             logado = false;
+            placeholder = "Comentário...";
         }
     }
 
@@ -156,6 +159,14 @@ public class AvaliacaoControle {
 
     public void setIduserLogado(int iduserLogado) {
         this.iduserLogado = iduserLogado;
+    }
+
+    public String getPlaceholder() {
+        return placeholder;
+    }
+
+    public void setPlaceholder(String placeholder) {
+        this.placeholder = placeholder;
     }
 
 }

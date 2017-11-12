@@ -8,8 +8,14 @@ var avMusica = document.getElementById('avaliacao:idMus');
 var sUsuario = document.getElementById('score:idUserS');
 var sMusica = document.getElementById('score:idMusS');
 //ID -> Avaliação
-avUsuario.value = idUsuario;
-avMusica.value = idMusica;
+setar();
+function setar() {
+    avUsuario.value = idUsuario;
+    avMusica.value = idMusica;
+    // click
+    document.getElementById('score:a').click();
+    document.getElementById('verfUserAv:a').click();
+}
 //ID -> Verificaçao user
 document.getElementById('verfUserAv:idUserS').value = idUsuario;
 //ID -> Score

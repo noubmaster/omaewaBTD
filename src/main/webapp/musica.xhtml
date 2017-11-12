@@ -100,49 +100,59 @@
                                     style="display: none"
                                     id="a"
                                     class="btn btn-default"
-                                    update="avaliacao"
-                                    action="#{avaliacaoControle.verificar(user)}"/>
+                                    action="#{avaliacaoControle.verificar(user)}">
+                                    <p:ajax update="avaliacao:only" />
+                                    <p:ajax update="avaliacao:only2" />
+                                </p:commandButton>
                             </h:form>
                             <h:form id="avaliacao">
                                 <h:panelGrid id="panelA" styleClass="panel" cellpadding="5">
-                                    <h:panelGrid columns="2">
-                                        <h:outputText value="Nota: " />
-                                        <p:rating value="#{avaliacaoControle.avaliacao.nota}" disabled="#{avaliacaoControle.logado}" style="margin-left: 130px" id="nota" required="true"/>
+                                    <p:panel id="only">
+                                        <h:panelGrid columns="2">
+                                            <h:outputText value="Nota: " />
+                                            <p:rating value="#{avaliacaoControle.avaliacao.nota}" disabled="#{avaliacaoControle.logado}" style="margin-left: 130px" id="nota" required="true"/>
 
-                                        <h:outputText value="Revisao: "/>
-                                        <p:selectBooleanCheckbox id="bool" style="margin-left: 130px" disabled="#{avaliacaoControle.logado}" value="#{avaliacaoControle.avaliacao.revisao}"/>
-                                    </h:panelGrid>
-                                    <p:inputTextarea style="resize: none;" 
-                                                     styleClass="form-control"
-                                                     id="comentario"
-                                                     disabled="#{avaliacaoControle.logado}"
-                                                     rows="3"
-                                                     cols="33"
-                                                     maxlength="200"
-                                                     required="true"
-                                                     placeholder=""
-                                                     value="#{avaliacaoControle.avaliacao.comentario}">
-                                    </p:inputTextarea>
+                                            <h:outputText value="Revisao: "/>
+                                            <p:selectBooleanCheckbox id="bool" style="margin-left: 130px" disabled="#{avaliacaoControle.logado}" value="#{avaliacaoControle.avaliacao.revisao}"/>
+                                        </h:panelGrid>
+
+                                        <p:inputTextarea style="resize: none;" 
+                                                         styleClass="form-control"
+                                                         id="comentario"
+                                                         disabled="#{avaliacaoControle.logado}"
+                                                         rows="3"
+                                                         cols="33"
+                                                         maxlength="200"
+                                                         required="true"
+                                                         placeholder="#{avaliacaoControle.placeholder}"
+                                                         value="#{avaliacaoControle.avaliacao.comentario}">
+                                        </p:inputTextarea>
+                                    </p:panel>
                                     <p:inputText style="display: none" id="idUser" value="#{avaliacaoControle.idUsuario}"/>
-                                    <p:commandButton value="Salvar" 
-                                                     disabled="#{avaliacaoControle.logado}"
-                                                     class="btn btn-default"
-                                                     action="#{avaliacaoControle.salvar}"
-                                                     >
-                                        <p:resetInput target=":avaliacao:panelA" />
-                                    </p:commandButton>
                                     <p:inputText style="display: none" id="idMus" value="#{avaliacaoControle.idMusica}"/>
+                                    <p:panel id="only2">
+                                        <p:commandButton value="Salvar" 
+                                                         disabled="#{avaliacaoControle.logado}"
+                                                         class="btn btn-default"
+                                                         action="#{avaliacaoControle.salvar}"
+                                                         update="@form"
+                                                         >
+                                            <p:resetInput target=":avaliacao:panelA" />
+                                        </p:commandButton>
+                                    </p:panel>
                                 </h:panelGrid>
                             </h:form>
                             <!--Lista de Avaliação -->
                             <h:form id="aval">
-                                <ui:repeat  value="#{avaliacaoControle.avaliacoes2}" var="a" varStatus="q">
-                                    <img class="img-responsive" src="#{a.usuario.perfil}" style="width: 25px; height: 25px; display: inline;" />
-                                    <p style="display: inline;">#{a.usuario.email}</p>
-                                    <p:rating value="#{a.nota}" readonly="true"/>
-                                    <p>#{a.comentario}</p>
-                                    <br/>
-                                </ui:repeat>
+                                <p:panel id="only3">
+                                    <ui:repeat  value="#{avaliacaoControle.avaliacoes2}" var="a" varStatus="q">
+                                        <img class="img-responsive" src="#{a.usuario.perfil}" style="width: 25px; height: 25px; display: inline;" />
+                                        <p style="display: inline;">#{a.usuario.email}</p>
+                                        <p:rating value="#{a.nota}" readonly="true"/>
+                                        <p>#{a.comentario}</p>
+                                        <br/>
+                                    </ui:repeat>
+                                </p:panel>
                             </h:form>
                         </div>
                         <div class="col-md-3 placeholder info">
@@ -257,11 +267,11 @@
                 <a href="#">BitesTheDust</a>
             </div>
         </footer>
+        <script src="resources/js/scoreAvaliaçao.js"></script>
         <script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
         <script src="resources/js/admBlock.js"></script>
         <script src="resources/js/pageBlock.js"></script>
         <script src="resources/js/googleLogin.js"></script>
-        <script src="resources/js/scoreAvaliaçao.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
         <script src="resources/js/buscaVox.js"></script>
     </h:body>

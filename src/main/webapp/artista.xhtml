@@ -9,17 +9,19 @@
     <h:head>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/css/estiloPrimefaces.css"/>
+        <link rel="stylesheet" href="resources/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css"/>
         <meta name="google-signin-client_id" content="488287116710-mg5d2db5prvt3gep4l6a037k2jclguoa.apps.googleusercontent.com"/>
-        <script src="https://apis.google.com/js/platform.js"  async="async"></script>
-        <h:outputStylesheet library="css" name="musicP.css"/>
-        <link rel="stylesheet" href="resources/css/navbar.css"/>
+        <script src="https://apis.google.com/js/platform.js" async="async"></script>
+        <link rel="icon" href="resources/png/favicon.png"/>
         <title>#{buscaControle.artista.nomeArtista}</title>
-        <script>
-        </script>
+        <link rel="stylesheet" href="resources/css/fonte.css"/>
+        <link rel="stylesheet" href="resources/css/artista.css"/>
+        <link rel="stylesheet" href="resources/css/results.css"/>
+        <link rel="stylesheet" href="resources/css/navbar.css"/>
+        <link rel="stylesheet" href="resources/css/footerR.css"/>
     </h:head>
     <h:body onload="#{buscaControle.getArtistsAlbum(buscaControle.artista.idArtista)}">
         <div class="container">
@@ -40,7 +42,7 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                
+
                             </ul>
                             <div class="navbar-form navbar-left">
                                 <ul class="nav navbar-nav">
@@ -56,22 +58,23 @@
                                 </ul>
                             </div>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><p:commandLink value="Log In" 
-                                                   id="login"
-                                                   styleClass="btn btn-default" 
-                                                   style="padding: 8px; margin-top: 6px; margin-right: 6px;"
-                                                   onclick="$('#myModal').modal('show');"
-                                                   update=":memes:myMemes"
-                                                   immediate="true" /></li>
+                                <li><p:commandButton value="Log In" 
+                                                     id="login"
+                                                     styleClass="btn btn-default" 
+                                                     style=" margin-top: 6px; padding: 6px 0px 6px 0px; margin-right: 6px;"
+                                                     onclick="$('#myModal').modal('show');"
+                                                     update=":memes:myMemes"
+                                                     immediate="true" /></li>
                                 <li class="dropdown">
                                     <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
                                         <span class="caret"></span></button>
                                     <ul class="dropdown-menu">
                                         <li><a href="#" onclick="signOut();">Sign out</a></li>
-                                        <div id="admUser" style="display: none;">
+                                        <div class="admUser" style="display: none">
                                             <li class="divider"></li>
-                                            <li><a href="/omaewa/cadastroT.xhtml">Administração</a></li>
                                         </div>
+                                        <li class="admUser" style="display: none"><a href="/omaewa/cadastroT.xhtml">Administração</a></li>
+
                                     </ul>
                                 </li>
                             </ul>
@@ -79,17 +82,38 @@
                     </div><!-- /.container-fluid -->
                 </nav>
 
-                <div style="height: 51px;"/>
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2 bgcool">
-                        <div class="page-header">
-                            <h1>#{buscaControle.artista.nomeArtista}</h1>
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="page-header text-center placeholder">
+                                <img src="#{buscaControle.artista.foto}" class="img-responsive img-centered duzentos" alt="Generic placeholder thumbnail"/>
+                                <h1>#{buscaControle.artista.nomeArtista}</h1>
+                            </div>
                         </div>
-                        <h:form>
-                            <ui:repeat value="#{buscaControle.albumsArtist}" var="a">
-                                <h:commandLink action="#{buscaControle.getAlbumRedirect(a.idAlbum)}"><p>#{a.nomeAlbum}</p></h:commandLink>
-                            </ui:repeat>
-                        </h:form>
+                        <div class="col-md-9 results">
+                            <h:form>
+                                <h1><h:outputText value="Albums:" rendered="#{buscaControle.renderI}"/></h1>
+                                <ui:repeat value="#{buscaControle.albumsArtistI}" var="a">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-3">
+                                            <img src="#{a.capa}" width="200" height="200" class="img-responsive img-centered" alt="Generic placeholder thumbnail"/>
+                                            <h:commandLink action="#{buscaControle.getAlbumRedirect(a.idAlbum, buscaControle.artista.idArtista, buscaControle.musica.idMusica)}"><h4>#{a.nomeAlbum}</h4></h:commandLink>
+                                            <h5>#{a.ano}</h5>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                                <h1><h:outputText value="Participações:" rendered="#{buscaControle.renderP}"/></h1>
+                                <ui:repeat value="#{buscaControle.albumsArtistP}" var="q">
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-3">
+                                            <img src="#{q.capa}" width="200" height="200" class="img-responsive img-centered" alt="Generic placeholder thumbnail"/>
+                                            <h:commandLink action="#{buscaControle.getAlbumRedirect(q.idAlbum, buscaControle.artista.idArtista, buscaControle.musica.idMusica)}"><h4>#{q.nomeAlbum}</h4></h:commandLink>
+                                            <h5>#{q.ano}</h5>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                            </h:form>
+                        </div>
                         <!-- Checagem de usuario -->
                         <h:form id="f" style="display: none">
                             <p:panel id="panel">
@@ -164,91 +188,16 @@
                 </div>
             </h:form>
         </div>
-        <script type="text/javascript">
-            var currentPath = window.location.pathname;
-            var currentPge = window.location.href;
-            var block = document.getElementById("block");
-            var loginIfBlock = document.getElementById("loginIfBlock");
-            var tipo = document.getElementById("f1:tipoUser").value;
-            var admUser = document.getElementById("admUser");
-            var idR = document.getElementById('f:idR');
-            var idR2 = document.getElementById('f1:idR');
-            var login = document.getElementById("login");
-            var optionsUser = document.getElementById("optionsUser");
-            var email = document.getElementById('f:email');
-            var perfil = document.getElementById('f:perfil');
-            var idRGet;
-            if (currentPath === "/memes/faces/cadastroGeneroT.xhtml" ||
-                    currentPath === "/memes/faces/cadastroGeneroT.xhtml#") {
-                if (tipo === "0") {
-                    block.style.display = "none";
-                    loginIfBlock.style.display = "inline";
-                } else {
-                    loginIfBlock.style.display = "none";
-                    block.style.display = "inline";
-                }
-            }
-            ;
-
-            function admin() {
-                tipo = document.getElementById("f1:tipoUser").value;
-                if (tipo === "0") {
-                    admUser.style.display = "none";
-                } else if (tipo === "1" || tipo === "2") {
-                    admUser.style.display = "inline";
-                }
-                ;
-            }
-
-            function signOut() {
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function () {
-                    console.log('User signed out.');
-                    login.style.display = "inline";
-                    optionsUser.style.display = "none";
-                });
-                idRGet = null;
-                idR.value = idRGet;
-                idR2.value = idRGet;
-                document.getElementById('fodasse:fodasse').click();
-                location.reload();
-            }
-
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                if (profile.getId() !== null) {
-                    idRGet = profile.getId();
-                    login.style.display = "none";
-                    optionsUser.style.display = "inline";
-                    email.value = profile.getEmail();
-                    idR.value = idRGet;
-                    idR2.value = idRGet;
-                    perfil.value = profile.getImageUrl();
-                    document.getElementById('f:registra').click();
-                    document.getElementById('f1:registra').click();
-                }
-                setTimeout(admin, 1000);
-                $('#myModal').modal('hide');
-            }
-        </script>
+        <footer class="footer">
+            <div class="container-fluid text-center">
+                <a href="#">BitesTheDust</a>
+            </div>
+        </footer>
+        <script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <script src="resources/js/admBlock.js"></script>
+        <script src="resources/js/pageBlock.js"></script>
+        <script src="resources/js/googleLogin.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
-        <script>
-            function vozes() {
-                console.log('ta passando aqui carai');
-                var textInput = document.getElementById("busca:txt");
-                if (annyang) {
-
-                    annyang.addCallback('result', function (phrases) {
-                        console.log("I think the user said: ", phrases[0]);
-                        textInput.value = phrases[0];
-                        console.log("But then again, it could be any of the following: ", phrases);
-
-                    });
-
-                    // Start listening.
-                    annyang.start();
-                }
-            }
-        </script>
+        <script src="resources/js/buscaVox.js"></script>
     </h:body>
 </html>
