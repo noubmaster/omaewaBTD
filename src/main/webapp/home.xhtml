@@ -163,6 +163,28 @@
         <script src="resources/js/pageBlock.js"></script>
         <script src="resources/js/googleLogin.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+        <script>
+                    if (annyang) {
+                        // Let's define a command.
+                        var cSearch = {
+                            'search': function () {
+                                console.log("foda");
+                            }
+                        };
+                        var wSearch = {
+                            'write search': function () {
+                                vozes();
+                            }
+                        };
+                        // Add our commands to annyang
+                        annyang.addCommands(cSearch);
+                        annyang.addCommands(wSearch);
+                        
+
+                        // Start listening.
+                        annyang.start();
+                    }
+        </script>
         <script src="resources/js/buscaVox.js"></script>
     </h:body>
 </html>

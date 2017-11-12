@@ -12,3 +12,6 @@
   display: inline-block;
   border-radius: 50%;
 }
+.ui-widget-content a {
+    color: #337ab7;
+}

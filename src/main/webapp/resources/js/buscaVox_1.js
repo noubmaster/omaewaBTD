@@ -1,5 +1,4 @@
 function vozes() {
-    console.log("searching");
     var textInput = document.getElementById("busca:txt");
     if (annyang) {
 
