@@ -175,17 +175,20 @@
                                 </ui:repeat>
                             </h:form>
                             <h:form id="score">
-                                <h5 style="display: inline">Gostou dessa musica: </h5>
                                 <p:inputText style="display: none" id="idUserS" value="#{scoreControle.idUsuario}"/>
                                 <p:inputText style="display: none" id="idMusS" value="#{scoreControle.idMusica}"/>
-                                <p:inputText style="display: none" id="scoreGet" value="#{scoreControle.scoreSet}"/>
                                 <p:commandButton 
                                     style="display: none"
                                     id="a"
                                     class="btn btn-default"
-                                    update="score"
-                                    action="#{scoreControle.socoreGet(idMusica, idUsuario)}"/>
-                                <h:commandLink style="display: inline" id="salvarS" disabled="#{scoreControle.disable}" action="#{scoreControle.salvar()}"><i class="fa fa-thumbs-up" aria-hidden="true"></i></h:commandLink>
+                                    action="#{scoreControle.socoreGet(idMusica, idUsuario)}">
+                                    <p:ajax update="score:scores2" />
+                                </p:commandButton>
+                                <p:panel id="scores2">
+                                    <p:inputText style="display: none" id="scoreGet" value="#{scoreControle.scoreSet}"/>
+                                    <h5 style="display: inline">Gostou dessa musica: </h5>
+                                    <h:commandLink style="display: inline" id="salvarS" disabled="#{scoreControle.disable}" action="#{scoreControle.salvar()}"><i class="fa fa-thumbs-up" aria-hidden="true"></i></h:commandLink>
+                                </p:panel>
                             </h:form>
                         </div>
                         <!-- Checagem de usuario -->
