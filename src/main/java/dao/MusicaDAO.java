@@ -46,15 +46,14 @@ public class MusicaDAO {
     public static void alterar(Musica musica) throws SQLException {
         Connection con = Conexao.getConnection();
         String sql
-                = "UPDATE `memes`.`musica` SET `nomeMusica`=?, `score`=?, `letra`=?, `faixa`=?, `idAlbumMusica`=?, `idGeneroMusica`=? WHERE  `idMusica`=?;";
+                = "UPDATE `memes`.`musica` SET `nomeMusica`=?, `letra`=?, `faixa`=?, `idAlbumMusica`=?, `idGeneroMusica`=? WHERE  `idMusica`=?;";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, musica.getNomeMusica());
-        stmt.setFloat(2, musica.getScore());
-        stmt.setString(3, musica.getLetra());
-        stmt.setInt(4, musica.getFaixa());
-        stmt.setInt(5, musica.getAlbum().getIdAlbum());
-        stmt.setInt(6, musica.getGenero().getIdGenero());
-        stmt.setInt(7, musica.getIdMusica());
+        stmt.setString(2, musica.getLetra());
+        stmt.setInt(3, musica.getFaixa());
+        stmt.setInt(4, musica.getAlbum().getIdAlbum());
+        stmt.setInt(5, musica.getGenero().getIdGenero());
+        stmt.setInt(6, musica.getIdMusica());
 
         stmt.execute();
         stmt.close();
@@ -92,7 +91,6 @@ public class MusicaDAO {
             Musica musica = new Musica();
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
             musica.setFaixa(rs.getInt("faixa"));
 

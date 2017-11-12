@@ -7,7 +7,6 @@ package modelo;
 public class Musica {
     private int idMusica, faixa;
     private String nomeMusica, letra;
-    private float score;
     private Album album;
     private Genero genero;
 
@@ -41,14 +40,6 @@ public class Musica {
 
     public void setLetra(String letra) {
         this.letra = letra;
-    }
-
-    public float getScore() {
-        return score;
-    }
-
-    public void setScore(float score) {
-        this.score = score;
     }
     
     public int getIdMusica() {

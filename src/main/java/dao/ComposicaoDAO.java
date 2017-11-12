@@ -68,7 +68,6 @@ public class ComposicaoDAO {
             Musica musica = new Musica();
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
 
             Artista artista = new Artista();

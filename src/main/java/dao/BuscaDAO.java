@@ -60,7 +60,6 @@ public class BuscaDAO {
             Musica musica = new Musica();
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
 
             Artista artista = new Artista();
@@ -121,7 +120,6 @@ public class BuscaDAO {
 
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
 
             Artista artista = new Artista();
@@ -165,7 +163,6 @@ public class BuscaDAO {
             Musica musica = new Musica();
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
 
             Artista artista = new Artista();
@@ -214,7 +211,6 @@ public class BuscaDAO {
             Musica musica = new Musica();
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
 
             Artista artista = new Artista();
@@ -267,7 +263,6 @@ public class BuscaDAO {
             Musica musica = new Musica();
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
 
             Artista artista = new Artista();
@@ -320,7 +315,6 @@ public class BuscaDAO {
             Musica musica = new Musica();
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
 
             Artista artista = new Artista();
@@ -374,7 +368,6 @@ public class BuscaDAO {
             Musica musica = new Musica();
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
 
             musica.setAlbum(album);
@@ -492,7 +485,6 @@ public class BuscaDAO {
 
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
 
             musica.setAlbum(album);
@@ -524,7 +516,6 @@ public class BuscaDAO {
             Musica musica = new Musica();
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
             musica.setFaixa(rs.getInt("faixa"));
 

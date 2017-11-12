@@ -68,7 +68,6 @@ public class ScoreDAO {
         while (rs.next()) {
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
 
             Usuario usuario = new Usuario();
@@ -109,7 +108,6 @@ public class ScoreDAO {
             Musica musica = new Musica();
             musica.setIdMusica(rs.getInt("idMusica"));
             musica.setNomeMusica(rs.getString("nomeMusica"));
-            musica.setScore(rs.getFloat("score"));
             musica.setLetra(rs.getString("letra"));
 
             Usuario usuario = new Usuario();
