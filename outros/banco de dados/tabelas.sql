@@ -1,20 +1,21 @@
 -- --------------------------------------------------------
 -- Servidor:                     127.0.0.1
--- Versão do servidor:           5.7.11-log - MySQL Community Server (GPL)
+-- Versão do servidor:           5.7.19-log - MySQL Community Server (GPL)
 -- OS do Servidor:               Win64
--- HeidiSQL Versão:              9.3.0.4984
+-- HeidiSQL Versão:              9.4.0.5125
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
 
 -- Copiando estrutura do banco de dados para memes
 DROP DATABASE IF EXISTS `memes`;
 CREATE DATABASE IF NOT EXISTS `memes` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `memes`;
-
 
 -- Copiando estrutura para tabela memes.album
 DROP TABLE IF EXISTS `album`;
@@ -24,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `album` (
   `ano` year(4) NOT NULL,
   `capa` text NOT NULL,
   PRIMARY KEY (`idAlbum`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela memes.album: ~7 rows (aproximadamente)
 DELETE FROM `album`;
@@ -36,9 +37,9 @@ INSERT INTO `album` (`idAlbum`, `nomeAlbum`, `ano`, `capa`) VALUES
 	(7, 'Off the wall', '1979', 'https://img.discogs.com/kf1Lr0secZdOD7FCv-YvAu8ZEvk=/fit-in/600x597/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-120096-1374721428-4864.jpeg.jpg'),
 	(8, 'Thriller', '1982', 'https://img.discogs.com/XKsX69yETlBSb_FNVZ9rnyS-3pU=/fit-in/600x593/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-6898470-1429038259-1930.jpeg.jpg'),
 	(9, 'News of the World', '1977', 'https://img.discogs.com/Jiwtt1dIc_1gFTSFBafv7kgXEK4=/fit-in/600x606/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-475599-1454715265-7842.jpeg.jpg'),
-	(10, 'War', '1983', 'https://img.discogs.com/azJ76FI4uR51Y0Lp7TnKkLR4gno=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-11052113-1508951794-5928.jpeg.jpg');
+	(10, 'War', '1983', 'https://img.discogs.com/azJ76FI4uR51Y0Lp7TnKkLR4gno=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-11052113-1508951794-5928.jpeg.jpg'),
+	(11, 'Pipes Of Peace', '1983', 'https://img.discogs.com/s0MKKzVyOpcVK0V7nHJjQ0Dn_to=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-1190961-1368702018-3386.jpeg.jpg');
 /*!40000 ALTER TABLE `album` ENABLE KEYS */;
-
 
 -- Copiando estrutura para tabela memes.artista
 DROP TABLE IF EXISTS `artista`;
@@ -66,14 +67,13 @@ INSERT INTO `artista` (`idArtista`, `nomeArtista`, `foto`) VALUES
 	(12, 'John Bettis', 'https://img.discogs.com/KrQ2A-tZMQUjKv71jagW_kkwSz0=/168x168/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-617010-1328648662.jpeg.jpg');
 /*!40000 ALTER TABLE `artista` ENABLE KEYS */;
 
-
 -- Copiando estrutura para tabela memes.avaliacao
 DROP TABLE IF EXISTS `avaliacao`;
 CREATE TABLE IF NOT EXISTS `avaliacao` (
   `idAvaliacao` int(11) NOT NULL AUTO_INCREMENT,
   `nota` int(11) NOT NULL,
   `comentario` varchar(200) NOT NULL,
-  `revisao` tinyint(4) DEFAULT NULL,
+  `revisao` bit(1) DEFAULT NULL,
   `idMusicaAvaliacao` int(11) NOT NULL,
   `idUsuarioAvaliacao` int(11) NOT NULL,
   PRIMARY KEY (`idAvaliacao`),
@@ -81,60 +81,72 @@ CREATE TABLE IF NOT EXISTS `avaliacao` (
   KEY `fk_Avaliacao_Usuario1_idx` (`idUsuarioAvaliacao`),
   CONSTRAINT `fk_Avaliacao_Musica1` FOREIGN KEY (`idMusicaAvaliacao`) REFERENCES `musica` (`idMusica`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Avaliacao_Usuario1` FOREIGN KEY (`idUsuarioAvaliacao`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.avaliacao: ~46 rows (aproximadamente)
+-- Copiando dados para a tabela memes.avaliacao: ~49 rows (aproximadamente)
 DELETE FROM `avaliacao`;
 /*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
 INSERT INTO `avaliacao` (`idAvaliacao`, `nota`, `comentario`, `revisao`, `idMusicaAvaliacao`, `idUsuarioAvaliacao`) VALUES
-	(3, 1, '1', 1, 2, 19),
-	(4, 100000, 'melhor musica ja criada pelo ser humano', 0, 1, 90),
-	(6, 4, 'aaaaa', 0, 1, 15),
-	(7, 5, 'eu amo michael jackson <3', 0, 12, 15),
-	(8, 4, 'asd', 0, 12, 15),
-	(9, 1, 'musicas muito dificil de tocar na bateria', 0, 11, 15),
-	(10, 5, 'a', 0, 12, 15),
-	(11, 3, 'aa', 0, 12, 15),
-	(12, 3, 'a', 0, 12, 15),
-	(13, 4, 'aa', 0, 12, 15),
-	(17, 4, 'asd', 0, 2, 15),
-	(18, 3, 'asdasd', 0, 2, 15),
-	(19, 4, 'asdasdada', 0, 2, 15),
-	(20, 4, 'asdasdasd', 0, 2, 15),
-	(21, 4, 'dw', 0, 2, 15),
-	(22, 4, 'dsadawd', 0, 2, 15),
-	(23, 4, 'dasdasdad', 0, 2, 15),
-	(24, 4, 'asdasdad', 0, 2, 15),
-	(25, 5, 'asdasd', 0, 2, 15),
-	(26, 5, 'fasfdasdf', 0, 2, 15),
-	(27, 1, 'wowowowowow', 0, 2, 15),
-	(28, 4, 'asdasd', 0, 2, 15),
-	(29, 4, 'asdasdasda', 0, 1, 15),
-	(30, 4, 'asdasdasda', 0, 1, 15),
-	(31, 4, 'asdasdasda', 0, 1, 15),
-	(32, 4, 'asdasdasda', 0, 1, 15),
-	(33, 4, 'asdasdasda', 0, 1, 15),
-	(34, 5, 'asdasdasd', 0, 1, 15),
-	(35, 4, 'asdasd', 0, 11, 15),
-	(36, 5, 'dsasdsasd', 0, 11, 15),
-	(37, 5, 'asdf', 0, 11, 15),
-	(38, 2, 'asd', 0, 11, 15),
-	(39, 3, 'asdasd', 0, 11, 15),
-	(40, 3, 'asdasd', 0, 11, 15),
-	(41, 3, 'asdasd', 0, 11, 15),
-	(42, 3, 'asdasd', 0, 11, 15),
-	(43, 3, 'asdasd', 0, 11, 15),
-	(44, 3, 'asdasd', 0, 11, 15),
-	(45, 3, 'asdasd', 0, 11, 15),
-	(46, 3, 'asdasd', 0, 11, 15),
-	(47, 3, 'asdasd', 0, 11, 15),
-	(48, 3, 'asdasd', 0, 11, 15),
-	(49, 3, 'asdasd', 0, 11, 15),
-	(50, 0, 'asd', 0, 1, 90),
-	(51, 5, 'asd', 0, 1, 90),
-	(52, 5, 'asd', 0, 1, 15);
+	(3, 1, '1', b'1', 2, 19),
+	(4, 100000, 'melhor musica ja criada pelo ser humano', b'0', 1, 90),
+	(6, 4, 'aaaaa', b'0', 1, 15),
+	(7, 5, 'eu amo michael jackson <3', b'0', 12, 15),
+	(8, 4, 'asd', b'0', 12, 15),
+	(9, 1, 'musicas muito dificil de tocar na bateria', b'0', 11, 15),
+	(10, 5, 'a', b'0', 12, 15),
+	(11, 3, 'aa', b'0', 12, 15),
+	(12, 3, 'a', b'0', 12, 15),
+	(13, 4, 'aa', b'0', 12, 15),
+	(17, 4, 'asd', b'0', 2, 15),
+	(18, 3, 'asdasd', b'0', 2, 15),
+	(19, 4, 'asdasdada', b'0', 2, 15),
+	(20, 4, 'asdasdasd', b'0', 2, 15),
+	(21, 4, 'dw', b'0', 2, 15),
+	(22, 4, 'dsadawd', b'0', 2, 15),
+	(23, 4, 'dasdasdad', b'0', 2, 15),
+	(24, 4, 'asdasdad', b'0', 2, 15),
+	(25, 5, 'asdasd', b'0', 2, 15),
+	(26, 5, 'fasfdasdf', b'0', 2, 15),
+	(27, 1, 'wowowowowow', b'0', 2, 15),
+	(28, 4, 'asdasd', b'0', 2, 15),
+	(29, 4, 'asdasdasda', b'0', 1, 15),
+	(30, 4, 'asdasdasda', b'0', 1, 15),
+	(31, 4, 'asdasdasda', b'0', 1, 15),
+	(32, 4, 'asdasdasda', b'0', 1, 15),
+	(33, 4, 'asdasdasda', b'0', 1, 15),
+	(34, 5, 'asdasdasd', b'0', 1, 15),
+	(35, 4, 'asdasd', b'0', 11, 15),
+	(36, 5, 'dsasdsasd', b'0', 11, 15),
+	(37, 5, 'asdf', b'0', 11, 15),
+	(38, 2, 'asd', b'0', 11, 15),
+	(39, 3, 'asdasd', b'0', 11, 15),
+	(40, 3, 'asdasd', b'0', 11, 15),
+	(41, 3, 'asdasd', b'0', 11, 15),
+	(42, 3, 'asdasd', b'0', 11, 15),
+	(43, 3, 'asdasd', b'0', 11, 15),
+	(44, 3, 'asdasd', b'0', 11, 15),
+	(45, 3, 'asdasd', b'0', 11, 15),
+	(46, 3, 'asdasd', b'0', 11, 15),
+	(47, 3, 'asdasd', b'0', 11, 15),
+	(48, 3, 'asdasd', b'0', 11, 15),
+	(49, 3, 'asdasd', b'0', 11, 15),
+	(50, 0, 'asd', b'0', 1, 90),
+	(51, 5, 'asd', b'0', 1, 90),
+	(52, 5, 'asd', b'0', 1, 15),
+	(53, 5, 'legal', b'0', 22, 15),
+	(54, 5, 'putz tem um erro ali e tals', b'1', 22, 15),
+	(56, 4, 'asdasd', b'0', 18, 15),
+	(63, 4, 'legal', b'0', 20, 15),
+	(64, 4, 'top', b'0', 20, 15),
+	(65, 4, 'uau', b'0', 20, 15),
+	(66, 4, 'uau', b'0', 20, 15),
+	(67, 4, 'uauauauau', b'0', 20, 15),
+	(68, 5, 'asdasd', b'0', 20, 15),
+	(69, 4, 'asd', b'0', 20, 15),
+	(70, 4, 'memes', b'0', 20, 15),
+	(71, 5, 'memes', b'0', 20, 15),
+	(72, 4, 'asd', b'0', 20, 15);
 /*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
-
 
 -- Copiando estrutura para tabela memes.composicao
 DROP TABLE IF EXISTS `composicao`;
@@ -148,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `composicao` (
   CONSTRAINT `fk_Artista_has_Musica_Musica1` FOREIGN KEY (`Musica_idMusica`) REFERENCES `musica` (`idMusica`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.composicao: ~20 rows (aproximadamente)
+-- Copiando dados para a tabela memes.composicao: ~22 rows (aproximadamente)
 DELETE FROM `composicao`;
 /*!40000 ALTER TABLE `composicao` DISABLE KEYS */;
 INSERT INTO `composicao` (`Artista_idArtista`, `Musica_idMusica`) VALUES
@@ -167,13 +179,17 @@ INSERT INTO `composicao` (`Artista_idArtista`, `Musica_idMusica`) VALUES
 	(4, 22),
 	(8, 23),
 	(4, 24),
+	(4, 25),
+	(4, 26),
 	(11, 27),
 	(12, 27),
 	(9, 28),
 	(10, 28),
-	(8, 29);
+	(8, 29),
+	(7, 30),
+	(4, 31),
+	(7, 31);
 /*!40000 ALTER TABLE `composicao` ENABLE KEYS */;
-
 
 -- Copiando estrutura para tabela memes.genero
 DROP TABLE IF EXISTS `genero`;
@@ -239,12 +255,11 @@ INSERT INTO `genero` (`idGenero`, `nomeGenero`) VALUES
 	(270, 'Metal');
 /*!40000 ALTER TABLE `genero` ENABLE KEYS */;
 
-
 -- Copiando estrutura para tabela memes.musica
 DROP TABLE IF EXISTS `musica`;
 CREATE TABLE IF NOT EXISTS `musica` (
   `idMusica` int(11) NOT NULL AUTO_INCREMENT,
-  `nomeMusica` varchar(45) NOT NULL,
+  `nomeMusica` varchar(100) NOT NULL,
   `score` float NOT NULL DEFAULT '0',
   `letra` text NOT NULL,
   `faixa` int(11) DEFAULT NULL,
@@ -255,7 +270,7 @@ CREATE TABLE IF NOT EXISTS `musica` (
   KEY `fk_Musica_Genero1_idx` (`idGeneroMusica`),
   CONSTRAINT `idAlbumMusica` FOREIGN KEY (`idAlbumMusica`) REFERENCES `album` (`idAlbum`),
   CONSTRAINT `idGeneroMusica` FOREIGN KEY (`idGeneroMusica`) REFERENCES `genero` (`idGenero`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela memes.musica: ~21 rows (aproximadamente)
 DELETE FROM `musica`;
@@ -276,14 +291,15 @@ INSERT INTO `musica` (`idMusica`, `nomeMusica`, `score`, `letra`, `faixa`, `idAl
 	(21, 'House Of Pain', 0, 'Say you\'re gonna leave me cause I only tie you up. \r\nAlways love you tender but you only like it rough. \r\n?? why you\'re leaving me again. \r\nGonna pack your bags and leave this house of pain. \r\nHeartaches all around me, how many times we cried. \r\nSaid she tried to leave me but her hands were always tied. \r\nIf I had it all to do I\'d do it just the same. \r\nGonna fix it so you never leave this house of pain \r\n\r\n[Guitar solo]', 9, 3, 244),
 	(22, 'Wanna Be Startin\' Somethin\'', 0, 'I said you wanna be startin\' somethin\'\r\nYou got to be startin\' somethin\'\r\nI said you wanna be startin\' somethin\'\r\nYou got to be startin\' somethin\'\r\n\r\nAnd too high to get over (yeah, yeah)\r\nAnd too low to get under (yeah, yeah)\r\nYou\'re stuck in the middle (yeah, yeah)\r\nAnd the pain is thunder (yeah, yeah)\r\n\r\nAnd too high to get over (yeah, yeah)\r\nAnd too low to get under (yeah, yeah)\r\nYou\'re stuck in the middle (yeah, yeah)\r\nAnd the pain is thunder (yeah, yeah)\r\n\r\nI took my baby to the doctor\r\nWith a fever, but nothing he found\r\nBy the time this hit the street\r\nThey said she had a breakdown\r\n\r\nSomeone\'s always tryin\'\r\nTo start my baby cryin\'\r\nTalkin\', squealin\', lyin\'\r\nSayin\' you just wanna be startin\' somethin\'\r\n\r\nI said you wanna be startin\' somethin\'\r\nYou got to be startin\' somethin\'\r\nI said you wanna be startin\' somethin\'\r\nYou got to be startin\' somethin\'\r\n\r\nAnd too high to get over (yeah, yeah)\r\nAnd too low to get under (yeah, yeah)\r\nYou\'re stuck in the middle (yeah, yeah)\r\nAnd the pain is thunder (yeah, yeah)\r\n\r\nAnd too high to get over (yeah, yeah)\r\nAnd too low to get under (yeah, yeah)\r\nYou\'re stuck in the middle (yeah, yeah)\r\nAnd the pain is thunder (yeah, yeah)\r\n\r\nYou love to pretend that you\'re good\r\nWhen you\'re always up to no good\r\nYou really can\'t make him hate her\r\nSo your tongue became a razor\r\n\r\nSomeone\'s always tryin\'\r\nTo keep my baby cryin\'\r\nTreacherous, cunnin\', declinin\'\r\nYou got my baby cryin\'\r\n\r\nI said you wanna be startin\' somethin\'\r\nYou got to be startin\' somethin\'\r\nI said you wanna be startin\' somethin\'\r\nYou got to be startin\' somethin\'\r\n\r\nAnd too high to get over (yeah, yeah)\r\nAnd too low to get under (yeah, yeah)\r\nYou\'re stuck in the middle (yeah, yeah)\r\nAnd the pain is thunder (yeah, yeah)\r\n\r\nAnd too high to get over (yeah, yeah)\r\nAnd too low to get under (yeah, yeah)\r\nYou\'re stuck in the middle (yeah, yeah)\r\nAnd the pain is thunder (yeah, yeah)\r\n\r\nYou\'re a vegetable, you\'re a vegetable\r\nStill they hate you, you\'re a vegetable\r\nYou\'re just a buffet, you\'re a vegetable\r\nThey eat off of you, you\'re a vegetable\r\n\r\nBillie Jean is always talkin\'\r\nWhen nobody else is talkin\'\r\nTellin\' lies and rubbin\' shoulders\r\nSo they called her mouth a motor\r\n\r\nSomeone\'s always tryin\'\r\nTo start my baby cryin\'\r\nTalkin\', squealin\', spyin\'\r\nSayin\' you just wanna be startin\' somethin\'\r\n\r\nI said you wanna be startin\' somethin\'\r\nYou got to be startin\' somethin\'\r\nI said you wanna be startin\' somethin\'\r\nYou got to be startin\' somethin\'\r\n\r\nAnd too high to get over (yeah, yeah)\r\nAnd too low to get under (yeah, yeah)\r\nYou\'re stuck in the middle (yeah, yeah)\r\nAnd the pain is thunder (yeah, yeah)\r\n\r\nAnd too high to get over (yeah, yeah)\r\nAnd too low to get under (yeah, yeah)\r\nYou\'re stuck in the middle (yeah, yeah)\r\nAnd the pain is thunder (yeah, yeah)\r\n\r\nYou\'re a vegetable, you\'re a vegetable\r\nStill they hate you, you\'re a vegetable\r\nYou\'re just a buffet, you\'re a vegetable\r\nThey eat off of you, you\'re a vegetable\r\n\r\nIf you can\'t feed your baby (yeah, yeah)\r\nThen don\'t have a baby (yeah, yeah)\r\nAnd don\'t think maybe (yeah, yeah)\r\nIf you can\'t feed your baby (yeah, yeah)\r\n\r\nYou\'ll be always tryin\'\r\nTo stop that child from cryin\'\r\nHustlin\', stealin\', lyin\'\r\nNow baby\'s slowly dyin\'\r\n\r\nI said you wanna be startin\' somethin\'\r\nYou got to be startin\' somethin\'\r\nI said you wanna be startin\' somethin\'\r\nYou got to be startin\' somethin\'\r\n\r\nIt\'s too high to get over (yeah, yeah)\r\nIt\'s too low to get under (yeah, yeah)\r\nYou\'re stuck in the middle (yeah, yeah)\r\nAnd the pain is thunder (yeah, yeah)\r\n\r\nIt\'s too high to get over (yeah, yeah)\r\nAnd too low to get under (yeah, yeah)\r\nYou\'re stuck in the middle (yeah, yeah)\r\nAnd the pain is thunder (yeah, yeah)\r\n\r\nLift your head up high\r\nAnd scream out to the world\r\nI know I am someone\r\nAnd let the truth unfurl\r\n\r\nNo one can hurt you now\r\nBecause you know what\'s true\r\nYes, I believe in me\r\nSo you believe in you\r\n\r\nHelp me sing it,\r\n\r\n[6x]\r\nMa ma se, ma ma sa, ma ma coo sa\r\nMa ma se, ma ma sa, ma ma coo sa\r\n\r\nHelp me sing it!\r\nSing it to the world\r\nSing it out loud\r\nHelp me sing it!\r\n\r\n[8x]\r\nMa ma se, ma ma sa, ma ma coo sa\r\nMa ma se, ma ma sa, ma ma coo sa\r\n\r\n(woo hoo, he he he)\r\nHelp me sing it!\r\n(woo hoo, he he he)\r\nSing it to the world\r\n\r\n[6x]\r\nMa ma se, ma ma sa, ma ma coo sa\r\nMa ma se, ma ma sa, ma ma coo sa\r\n\r\n(woo hoo, he he he)\r\nHelp me sing it baby!\r\nSing it to the world\r\nSing it out loud', 1, 8, 224),
 	(23, 'Baby Be Mine', 0, 'I don\'t need no dreams when I\'m by your side\r\nEvery moment takes me to paradise\r\nDarlin\' let me hold you\r\nWarm you in my arms and melt your fears away\r\nShow you all the magic that a perfect love can make\r\nI need you night and day\r\n\r\nSo baby be mine (baby you gotta be mine)\r\nAnd girl I\'ll give you all I got to give\r\nSo baby be my girl (all the time)\r\nAnd we can share this ecstasy\r\nAs long as we believe in love\r\n\r\nI won\'t give you reason to change your mind\r\n(I guess it\'s still you thrill me baby be mine)\r\nYou are all the future that I desire\r\nGirl I need to hold you\r\nShare my feelings in the heat of love\'s embrace\r\nShow you all the passion burning in my heart today\r\nIt\'s never gonna fade\r\n\r\nSo baby be mine (baby you gotta be mine)\r\nAnd girl I\'ll give you all I got to give\r\nSo baby be my girl (all the time)\r\nYou\'re everything this world could be\r\nThe reason that I live\r\n\r\nWon\'t you stay with me until the mornin\' sun\r\nI promise you now that the dawn will be different\r\nLady can\'t you see that heaven\'s just begun\r\nIt\'s livin\' here inside our hearts\r\n\r\nThere\'ll be no more mountains for us to climb\r\n(I can\'t be still you thrill me baby be mine)\r\nThis will be a love lasting for all time\r\nGirl you got to hold me\r\nWe can touch the sky and light the darkest day\r\nHold me only you and I can make sweet love this way\r\nThere\'s no more I can say\r\n\r\nSo baby be mine (baby you gotta be mine)\r\n(tell me that you love me)\r\nAnd girl I\'ll give you all I got to give\r\n(say you\'re thinking of me)\r\nSo baby be mine (all the time)\r\n(show me how it should be)\r\nYou\'re everything this world could be\r\nThe reason that I live\r\n(every night it feels alright)\r\n\r\nBaby be my girl\r\n(tell me that you love me)\r\nAnd girl I\'ll give you all I got to give\r\n(say you\'re thinking of me)\r\nSo baby, be mine, baby, be mine\r\n(show me how it should be)\r\nYou\'re everything this world could be to me\r\n(every night it feels alright)\r\n\r\nC\'mon girl c\'mon girl\r\n(tell me that you love me)\r\n(say you\'re thinking of me)\r\nSo baby be mine\r\n(show me how it should be)\r\nYou\'re everything this world could be to me\r\n(every night it feels alright)', 2, 8, 224),
-	(24, 'The Girl Is Mine (with Paul M', 0, '[Michael:]\r\nEvery night she walks right in my dreams\r\nSince I met her from the start\r\nI\'m so proud I am the only one\r\nWho is special in her heart\r\n\r\nThe girl is mine\r\nThe doggone girl is mine\r\nI know she\'s mine\r\nBecause the doggone girl is mine\r\n\r\n[Paul:]\r\nI don\'t understand the way you think\r\nSaying that she\'s yours not mine\r\nSending roses and your silly dreams\r\nReally just a waste of time\r\n\r\nBecause she\'s mine\r\nThe doggone girl is mine\r\nDon\'t waste your time\r\nBecause the doggone girl is mine\r\n\r\n[Paul:]\r\nI love you more than he\r\n(take you anywhere)\r\n\r\n[Michael:]\r\nBut I love you endlessly\r\n(loving we will share)\r\n\r\n[Michael and Paul:]\r\nSo come and go with me\r\nTwo on the town\r\n\r\n[Michael:]\r\nBut we both cannot have her\r\nSo it\'s one or the other\r\nAnd one day you\'ll discover\r\nThat she\'s my girl forever and ever\r\n\r\n[Paul:]\r\nI don\'t build your hopes to be let down\r\n\'Cause I really feel it\'s time\r\n\r\n[Michael:]\r\nI know she\'ll tell you I\'m the one for her\r\n\'Cause she said I blow her mind\r\n\r\nThe girl is mine\r\nThe doggone girl is mine\r\nDon\'t waste your time\r\nBecause the doggone girl is mine\r\n\r\n[Michael and Paul:]\r\nShe\'s mine, she\'s mine\r\nNo, no, no, she\'s mine\r\nThe girl is mine, the girl is mine\r\nThe girl is mine, the girl is mine\r\n\r\n[Paul:]\r\nThe girl is mine (mine, mine) yep she\'s mine (mine, mine)\r\nThe girl is mine (mine, mine) yep she\'s mine (mine, mine)\r\n\r\n[Michael:]\r\nDon\'t waste your time\r\nBecause the doggone girl is mine\r\nThe girl is mine, the girl is mine\r\n\r\n[Paul:]\r\nMichael, we\'re not gonna fight about this, okay?\r\n\r\n[Michael:]\r\nPaul, I think I told you, I\'m a lover not a fighter\r\n\r\n[Paul:]\r\nI\'ve heard it all before, Michael\r\nShe told me that I\'m her forever lover, you know, don\'t you remember?\r\n\r\n[Michael:]\r\nWell, after loving me, she said she couldn\'t love another\r\n\r\n[Paul]\r\nIs that what she said?\r\n\r\n[Michael:]\r\nYes, she said it, you keep dreaming\r\n\r\n[Paul]\r\nI don\'t believe it (mine, mine) no\r\n\r\n[Michael and Paul:]\r\nThe girl is mine (mine, mine)\r\nNo, mine\r\nNo, mine (mine, mine)\r\n\r\n[Paul:]\r\nShe\'s mine mine mine mine mine (mine, mine, mine)\r\n\r\n[Michael:]\r\n\'Cause the girl is mine (mine, mine)\r\n\r\n[Paul:]\r\nNo girl is mine (mine, mine)\r\n\r\n[Fade-out/repeat]', 3, 8, 224),
+	(24, 'The Girl Is Mine (with Paul McCartney)', 0, '[Michael:]\r\nEvery night she walks right in my dreams\r\nSince I met her from the start\r\nI\'m so proud I am the only one\r\nWho is special in her heart\r\n\r\nThe girl is mine\r\nThe doggone girl is mine\r\nI know she\'s mine\r\nBecause the doggone girl is mine\r\n\r\n[Paul:]\r\nI don\'t understand the way you think\r\nSaying that she\'s yours not mine\r\nSending roses and your silly dreams\r\nReally just a waste of time\r\n\r\nBecause she\'s mine\r\nThe doggone girl is mine\r\nDon\'t waste your time\r\nBecause the doggone girl is mine\r\n\r\n[Paul:]\r\nI love you more than he\r\n(take you anywhere)\r\n\r\n[Michael:]\r\nBut I love you endlessly\r\n(loving we will share)\r\n\r\n[Michael and Paul:]\r\nSo come and go with me\r\nTwo on the town\r\n\r\n[Michael:]\r\nBut we both cannot have her\r\nSo it\'s one or the other\r\nAnd one day you\'ll discover\r\nThat she\'s my girl forever and ever\r\n\r\n[Paul:]\r\nI don\'t build your hopes to be let down\r\n\'Cause I really feel it\'s time\r\n\r\n[Michael:]\r\nI know she\'ll tell you I\'m the one for her\r\n\'Cause she said I blow her mind\r\n\r\nThe girl is mine\r\nThe doggone girl is mine\r\nDon\'t waste your time\r\nBecause the doggone girl is mine\r\n\r\n[Michael and Paul:]\r\nShe\'s mine, she\'s mine\r\nNo, no, no, she\'s mine\r\nThe girl is mine, the girl is mine\r\nThe girl is mine, the girl is mine\r\n\r\n[Paul:]\r\nThe girl is mine (mine, mine) yep she\'s mine (mine, mine)\r\nThe girl is mine (mine, mine) yep she\'s mine (mine, mine)\r\n\r\n[Michael:]\r\nDon\'t waste your time\r\nBecause the doggone girl is mine\r\nThe girl is mine, the girl is mine\r\n\r\n[Paul:]\r\nMichael, we\'re not gonna fight about this, okay?\r\n\r\n[Michael:]\r\nPaul, I think I told you, I\'m a lover not a fighter\r\n\r\n[Paul:]\r\nI\'ve heard it all before, Michael\r\nShe told me that I\'m her forever lover, you know, don\'t you remember?\r\n\r\n[Michael:]\r\nWell, after loving me, she said she couldn\'t love another\r\n\r\n[Paul]\r\nIs that what she said?\r\n\r\n[Michael:]\r\nYes, she said it, you keep dreaming\r\n\r\n[Paul]\r\nI don\'t believe it (mine, mine) no\r\n\r\n[Michael and Paul:]\r\nThe girl is mine (mine, mine)\r\nNo, mine\r\nNo, mine (mine, mine)\r\n\r\n[Paul:]\r\nShe\'s mine mine mine mine mine (mine, mine, mine)\r\n\r\n[Michael:]\r\n\'Cause the girl is mine (mine, mine)\r\n\r\n[Paul:]\r\nNo girl is mine (mine, mine)\r\n\r\n[Fade-out/repeat]', 3, 8, 224),
 	(25, 'Thriller', 0, '[Michael Jackson:]\r\nIt\'s close to midnight and something evil\'s lurkin\' in the dark\r\nUnder the moonlight you see a sight that almost stops your heart\r\nYou try to scream but terror takes the sound before you make it\r\nYou start to freeze as horror looks you right between the eyes,\r\nYou\'re paralyzed\r\n\r\n\'Cause this is thriller, thriller night\r\nAnd no one\'s gonna save you from the beast about to strike\r\nYou know it\'s thriller, thriller night\r\nYou\'re fighting for your life inside a killer, thriller tonight\r\n\r\nYou hear the door slam and realize there\'s nowhere left to run\r\nYou feel the cold hand and wonder if you\'ll ever see the sun\r\nYou close your eyes and hope that this is just imagination, girl\r\nBut all the while you hear a creature creepin\' up behind\r\nYou\'re outta time\r\n\r\n\'Cause this is thriller, thriller night\r\nThere ain\'t no second chance against the thing with the forty eyes, girl\r\nThriller, thriller night\r\nYou\'re fighting for your life inside a killer, thriller tonight\r\n\r\nNight creatures call\r\nAnd the dead start to walk in their masquerade\r\nThere\'s no escaping the jaws of the alien this time (they\'re open wide)\r\nThis is the end of your life\r\n\r\nThey\'re out to get you, there\'s demons closing in on every side\r\nThey will possess you unless you change that number on your dial\r\nNow is the time for you and I to cuddle close together\r\nAll through the night I\'ll save you from the terror on the screen,\r\nI\'ll make you see\r\n\r\nThat this is thriller, thriller night\r\n\'Cause I can thrill you more than any ghoul could ever dare try\r\nThriller, thriller night\r\nSo let me hold you tight and share a killer, thriller, chiller\r\nThriller here tonight\r\n\r\n\'Cause this is thriller, thriller night\r\nGirl, I can thrill you more than any ghoul could ever dare try\r\nThriller, thriller night\r\nSo let me hold you tight and share a killer, thriller\r\n\r\nI\'m gonna thrill you tonight\r\n\r\n[Vincent Price:]\r\nDarkness falls across the land\r\nThe midnight hour is close at hand\r\nCreatures crawl in search of blood\r\nTo terrorize y\'all\'s neighborhood\r\nAnd whomsoever shall be found\r\nWithout the soul for getting down\r\nMust stand and face the hounds of hell\r\nAnd rot inside a corpse\'s shell\r\n\r\n[Michael Jackson:]\r\nI\'m gonna thrill you tonight...\r\n\r\n[Vincent Price:]\r\nThe foulest stench is in the air\r\nThe funk of forty thousand years\r\nAnd grisly ghouls from every tomb\r\nAre closing in to seal your doom\r\nAnd though you fight to stay alive\r\nYour body starts to shiver\r\nFor no mere mortal can resist\r\nThe evil of the thriller\r\n\r\n[Into maniacal laugh, in deep echo]', 4, 8, 224),
 	(26, 'Beat It', 0, 'They told him, "Don\'t you ever come around here.\r\nDon\'t wanna see your face. You better disappear."\r\nThe fire\'s in their eyes and their words are really clear\r\nSo beat it, just beat it\r\n\r\nYou better run, you better do what you can\r\nDon\'t wanna see no blood, don\'t be a macho man\r\nYou wanna be tough, better do what you can\r\nSo beat it, but you wanna be bad\r\n\r\n[Chorus]\r\nJust beat it, beat it, beat it, beat it\r\nNo one wants to be defeated\r\nShowin\' how funky strong is your fight\r\nIt doesn\'t matter who\'s wrong or right\r\n\r\nJust beat it, beat it [4x]\r\n\r\nThey\'re out to get you, better leave while you can\r\nDon\'t wanna be a boy, you wanna be a man\r\nYou wanna stay alive, better do what you can\r\nSo beat it, just beat it\r\n\r\nYou have to show them that you\'re really not scared\r\nYou\'re playin\' with your life, this ain\'t no truth or dare\r\nThey\'ll kick you, then they beat you, then they\'ll tell you it\'s fair\r\nSo beat it, but you wanna be bad\r\n\r\n[Chorus 2x]\r\nJust beat it, beat it, beat it, beat it\r\nNo one wants to be defeated\r\nShowin\' how funky strong is your fight\r\nIt doesn\'t matter who\'s wrong or right\r\n\r\nJust beat it, beat it, beat it, beat it, beat it\r\n\r\nBeat it, beat it, beat it, beat it\r\nNo one wants to be defeated\r\nShowin\' how funky strong is your fight\r\nIt doesn\'t matter who\'s wrong or right\r\n\r\n[Chorus 3x]\r\nJust beat it, beat it, beat it, beat it\r\nNo one wants to be defeated\r\nShowin\' how funky strong is your fight\r\nIt doesn\'t matter who\'s wrong or right\r\n\r\nJust beat it, beat it\r\nBeat it, beat it, beat it\r\n\r\n', 5, 8, 244),
 	(27, 'Human Nature', 0, 'Looking out\r\nAcross the night-time\r\nThe city winks a sleepless eye\r\nHear her voice\r\nShake my window\r\nSweet seducing sighs\r\n\r\nGet me out\r\nInto the night-time\r\nFour walls won\'t hold me tonight\r\nIf this town\r\nIs just an apple\r\nThen let me take a bite\r\n\r\nIf they say, "Why? Why?"\r\nTell \'em that is human nature\r\nWhy, why does he do it that way?\r\nIf they say, "Why? Why?"\r\nTell \'em that is human nature\r\nWhy, why does he do it that way?\r\n\r\nReaching out\r\nTo touch a stranger\r\nElectric eyes are everywhere\r\nSee that girl\r\nShe knows I\'m watching\r\nShe likes the way I stare\r\n\r\nIf they say, "Why? Why?"\r\nJust tell \'em that is human nature\r\nWhy, why does he do it that way?\r\nIf they say, "Why? Why?"\r\n(Do you really like me to be around?)\r\nTell \'em that is human nature\r\nWhy, why does he do it that way?\r\nI like livin\' this way\r\nI like lovin\' this way\r\n\r\nThat way (The way it was.)\r\nThat way (The way it was.)\r\n\r\nLooking out\r\nAcross the morning\r\nThe city\'s heart begins to beat\r\nReaching out\r\nI touch her shoulder\r\nI\'m dreaming of the street\r\n\r\nIf they say, "Why? Why?"\r\nTell \'em that is human nature\r\nWhy, why does he do it that way?\r\nIf they say, "Why? Why?"\r\n(Just tell me you like me to be around.)\r\nOoh, tell \'em\r\nWhy, why does he do it that way?\r\n\r\nIf they say, "Why? Why?"\r\n\r\nWhy, why does he do it that way?\r\nIf they say, "Why? Why?"\r\n(Just tell me you like me to be around.)\r\nOoh, tell \'em\r\nWhy, why does he do it that way?\r\n\r\nAnd they say, "Why? Why?"\r\nOoh, tell \'em\r\nWhy, why does he do it that way?\r\n\r\nThey say, "Why? Why?"\r\n(Just tell me you like me to be around.)\r\nWhy, why does he do it that way?\r\nI like livin\' this way\r\n\r\nThe way\r\nThe way', 7, 8, 224),
 	(28, 'P.Y.T. (Pretty Young Thing)', 0, 'You know, you—you make me feel so good inside.\r\nI always wanted a girl just like you.\r\nYou\'re such a P.Y.T. pretty young thing.\r\n\r\nWhere did you come from baby\r\nAnd ooh won\'t you take me there?\r\nRight away won\'t you baby\r\nTender only you\'ve got to be\r\nSpark my nature\r\nSugar fly with me\r\n\r\nDon\'t you know now is the perfect time\r\nWe can make it right\r\nHit the city lights\r\n\r\nThen tonight ease the love and pain\r\nLet me take you to the max\r\n\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there\r\n\r\nAnywhere you wanna go (Yes, I will.)\r\n\r\nNothin\' can stop this burnin\'\r\nDesire to be with you\r\nGotta get to you baby\r\nWon\'t you come, it\'s emergency\r\nCool my fire yearnin\'\r\nHoney, come set me free\r\n\r\nDon\'t you know now is the perfect time\r\nWe can dim the lights\r\nJust to make it right\r\n\r\nIn the night hit the lovin\' spot\r\nI\'ll give you all that I\'ve got\r\n\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there (Yes, I will.)\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there\r\n\r\nPretty young things\r\nPretty young things\r\nPretty young things\r\nPretty young things\r\n\r\nPretty young things, repeat after me\r\n[Michael] Say "Na, na, na."\r\n[P.Y.T.\'s] Na, na, na\r\n[Michael] Na, na, na, na\r\n[P.Y.T.\'s] Na, na, na, na\r\n[Michael] Say "Na, na, na."\r\n[P.Y.T.\'s] Na, na, na\r\n[Michael] Na, na, na, na, na\r\n[P.Y.T.\'s] Na, na, na, na, na\r\n[Michael] I\'ll take you there, take you there\r\n\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there\r\n\r\nI want to love you (P.Y.T.)\r\nPretty young thing\r\nYou need some lovin\' (T.L.C.)\r\nTender love, and care\r\nAnd I\'ll take you there, take you there\r\n\r\n[Ad-lib and fade-out:]\r\nYou know I think you are really nice.\r\nYou and I could\'ve just put together.\r\nYou\'re such a P.Y.T. Pretty young thing.\r\n\r\nI just wanna love you, you know, it\'s...\r\nI\'d give you all', 8, 8, 224),
-	(29, 'The Lady In My Life', 0, 'There\'ll be no darkness tonight\r\nLady our love will shine\r\n(lighting the night)\r\nJust put your trust in my heart\r\nAnd meet me in paradise\r\n(now is the time)\r\nGirl, you\'re every wonder in this world to me\r\nA treasure time won\'t steal away\r\n\r\nSo listen to my heart\r\nLay your body close to mine\r\nLet me fill you with my dreams\r\nI can make you feel alright\r\nAnd baby through the years gonna love you more each day\r\nSo I promise you tonight that you will always be the lady in my life\r\n\r\nLay back in my tenderness\r\nLet\'s make this a night we won\'t forget\r\nGirl, I need your sweet caress, oh\r\nReach out to a fantasy\r\nTwo hearts in a beat of ecstasy\r\nCome to me, girl\r\n\r\nAnd I will keep you warm\r\nThrough the shadows of the night\r\nLet me touch you with my love\r\nI can make you feel so right\r\nAnd baby through the years\r\nEven when we\'re old and gray\r\nI will love you more each day\r\n\'Cause you will always be the lady in my life\r\n\r\nStay with me\r\nI want you to stay with me\r\nI need you by my side\r\nDon\'t you go nowhere\r\n(ooh girl let me keep you warm)\r\nLet me keep you warm\r\n(you are the lady in my life)\r\nYou\'re my lady\r\n(fill you with the sweetest love)\r\nThe sweetest love\r\n(always the lady in my life)\r\nI wanna touch you baby\r\n\r\n(lay back in my tenderness)\r\n(you are the lady in my life)\r\nDoo doo doo\r\n(rock me with your sweet caress)\r\n(always the lady in my life)\r\nYou\'re my lady and I love you girl\r\n\r\n(ooh girl let me keep you warm)\r\n(you are the lady in my life)\r\nDon\'t you go nowhere\r\n(fill you with the sweetest love)\r\nI love you I love you\r\n(always the lady in my life)\r\nI need you I want you, baby\r\n\r\n(lay back in my tenderness)\r\nStay with me\r\n(you are the lady in my life)\r\nDon\'t you go no where\r\n(rock me with your sweet caress)\r\nAnd I love you baby\r\n(always the lady in my life)\r\nWoo\r\n\r\nOoh baby\r\nDon\'t you go nowhere\r\nYou\'re my lady\r\nAll through the night\r\n\r\n(ooh girl let me keep you warm)\r\nI wanna give you all\r\n(you are the lady in my life)\r\nIn my life\r\n(fill you with the sweetest love)\r\nLet me fill you baby\r\n(always the lady in my life)\r\nAll over all over all over\r\n\r\n(lay back in my tenderness)\r\nLay back with me\r\n(you are the lady in my life)\r\nLet me touch you girl\r\n(rock me with your sweet caress)\r\nLay back with me\r\n(always the lady in my life)\r\nAll over [7x]\r\n\r\n(ooh girl let me keep you warm)\r\nBaby\r\n(you are the lady in my life)\r\nWoo\r\n(fill you with the sweetest love)\r\n(always the lady in my life)\r\nYou\'re my lady\r\n\r\n(lay back in my tenderness)\r\nYou\'re my lady baby', 9, 8, 224);
+	(29, 'The Lady In My Life', 0, 'There\'ll be no darkness tonight\r\nLady our love will shine\r\n(lighting the night)\r\nJust put your trust in my heart\r\nAnd meet me in paradise\r\n(now is the time)\r\nGirl, you\'re every wonder in this world to me\r\nA treasure time won\'t steal away\r\n\r\nSo listen to my heart\r\nLay your body close to mine\r\nLet me fill you with my dreams\r\nI can make you feel alright\r\nAnd baby through the years gonna love you more each day\r\nSo I promise you tonight that you will always be the lady in my life\r\n\r\nLay back in my tenderness\r\nLet\'s make this a night we won\'t forget\r\nGirl, I need your sweet caress, oh\r\nReach out to a fantasy\r\nTwo hearts in a beat of ecstasy\r\nCome to me, girl\r\n\r\nAnd I will keep you warm\r\nThrough the shadows of the night\r\nLet me touch you with my love\r\nI can make you feel so right\r\nAnd baby through the years\r\nEven when we\'re old and gray\r\nI will love you more each day\r\n\'Cause you will always be the lady in my life\r\n\r\nStay with me\r\nI want you to stay with me\r\nI need you by my side\r\nDon\'t you go nowhere\r\n(ooh girl let me keep you warm)\r\nLet me keep you warm\r\n(you are the lady in my life)\r\nYou\'re my lady\r\n(fill you with the sweetest love)\r\nThe sweetest love\r\n(always the lady in my life)\r\nI wanna touch you baby\r\n\r\n(lay back in my tenderness)\r\n(you are the lady in my life)\r\nDoo doo doo\r\n(rock me with your sweet caress)\r\n(always the lady in my life)\r\nYou\'re my lady and I love you girl\r\n\r\n(ooh girl let me keep you warm)\r\n(you are the lady in my life)\r\nDon\'t you go nowhere\r\n(fill you with the sweetest love)\r\nI love you I love you\r\n(always the lady in my life)\r\nI need you I want you, baby\r\n\r\n(lay back in my tenderness)\r\nStay with me\r\n(you are the lady in my life)\r\nDon\'t you go no where\r\n(rock me with your sweet caress)\r\nAnd I love you baby\r\n(always the lady in my life)\r\nWoo\r\n\r\nOoh baby\r\nDon\'t you go nowhere\r\nYou\'re my lady\r\nAll through the night\r\n\r\n(ooh girl let me keep you warm)\r\nI wanna give you all\r\n(you are the lady in my life)\r\nIn my life\r\n(fill you with the sweetest love)\r\nLet me fill you baby\r\n(always the lady in my life)\r\nAll over all over all over\r\n\r\n(lay back in my tenderness)\r\nLay back with me\r\n(you are the lady in my life)\r\nLet me touch you girl\r\n(rock me with your sweet caress)\r\nLay back with me\r\n(always the lady in my life)\r\nAll over [7x]\r\n\r\n(ooh girl let me keep you warm)\r\nBaby\r\n(you are the lady in my life)\r\nWoo\r\n(fill you with the sweetest love)\r\n(always the lady in my life)\r\nYou\'re my lady\r\n\r\n(lay back in my tenderness)\r\nYou\'re my lady baby', 9, 8, 224),
+	(30, 'Pipes Of Peace', 0, 'I Light A Candle To Our Love\r\nIn Love Our Problems Disapper\r\nBut All In All We Soon Discover\r\nThat One And One Is All We Long To Hear\r\n\r\nAll\'round The World\r\nLittle Children Being Born To The World\r\nGot To Give Them All We Can \'Til The War Is Won\r\nThen Will The Work Be Done\r\n\r\nHelp Them To Learn (Help Them To Learn)\r\nSongs Of Joy Instead Of Burn, Baby, Burn (Burn, Baby Burn)\r\nLet Us Show Them How To Play The Pipes Of Peace\r\nPlay The Pipes Of Peace\r\n\r\nHelp Me To Learn\r\n\r\nSongs Of Joy Instead Of Burn, Baby, Burn\r\nWon\'t You Show Me To Play (How To Play) The Pipes Of Peace (Pipes Of Peace)\r\nPlay The Pipes Of Peace\r\n\r\nWhat Do You Say? (What Do You Say)\r\nWill The Human Race Be Run In A Day? (In A Day)\r\nOr Will Someone Save This Planet We\'re Playing On?\r\nIs It The Only One? (What Are We Going To Do?)\r\n\r\nHelp Them To See (Help Them To See)\r\nThat The People Here Are Like You And Me (You And Me)\r\nLet Us Show Them How To Play (How To Play) The Pipes Of\r\nPeace (Pipesofpeace)\r\nPlay The Pipes Of Peace\r\nOoh___\r\nI Light A Candle To Our Love\r\nIn Love Our Problems Disapper\r\nBut All In All We Soon Discover\r\nThat One And One Is All We Long To Hear\r\n\r\nAll\'round The World\r\nLittle Children Being Born To The World\r\nGot To Give Them All We Can \'Til The War Is Won\r\nThen Will The Work Be Done\r\n\r\nHelp Them To Learn (Help Them To Learn)\r\nSongs Of Joy Instead Of Burn, Baby, Burn (Burn, Baby Burn)\r\nLet Us Show Them How To Play The Pipes Of Peace\r\nPlay The Pipes Of Peace\r\n\r\nHelp Me To Learn\r\n\r\nSongs Of Joy Instead Of Burn, Baby, Burn\r\nWon\'t You Show Me To Play (How To Play) The Pipes Of Peace (Pipes Of Peace)\r\nPlay The Pipes Of Peace\r\n\r\nWhat Do You Say? (What Do You Say)\r\nWill The Human Race Be Run In A Day? (In A Day)\r\nOr Will Someone Save This Planet We\'re Playing On?\r\nIs It The Only One? (What Are We Going To Do?)\r\n\r\nHelp Them To See (Help Them To See)\r\nThat The People Here Are Like You And Me (You And Me)\r\nLet Us Show Them How To Play (How To Play) The Pipes Of Peace (Pipes of peace)\r\nPlay The Pipes Of Peace\r\nOoh____\r\nI Light A Candle To Our Love\r\nIn Love Our Problems Disapper\r\nBut All In All We Soon Discover\r\nThat One And One Is All We Long To Hear', 1, 11, 224),
+	(31, 'Say Say Say (duet with Michael Jackson)', 0, 'Say, say, say what you want\r\nBut don\'t play games with my affection\r\nTake, take, take what you need\r\nBut don\'t leave me with no direction\r\n\r\nAll alone, I sit home by the phone\r\nWaiting for you, baby\r\nThrough the years\r\nHow can you stand to hear\r\nMy pleading for you dear?\r\nYou know I\'m crying ooh ooh ooh ooh\r\n\r\nGo, go, go where you want\r\nBut don\'t leave me here forever\r\nYou, you, you stay away\r\nSo long girl, I see you never\r\n\r\nWhat can I do\r\nGirl to get through to you?\r\nCause I love you, baby\r\nStanding here, baptisted in all my tears\r\nBaby through the years\r\nYou know I\'m crying ooh ooh ooh ooh\r\n\r\nYou never ever worry\r\nAnd you never shed a tear\r\nYou saying that my love ain\'t real\r\nJust look at my face\r\nThese tears ain\'t drying\r\n\r\nYou, you, you can never say\r\nThat I\'m not the one who really loves you\r\nI pray, pray, pray every day\r\nThat you\'ll see things, girl like I do\r\n\r\nWhat can I do girl, to get through to you?\r\nCause I love you baby\r\nStanding here baptised in all my tears\r\nBaby through the years\r\nYou know I\'m crying, ooh ooh ooh ooh ooh', 2, 11, 239);
 /*!40000 ALTER TABLE `musica` ENABLE KEYS */;
-
 
 -- Copiando estrutura para tabela memes.participa
 DROP TABLE IF EXISTS `participa`;
@@ -323,9 +339,11 @@ INSERT INTO `participa` (`Musica_idMusica`, `Artista_idArtista`, `papel`) VALUES
 	(26, 4, 'Intérprete'),
 	(27, 4, 'Intérprete'),
 	(28, 4, 'Intérprete'),
-	(29, 4, 'Intérprete');
+	(29, 4, 'Intérprete'),
+	(30, 7, 'Intérprete'),
+	(31, 4, 'Participante'),
+	(31, 7, 'Intérprete');
 /*!40000 ALTER TABLE `participa` ENABLE KEYS */;
-
 
 -- Copiando estrutura para tabela memes.score
 DROP TABLE IF EXISTS `score`;
@@ -339,17 +357,27 @@ CREATE TABLE IF NOT EXISTS `score` (
   KEY `idMusicaScore` (`idMusicaScore`),
   CONSTRAINT `idMusicaScore` FOREIGN KEY (`idMusicaScore`) REFERENCES `musica` (`idMusica`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `idUsuarioScore` FOREIGN KEY (`idUsuarioScore`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.score: ~8 rows (aproximadamente)
+-- Copiando dados para a tabela memes.score: ~3 rows (aproximadamente)
 DELETE FROM `score`;
 /*!40000 ALTER TABLE `score` DISABLE KEYS */;
 INSERT INTO `score` (`idScore`, `idUsuarioScore`, `idMusicaScore`, `data`) VALUES
 	(16, 15, 13, '2017-11-10 10:48:19'),
 	(17, 15, 1, '2017-11-10 10:54:33'),
-	(18, 15, 2, '2017-11-10 10:54:49');
+	(18, 15, 2, '2017-11-10 10:54:49'),
+	(19, 15, 12, '2017-11-10 15:23:49'),
+	(20, 15, 11, '2017-11-10 19:10:44'),
+	(29, 15, 21, '2017-11-11 23:45:10'),
+	(30, 15, 31, '2017-11-11 23:47:53'),
+	(31, 15, 23, '2017-11-11 23:48:09'),
+	(32, 19, 1, '2017-11-11 23:48:53'),
+	(33, 19, 2, '2017-11-11 23:49:03'),
+	(34, 19, 11, '2017-11-11 23:49:16'),
+	(35, 19, 31, '2017-11-11 23:49:23'),
+	(36, 76, 1, '2017-11-11 23:49:52'),
+	(37, 90, 1, '2017-11-11 23:50:34');
 /*!40000 ALTER TABLE `score` ENABLE KEYS */;
-
 
 -- Copiando estrutura para tabela memes.usuario
 DROP TABLE IF EXISTS `usuario`;
@@ -357,22 +385,23 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(45) NOT NULL,
   `idR` varchar(45) NOT NULL,
-  `tipo` tinyint(4) NOT NULL DEFAULT '0',
+  `tipo` tinyint(4) NOT NULL DEFAULT '1',
   `perfil` text NOT NULL,
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `idR` (`idR`)
-) ENGINE=InnoDB AUTO_INCREMENT=418 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1027 DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela memes.usuario: ~4 rows (aproximadamente)
 DELETE FROM `usuario`;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` (`idUsuario`, `email`, `idR`, `tipo`, `perfil`) VALUES
-	(15, 'noubmaster@gmail.com', '114906338798410851834', 2, 'https://lh4.googleusercontent.com/-36es8WyUfY0/AAAAAAAAAAI/AAAAAAAAAMw/KTD0N0D7HzA/s96-c/photo.jpg'),
-	(19, 'thenuubgamer@gmail.com', '108493248676886266125', 2, 'https://lh5.googleusercontent.com/-yDJi2MiItnA/AAAAAAAAAAI/AAAAAAAAAAA/ACnBePbqzr0wz0KkYzcoRMi2v_9AINnHjA/s96-c/photo.jpg'),
-	(76, 'elishaphp@gmail.com', '107170213645449942722', 1, 'https://lh5.googleusercontent.com/-eTfe1uR0mnE/AAAAAAAAAAI/AAAAAAAAAHw/w1BgcRuJhT0/s96-c/photo.jpg'),
-	(90, 'eliseuphp@gmail.com', '112355985130332857702', 0, 'https://lh3.googleusercontent.com/-snpJLNdEd6U/AAAAAAAAAAI/AAAAAAAAAAA/ACnBePbyntDY-nS4Z_lMbSjJToCLirOF7w/s96-c/photo.jpg');
+	(15, 'noubmaster@gmail.com', '114906338798410851834', 3, 'https://lh4.googleusercontent.com/-36es8WyUfY0/AAAAAAAAAAI/AAAAAAAAAMw/KTD0N0D7HzA/s96-c/photo.jpg'),
+	(19, 'thenuubgamer@gmail.com', '108493248676886266125', 3, 'https://lh5.googleusercontent.com/-yDJi2MiItnA/AAAAAAAAAAI/AAAAAAAAAAA/ACnBePbqzr0wz0KkYzcoRMi2v_9AINnHjA/s96-c/photo.jpg'),
+	(76, 'elishaphp@gmail.com', '107170213645449942722', 2, 'https://lh5.googleusercontent.com/-eTfe1uR0mnE/AAAAAAAAAAI/AAAAAAAAAHw/w1BgcRuJhT0/s96-c/photo.jpg'),
+	(90, 'eliseuphp@gmail.com', '112355985130332857702', 1, 'https://lh3.googleusercontent.com/-snpJLNdEd6U/AAAAAAAAAAI/AAAAAAAAAAA/ACnBePbyntDY-nS4Z_lMbSjJToCLirOF7w/s96-c/photo.jpg');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
