@@ -75,7 +75,7 @@
                                     <p:inputText id="txt" value="#{buscaControle.webInput}" placeholder="Search" class="form-control input-radius-l-corner"/>
                                     <span class="input-group-btn">
                                         <p:commandLink onclick="vozes()" class="btn btn-default btn-outline"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
-                                        <h:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" action="index.xhtml" class="btn btn-default btn-radius-r-corner"><i class="fa fa-search" aria-hidden="true"></i></h:commandLink>
+                                        <h:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" id="searchss" action="index.xhtml" class="btn btn-default btn-radius-r-corner"><i class="fa fa-search" aria-hidden="true"></i></h:commandLink>
                                     </span>
                                 </div>
                             </h:form>
@@ -168,7 +168,7 @@
                         // Let's define a command.
                         var cSearch = {
                             'search': function () {
-                                console.log("foda");
+                                document.getElementById("busca:searchss").click();
                             }
                         };
                         var wSearch = {
