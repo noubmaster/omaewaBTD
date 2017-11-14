@@ -61,6 +61,53 @@ public class AvaliacaoDAO {
         con.close();
     }
 
+    public static List<Avaliacao> getListaAvaliacoesRevisao() throws SQLException {
+        List<Avaliacao> lista = new ArrayList<Avaliacao>();
+        Musica musica = new Musica();
+        Connection con = Conexao.getConnection();
+        String sql = "SELECT\n"
+                + "	*\n"
+                + "FROM\n"
+                + "	avaliacao av,\n"
+                + "	musica mu ,\n"
+                + "	usuario us\n"
+                + "WHERE\n"
+                + "	av.revisao = 1 AND\n"
+                + "	av.idMusicaAvaliacao = mu.idMusica AND\n"
+                + "	us.idUsuario = av.idUsuarioAvaliacao\n"
+                + "ORDER BY\n"
+                + "	av.idAvaliacao;";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            musica.setIdMusica(rs.getInt("idMusica"));
+            musica.setNomeMusica(rs.getString("nomeMusica"));
+            musica.setLetra(rs.getString("letra"));
+
+            Avaliacao avaliacao = new Avaliacao();
+            avaliacao.setIdAvaliacao(rs.getInt("idAvaliacao"));
+            avaliacao.setNota(rs.getInt("nota"));
+            avaliacao.setComentario(rs.getString("comentario"));
+            avaliacao.setRevisao(rs.getBoolean("revisao"));
+            
+            Usuario usuario = new Usuario();
+            usuario.setIdUsuario(rs.getInt("idUsuario"));
+            usuario.setEmail(rs.getString("email"));
+            usuario.setIdR(rs.getString("idR"));
+            usuario.setTipo(rs.getInt("tipo"));
+            usuario.setPerfil(rs.getString("perfil"));
+
+            avaliacao.setMusica(musica);
+            avaliacao.setUsuario(usuario);
+            lista.add(avaliacao);
+        }
+        stmt.close();
+        rs.close();
+        con.close();
+
+        return lista;
+    }
+
     public static List<Avaliacao> getListaAsd(int idMusica) throws SQLException {
         List<Avaliacao> lista = new ArrayList<Avaliacao>();
         Musica musica = new Musica();

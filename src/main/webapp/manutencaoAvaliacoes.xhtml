@@ -114,15 +114,15 @@
                             <li><a href="/omaewa/cadastroAlbumT.xhtml">Cadastro de Albuns</a></li>
                             <li><a href="/omaewa/cadastroArtistaT.xhtml">Cadastro de Artistas</a></li>
                             <li><a href="/omaewa/cadastroMusicaT.xhtml">Cadastro de Músicas</a></li>
-                            <li><a href="/omaewa/manutencaoAvaliacoes.xhtml">Manutenção de Avaliações</a></li>
+                            <li class="active"><a href="#">Manutenção de Avaliações<span class="sr-only">(current)</span></a></li>
                         </ul>
                         <ul class="nav nav-sidebar" id="su">
-                            <li class="active"><a href="#">Manutenção de Usuários<span class="sr-only">(current)</span></a></li>
+                            <li><a href="/omaewa/manutencaoUser.xhtml">Manutenção de Usuários</a></li>
                         </ul>
                     </div>
                     <h:form id="tabelaGenero">
                         <div class="col-sm-6 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-                            <h1 class="page-header" style="display: inline">Manutenção de Usuários</h1>
+                            <h1 class="page-header" style="display: inline">Manutenção de Avaliações</h1>
                         </div>
 
                         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -130,25 +130,25 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Imagem</th>
-                                            <th>Nome</th>
+                                            <th>Descrição</th>
+                                            <th>Música</th>
                                             <th>Opções</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <ui:repeat value="#{usuarioControle.usuarios}" var="q">
+                                        <ui:repeat value="#{avaliacaoControle.avaliacoes}" var="q">
                                             <tr>
-                                                <td style="width: 5%"><img class="img-responsive" src="#{q.perfil}" style="width: 25px; height: 25px; display: inline;" /></td>
-                                                <td>#{q.email}</td>
+                                                <td>#{q.comentario}</td>
+                                                <td>#{q.musica.nomeMusica}</td>
                                                 <td style="width: 10%"> 
                                                     <div class="btn-group">
                                                         <!-- Botao do Modal de Alterar -->
                                                         <p:commandLink class="btn btn-info btn-sm" 
-                                                                       action="#{usuarioControle.preparaAlterar()}" 
+                                                                       action="#{avaliacaoControle.preparaAlterar()}" 
                                                                        onclick="$('#modalCadastro').modal('show');" 
                                                                        update=":cadastramento">
                                                             <p:resetInput target=":cadastramento:painel" />
-                                                            <f:setPropertyActionListener value="#{q}" target="#{usuarioControle.usuario}" />
+                                                            <f:setPropertyActionListener value="#{q}" target="#{avaliacaoControle.avaliacao}" />
                                                             <i class="fa fa-cog" aria-hidden="true"></i>
                                                         </p:commandLink>
                                                     </div>
@@ -182,25 +182,15 @@
                         </div>
                         <div class="modal-body">
                             <h:panelGrid columns="2" id="painel">
-                                <label style="margin-right: 2px" for="tipo">Tipo</label>
-                                <h:selectOneMenu 
-                                    style="width: 225px" 
-                                    required="true" id="tipo" 
-                                    class="btn btn-default dropdown-toggle" 
-                                    value="#{usuarioControle.usuario.tipo}">
-                                    <f:selectItem itemValue="Selecione"/>
-                                    <f:selectItem itemValue="1" itemLabel="Usuário"></f:selectItem>
-                                    <f:selectItem itemValue="2" itemLabel="Moderador"></f:selectItem>
-                                    <f:selectItem itemValue="3" itemLabel="Administrador"></f:selectItem>
-                                    <f:selectItem itemValue="4" itemLabel="Bloqueado"></f:selectItem>
-                                </h:selectOneMenu>
+                                <label style="margin-right: 2px" for="bool">Problema ainda persiste:</label>
+                                <p:selectBooleanCheckbox id="bool" style="margin-left: 60px" value="#{avaliacaoControle.avaliacao.revisao}"/>
                             </h:panelGrid>
                         </div>
                         <div class="modal-footer">
                             <p:commandLink value="Salvar" 
                                            class="btn btn-default"
                                            update=":tabelaGenero"
-                                           action="#{usuarioControle.salvar}"
+                                           action="#{avaliacaoControle.salvar}"
                                            oncomplete="$('#modalCadastro').modal('hide');"
                                            />
                             <p:commandLink value="Não" 
@@ -212,6 +202,39 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal Excluir -->
+        <h:form id="modalDeExcluir">
+            <div class="modal fade" 
+                 id="modalExcluir" 
+                 tabindex="-1" role="dialog" 
+                 aria-labelledby="modalExcluir" 
+                 aria-hidden="true" 
+                 data-keyboard="false" 
+                 data-backdrop="static">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <h:form id="exclusao">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&#215;</button>
+                                <h4 class="modal-title">Tens certeza da exclusão?</h4>
+                            </div>
+                            <h:panelGroup layout="block" styleClass="modal-footer">
+                                <p:commandLink value="Sim" 
+                                               styleClass="btn btn-danger"
+                                               oncomplete="$('#modalExcluir').modal('hide');" 
+                                               update=":tabelaGenero"  
+                                               actionListener="#{generoControle.excluir()}"/>
+                                <p:commandLink value="Não" 
+                                               immediate="true" 
+                                               styleClass="btn btn-default" 
+                                               oncomplete="$('#modalExcluir').modal('hide');"/> 
+                            </h:panelGroup>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </h:form>
         <!-- Fim Pagina de cadastro -->
         <footer class="footer">
             <div class="container-fluid text-center">

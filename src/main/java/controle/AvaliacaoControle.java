@@ -36,7 +36,7 @@ public class AvaliacaoControle {
     @PostConstruct
     public void atualizaAvaliacoes() {
         try {
-            avaliacoes = AvaliacaoDAO.getLista();
+            avaliacoes = AvaliacaoDAO.getListaAvaliacoesRevisao();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -59,12 +59,19 @@ public class AvaliacaoControle {
     }
     public void verificar(int user) {
         user = iduserLogado;
-        if(user == 0){
-            logado = true;
-            placeholder = "Favor realize login ou atualize a página";
-        } else{
-            logado = false;
-            placeholder = "Comentário...";
+        switch (user) {
+            case 0:
+                logado = true;
+                placeholder = "Favor realize login ou atualize a página";
+                break;
+            case 4:
+                logado = true;
+                placeholder = "Usuário bloqueado";
+                break;
+            default:
+                logado = false;
+                placeholder = "Comentário...";
+                break;
         }
     }
 
@@ -72,7 +79,6 @@ public class AvaliacaoControle {
         salvar = false;
         idUsuario = avaliacao.getUsuario().getIdUsuario();
         idMusica = avaliacao.getMusica().getIdMusica();
-
     }
 
     public void salvar() {
