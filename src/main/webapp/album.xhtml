@@ -36,7 +36,7 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="/omaewa/index.xhtml">BTheD</a>
+                            <a class="navbar-brand" href="/omaewa/home.xhtml">BTheD</a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -93,8 +93,8 @@
                                         <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(q.idArtista)}"><h5>#{q.nomeArtista}</h5></h:commandLink>
                                     </ui:repeat>
                                     <h:outputLabel value="Participantes" rendered="#{buscaControle.render}"/>
-                                    <ui:repeat var="q" value="#{buscaControle.artistasP}">
-                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(q.idArtista)}"><h5>#{q.nomeArtista}</h5></h:commandLink>
+                                    <ui:repeat var="a" value="#{buscaControle.artistasP}">
+                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(q.idArtista)}"><h5>#{a.nomeArtista}</h5></h:commandLink>
                                     </ui:repeat>
                                 </h:form>
                             </div>
@@ -184,7 +184,7 @@
         </div>
         <footer class="footer">
             <div class="container-fluid text-center">
-                <a href="#">BitesTheDust</a>
+                <a href="/omaewa/home.xhtml">BitesTheDust</a>
             </div>
         </footer>
         <script src="resources/js/dimLetras.js"></script>
