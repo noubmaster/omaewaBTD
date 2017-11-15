@@ -14,10 +14,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import modelo.Artista;
 import modelo.Album;
-import modelo.Busca;
 import modelo.Score;
 import modelo.Composicao;
 import modelo.Musica;
+import modelo.Participa;
 
 /**
  *
@@ -27,7 +27,7 @@ import modelo.Musica;
 @SessionScoped
 public class BuscaControle {
 
-    private List<Busca> result = new ArrayList<Busca>();
+    private List<Participa> result = new ArrayList<Participa>();
     private List<Album> albumsArtistI = new ArrayList<Album>();
     private List<Album> albumsArtistP = new ArrayList<Album>();
     private List<Artista> artistas = new ArrayList<Artista>();
@@ -105,11 +105,11 @@ public class BuscaControle {
         }
     }
 
-    public List<Busca> getResult() {
+    public List<Participa> getResult() {
         return result;
     }
 
-    public void setResult(List<Busca> result) {
+    public void setResult(List<Participa> result) {
         this.result = result;
     }
 

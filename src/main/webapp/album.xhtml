@@ -94,7 +94,7 @@
                                     </ui:repeat>
                                     <h:outputLabel value="Participantes" rendered="#{buscaControle.render}"/>
                                     <ui:repeat var="a" value="#{buscaControle.artistasP}">
-                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(q.idArtista)}"><h5>#{a.nomeArtista}</h5></h:commandLink>
+                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(a.idArtista)}"><h5>#{a.nomeArtista}</h5></h:commandLink>
                                     </ui:repeat>
                                 </h:form>
                             </div>

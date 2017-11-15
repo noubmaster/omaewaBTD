@@ -13,7 +13,6 @@ import modelo.Album;
 import modelo.Avaliacao;
 import modelo.Composicao;
 import modelo.Genero;
-import modelo.Busca;
 import modelo.Score;
 import modelo.Usuario;
 
@@ -21,8 +20,8 @@ import util.Conexao;
 
 public class BuscaDAO {
 
-    public static List<Busca> searchMain(String webInput) throws SQLException {
-        List<Busca> lista = new ArrayList<Busca>();
+    public static List<Participa> searchMain(String webInput) throws SQLException {
+        List<Participa> lista = new ArrayList<Participa>();
         Connection con = Conexao.getConnection();
         String sql = "SELECT \n"
                 + "	* ,\n"
@@ -83,15 +82,10 @@ public class BuscaDAO {
             Genero genero = new Genero();
             genero.setIdGenero(rs.getInt("idGenero"));
             genero.setNome(rs.getString("nomeGenero"));
-
-            Busca busca = new Busca();
-            busca.setArtista(artista);
-            busca.setScore(score);
-            busca.setMusica(musica);
-            busca.setParticipa(participa);
-            busca.setAlbum(album);
-            busca.setGenero(genero);
-            lista.add(busca);
+            
+            musica.setAlbum(album);
+            musica.setGenero(genero);
+            lista.add(participa);
         }
         stmt.close();
         rs.close();
