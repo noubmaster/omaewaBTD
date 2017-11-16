@@ -15,7 +15,9 @@ function bloquear() {
             currentPath === "/omaewa/cadastroMusicaT.xhtml" ||
             currentPath === "/omaewa/cadastroMusicaT.xhtml#" ||
             currentPath === "/omaewa/manutencaoUser.xhtml" ||
-            currentPath === "/omaewa/manutencaoUser.xhtml#") {
+            currentPath === "/omaewa/manutencaoUser.xhtml#" ||
+            currentPath === "/omaewa/manutencaoAvaliacoes.xhtml" ||
+            currentPath === "/omaewa/manutencaoAvaliacoes.xhtml#") {
         tipo = document.getElementById("f1:tipoUser").value;
         if (tipo === "0" || tipo === "1") {
             block.style.display = "none";
