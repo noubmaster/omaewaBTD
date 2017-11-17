@@ -16,7 +16,7 @@
         <meta name="google-signin-client_id" content="488287116710-mg5d2db5prvt3gep4l6a037k2jclguoa.apps.googleusercontent.com"/>
         <script src="https://apis.google.com/js/platform.js" async="async"></script>
         <link rel="icon" href="resources/png/favicon.png"/>
-        <title>Cadastro de Albums</title>
+        <title>Cadastro de Álbuns</title>
         <link rel="stylesheet" href="resources/css/fonte.css"/>
         <link rel="stylesheet" href="resources/css/navbarC.css"/>
         <link rel="stylesheet" href="resources/css/lista.css"/>
@@ -63,7 +63,7 @@
                                              update=":memes:myMemes"
                                              immediate="true" /></li>
                         <li class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
+                            <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Opções
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li><a href="#" onclick="signOut();">Sign out</a></li>
@@ -111,8 +111,8 @@
                 <div class="row">
                     <div class="col-sm-3 col-md-2 sidebar">
                         <ul class="nav nav-sidebar">
-                            <li><a href="/omaewa/cadastroGeneroT.xhtml">Cadastro de Generos</a></li>
-                            <li class="active"><a href="#">Cadastro de Albuns<span class="sr-only">(current)</span></a></li>
+                            <li><a href="/omaewa/cadastroGeneroT.xhtml">Cadastro de Gêneros</a></li>
+                            <li class="active"><a href="#">Cadastro de Álbuns<span class="sr-only">(current)</span></a></li>
                             <li><a href="/omaewa/cadastroArtistaT.xhtml">Cadastro de Artistas</a></li>
                             <li><a href="/omaewa/cadastroMusicaT.xhtml">Cadastro de Músicas</a></li>
                             <li><a href="/omaewa/manutencaoAvaliacoes.xhtml">Manutenção de Avaliações</a></li>
@@ -123,7 +123,7 @@
                     </div>
                     <h:form id="tabelaAlbum">
                         <div class="col-sm-6 col-sm-offset-3 col-md-9 col-md-offset-2 main">
-                            <h1 class="page-header" style="display: inline">Cadastro de Albums</h1>
+                            <h1 class="page-header" style="display: inline">Cadastro de Álbuns</h1>
                         </div>
                         <!-- Botao do Modal de cadastro -->
                         <p:commandLink value="Novo" 
@@ -201,14 +201,14 @@
                         </div>
                         <div class="modal-body">
                             <h:panelGrid columns="2" id="painel">
-                                <label for="nome">Nome do Album: </label>
+                                <label for="nome">Nome do Álbum: </label>
                                 <p:inputText id="nome"
                                              required="true"
                                              maxlength="30"
                                              value="#{albumControle.album.nomeAlbum}"/>
-                                <label for="ano">Ano do Album: </label>
+                                <label for="ano">Ano do Álbum: </label>
                                 <p:spinner id="faixa" value="#{albumControle.album.ano}" min="1910" />
-                                <label for="capa">Url da Capa do Album: </label>
+                                <label for="capa">Url da Capa do Álbum: </label>
                                 <p:inputText id="capa"
                                              required="true"
                                              value="#{albumControle.album.capa}"/>

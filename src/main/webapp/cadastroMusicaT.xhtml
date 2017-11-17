@@ -64,7 +64,7 @@
                                              update=":memes:myMemes"
                                              immediate="true" /></li>
                         <li class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Options
+                            <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Opções
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li><a href="#" onclick="signOut();">Sign out</a></li>
@@ -112,8 +112,8 @@
                 <div class="row">
                     <div class="col-sm-3 col-md-2 sidebar">
                         <ul class="nav nav-sidebar">
-                            <li><a href="/omaewa/cadastroGeneroT.xhtml">Cadastro de Generos</a></li>
-                            <li><a href="/omaewa/cadastroAlbumT.xhtml">Cadastro de Albuns</a></li>
+                            <li><a href="/omaewa/cadastroGeneroT.xhtml">Cadastro de Gêneros</a></li>
+                            <li><a href="/omaewa/cadastroAlbumT.xhtml">Cadastro de Álbuns</a></li>
                             <li><a href="/omaewa/cadastroArtistaT.xhtml">Cadastro de Artistas</a></li>
                             <li class="active"><a href="#">Cadastro de Músicas<span class="sr-only">(current)</span></a></li>
                             <li><a href="/omaewa/manutencaoAvaliacoes.xhtml">Manutenção de Avaliações</a></li>
@@ -144,8 +144,8 @@
                                         <tr>
                                             <th>Faixa</th>
                                             <th>Nomes</th>
-                                            <th>Album</th>
-                                            <th>Genero</th>
+                                            <th>Álbum</th>
+                                            <th>Gênero</th>
                                             <th>Opções</th>
                                         </tr>
                                     </thead>
@@ -226,7 +226,7 @@
                                     value="#{musicaControle.musica.nomeMusica}"></p:inputText>
                                 <label style="margin-right: 50px" for="faixa">Faixa</label>
                                 <p:spinner id="faixa" value="#{musicaControle.musica.faixa}" style="padding-right: 6px;" min="0" max="100" />
-                                <label for="genero">Genero</label>
+                                <label for="genero">Gênero</label>
                                 <h:selectOneMenu 
                                     style="width: 225px" 
                                     required="true" id="genero" 
@@ -235,7 +235,7 @@
                                     <f:selectItem itemValue="Selecione"/>
                                     <f:selectItems value="#{generoControle.generos}" var="aux" itemValue="#{aux.idGenero}" itemLabel="#{aux.nome}"></f:selectItems>
                                 </h:selectOneMenu>
-                                <label for="album">Albums</label>
+                                <label for="album">Álbuns</label>
                                 <h:selectOneMenu 
                                     style="width: 225px" 
                                     required="true" id="album" 
