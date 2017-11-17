@@ -74,6 +74,7 @@ public class ComposicaoControle {
                     ComposicaoDAO.inserir(composicao);
                 }
                 cId = null;
+            } catch (java.lang.NullPointerException e) {
             } catch (SQLException e) {
                 e.printStackTrace();
             }

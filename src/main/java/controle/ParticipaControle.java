@@ -81,6 +81,7 @@ public class ParticipaControle {
         } else {
             try {
                 ParticipaDAO.alterar(participa);
+            } catch (java.lang.NullPointerException e) {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
