@@ -139,6 +139,7 @@ public class AvaliacaoDAO {
             usuario.setIdUsuario(rs.getInt("idUsuario"));
             usuario.setEmail(rs.getString("email"));
             usuario.setIdR(rs.getString("idR"));
+            usuario.setNome(rs.getString("nome"));
             usuario.setTipo(rs.getInt("tipo"));
             usuario.setPerfil(rs.getString("perfil"));
 

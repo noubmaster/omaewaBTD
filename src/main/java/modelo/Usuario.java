@@ -11,7 +11,7 @@ package modelo;
 public class Usuario {
 
     private int idUsuario, tipo;
-    private String email, idR, perfil;
+    private String email, idR, perfil, nome;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -51,6 +51,14 @@ public class Usuario {
 
     public void setPerfil(String perfil) {
         this.perfil = perfil;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     

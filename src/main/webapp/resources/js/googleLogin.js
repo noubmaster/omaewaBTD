@@ -8,6 +8,7 @@ function onSignIn(googleUser) {
     var email = document.getElementById('f:email');
     var idR = document.getElementById('f:idR');
     var idR2 = document.getElementById('f1:idR');
+    var nome = document.getElementById('f:nome');
     var perfil = document.getElementById('f:perfil');
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
@@ -19,6 +20,7 @@ function onSignIn(googleUser) {
         email.value = profile.getEmail();
         idR.value = profile.getId();
         idR2.value = profile.getId();
+        nome.value = profile.getName();
         perfil.value = profile.getImageUrl();
         document.getElementById('f:registra').click();
         document.getElementById('f1:registra').click();

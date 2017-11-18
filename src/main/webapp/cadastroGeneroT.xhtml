@@ -82,14 +82,17 @@
         <div id="block" >
             <!-- Checagem de usuario -->
             <h:form id="f" style="display: none">
-                <h:inputText id="email" value="#{usuarioControle.usuario.email}"/>
-                <h:inputText id="idR" value="#{usuarioControle.usuario.idR}"/>
-                <h:inputText id="perfil" value="#{usuarioControle.usuario.perfil}"/>
-                <p:commandButton value="Salvar" 
-                                 id="registra"
-                                 class="btn btn-default"
-                                 action="#{usuarioControle.salvar}"
-                                 />
+                <p:panel id="panel">
+                    <p:inputText id="email" value="#{usuarioControle.usuario.email}"/>
+                    <p:inputText id="idR" value="#{usuarioControle.usuario.idR}"/>
+                    <p:inputText id="nome" value="#{usuarioControle.usuario.nome}"/>
+                    <p:inputText id="perfil" value="#{usuarioControle.usuario.perfil}"/>
+                    <p:commandButton value="Salvar" 
+                                     id="registra"
+                                     class="btn btn-default"
+                                     action="#{usuarioControle.salvar}">
+                    </p:commandButton>
+                </p:panel>
             </h:form>
             <h:form id="f1" style="display: none">
                 <p:inputText id="idR" value="#{usuarioControle.idR}"/>
@@ -255,7 +258,7 @@
             </div>
         </h:form>
         <!-- Fim Pagina de cadastro -->
-        
+
         <!-- botao do login parte 2 -->
         <div id="loginIfBlock" >
             <p:commandLink value="Log In"

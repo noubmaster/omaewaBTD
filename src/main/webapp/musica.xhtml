@@ -147,7 +147,7 @@
                                 <p:panel id="only3">
                                     <ui:repeat  value="#{avaliacaoControle.avaliacoes2}" var="a" varStatus="q">
                                         <img class="img-responsive" src="#{a.usuario.perfil}" style="width: 25px; height: 25px; display: inline;" />
-                                        <p style="display: inline;">#{a.usuario.email}</p>
+                                        <p style="display: inline;">#{a.usuario.nome}</p>
                                         <p:rating value="#{a.nota}" readonly="true"/>
                                         <p>#{a.comentario}</p>
                                         <br/>
@@ -196,6 +196,7 @@
                             <p:panel id="panel">
                                 <p:inputText id="email" value="#{usuarioControle.usuario.email}"/>
                                 <p:inputText id="idR" value="#{usuarioControle.usuario.idR}"/>
+                                <p:inputText id="nome" value="#{usuarioControle.usuario.nome}"/>
                                 <p:inputText id="perfil" value="#{usuarioControle.usuario.perfil}"/>
                                 <p:commandButton value="Salvar" 
                                                  id="registra"

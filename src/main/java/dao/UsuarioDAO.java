@@ -19,12 +19,12 @@ public class UsuarioDAO {
     public static void inserir(Usuario usuario) throws SQLException {
         Connection con = Conexao.getConnection();
         String sql
-                = "INSERT INTO `memes`.`usuario` (`email`, `idR`, `perfil`) VALUES (?, ?, ?);";
+                = "INSERT INTO `memes`.`usuario` (`email`, `nome`, `idR`, `perfil`,data) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP());";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, usuario.getEmail());
-        stmt.setString(2, usuario.getIdR());
-        stmt.setString(3, usuario.getPerfil());
-
+        stmt.setString(2, usuario.getNome());
+        stmt.setString(3, usuario.getIdR());
+        stmt.setString(4, usuario.getPerfil());
         stmt.execute();
         stmt.close();
         con.close();
@@ -69,13 +69,15 @@ public class UsuarioDAO {
     public static void alterar(Usuario usuario) throws SQLException {
         Connection con = Conexao.getConnection();
         String sql
-                = "UPDATE `memes`.`usuario` SET `email`=?, `idR`=?, `tipo`=?, `perfil`=? WHERE  `idUsuario`=?;";
+                = "UPDATE `memes`.`usuario` SET `email`=?, `nome`=?, `idR`=?, `tipo`=?, `perfil`=? WHERE  `idUsuario`=?;";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, usuario.getEmail());
+        stmt.setString(2, usuario.getNome());
         stmt.setString(2, usuario.getIdR());
-        stmt.setInt(3, usuario.getTipo());
-        stmt.setString(4, usuario.getPerfil());
-        stmt.setInt(5, usuario.getIdUsuario());
+        stmt.setString(3, usuario.getIdR());
+        stmt.setInt(4, usuario.getTipo());
+        stmt.setString(5, usuario.getPerfil());
+        stmt.setInt(6, usuario.getIdUsuario());
 
         stmt.execute();
         stmt.close();
@@ -104,6 +106,7 @@ public class UsuarioDAO {
             Usuario usuario = new Usuario();
             usuario.setIdUsuario(rs.getInt("idUsuario"));
             usuario.setEmail(rs.getString("email"));
+            usuario.setNome(rs.getString("nome"));
             usuario.setIdR(rs.getString("idR"));
             usuario.setTipo(rs.getInt("tipo"));
             usuario.setPerfil(rs.getString("perfil"));
