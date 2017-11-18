@@ -164,25 +164,24 @@
         <script src="resources/js/googleLogin.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
         <script>
-                    if (annyang) {
-                        // Let's define a command.
-                        var cSearch = {
-                            'search': function () {
-                                document.getElementById("busca:searchss").click();
+                    // choose language
+                    annyang.setLanguage('it-IT');
+// define commands in that language
+                    annyang.init(
+                            'it-IT': {
+                            'mi chiamo *name': sayHello
+                            },
+                            'en' : {
+                            'my name is *name': sayHello
                             }
-                        };
-                        var wSearch = {
-                            'write search': function () {
-                                vozes();
-                            }
-                        };
-                        // Add our commands to annyang
-                        annyang.addCommands(cSearch);
-                        annyang.addCommands(wSearch);
-                        
-
-                        // Start listening.
-                        annyang.start();
+                    });
+                    annyang.setLanguage('en');
+// now annyag recognizes English
+                    annyang.setLanguage('it-IT');
+// now annyag recognizes Italian
+                    // Start listening.
+                    if (annyang){
+                    annyang.start();
                     }
         </script>
         <script src="resources/js/buscaVox.js"></script>

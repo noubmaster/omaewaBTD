@@ -10,12 +10,17 @@ import javax.faces.bean.SessionScoped;
 import modelo.Usuario;
 import modelo.Score;
 import modelo.Musica;
+import modelo.Participa;
 
 @ManagedBean
 @SessionScoped
 public class ScoreControle {
 
     private List<Score> scores = new ArrayList<Score>();
+    private List<Participa> top3 = new ArrayList<Participa>();
+    private List<Participa> topS1 = new ArrayList<Participa>();
+    private List<Participa> totalMes = new ArrayList<Participa>();
+    private List<Participa> total10S = new ArrayList<Participa>();
     private List<Score> scores2 = new ArrayList<Score>();
     private Score score = new Score();
     private boolean salvar = true;
@@ -35,7 +40,10 @@ public class ScoreControle {
     @PostConstruct
     public void atualizaAvaliacoes() {
         try {
-            scores = ScoreDAO.getLista();
+            top3 = ScoreDAO.getListaTop3();
+            totalMes = ScoreDAO.getListaTotalMes();
+            topS1 = ScoreDAO.getListaTopSempre1();
+            total10S = ScoreDAO.getListaTop10Sempre();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,7 +61,7 @@ public class ScoreControle {
             idMusica = this.idMusica;
             idUsuario = this.idUsuario;
             scoreSet = ScoreDAO.socoreGet(idMusica, idUsuario);
-            if(scoreSet == 1){
+            if (scoreSet == 1) {
                 disable = false;
             } else {
                 disable = true;
@@ -155,6 +163,38 @@ public class ScoreControle {
 
     public void setDisable(boolean disable) {
         this.disable = disable;
+    }
+
+    public List<Participa> getTop3() {
+        return top3;
+    }
+
+    public void setTop3(List<Participa> top3) {
+        this.top3 = top3;
+    }
+
+    public List<Participa> getTotalMes() {
+        return totalMes;
+    }
+
+    public void setTotalMes(List<Participa> totalMes) {
+        this.totalMes = totalMes;
+    }
+
+    public List<Participa> getTopS1() {
+        return topS1;
+    }
+
+    public void setTopS1(List<Participa> topS1) {
+        this.topS1 = topS1;
+    }
+
+    public List<Participa> getTotal10S() {
+        return total10S;
+    }
+
+    public void setTotal10S(List<Participa> total10S) {
+        this.total10S = total10S;
     }
 
 }

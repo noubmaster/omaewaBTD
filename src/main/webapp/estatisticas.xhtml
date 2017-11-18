@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <link rel="stylesheet" href="resources/css/estiloPrimefaces.css"/>
+        <link rel="stylesheet" href="resources/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="resources/font-awesome/css/font-awesome.min.css"/>
+        <meta name="google-signin-client_id" content="488287116710-mg5d2db5prvt3gep4l6a037k2jclguoa.apps.googleusercontent.com"/>
+        <script src="https://apis.google.com/js/platform.js" async="async"></script>
+        <link rel="icon" href="resources/png/favicon.png"/>
+        <title>Estatísticas</title>
+        <link rel="stylesheet" href="resources/css/fonte.css"/>
+        <link rel="stylesheet" href="resources/css/results.css"/>
+        <link rel="stylesheet" href="resources/css/navbar.css"/>
+        <link rel="stylesheet" href="resources/css/footerR.css"/>
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/omaewa/home.xhtml">BTheD</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                    <div class="navbar-form navbar-left">
+                        <ul class="nav navbar-nav">
+                            <li><h:form id="busca">
+                                    <div class="input-group">
+                                        <p:inputText id="txt" value="#{buscaControle.webInput}" placeholder="Search" class="form-control"/>
+                                        <span class="input-group-btn">
+                                            <p:commandLink onclick="vozes()" class="btn btn-danger btn-outline"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
+                                            <h:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" action="index.xhtml" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></h:commandLink>
+                                        </span>
+                                    </div>
+                                </h:form></li>
+                        </ul>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav">
+                            <li><p:commandButton value="Log In" 
+                                                 id="login"
+                                                 styleClass="btn btn-default" 
+                                                 style=" margin-top: 6px; padding: 6px 0px 6px 0px; margin-right: 6px;"
+                                                 onclick="$('#myModal').modal('show');"
+                                                 update=":memes:myMemes"
+                                                 immediate="true" /></li>
+                            <li class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Opções
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#" onclick="signOut();">Sign out</a></li>
+                                    <div class="admUser" style="display: none">
+                                        <li class="divider"></li>
+                                    </div>
+                                    <li class="admUser" style="display: none"><a href="/omaewa/cadastroT.xhtml">Administração</a></li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div class="container">
+            <div id="block" >
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h2 class="page-header text-center">Mais Likes no mês</h2>
+                                <ui:repeat value="#{scoreControle.top3}" var="a" varStatus="q">
+                                    <h:form id="dadosMusica">
+                                        <div class="placeholder">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <img src="#{a.musica.album.capa}" width="62" height="62" class="img-responsive" alt="Generic placeholder thumbnail" style="float: left"/>
+                                                    <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica, a.artista.idArtista)}"><h4>#{a.musica.nomeMusica}</h4></h:commandLink>
+                                                    <h6 class="text-muted">
+                                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(a.artista.idArtista)}">#{a.artista.nomeArtista}</h:commandLink>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </ui:repeat>
+                                <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#total-scoreM">Lista Comlpeta</button>
+                                <div id="total-scoreM" class="collapse">
+                                    <ui:repeat value="#{scoreControle.totalMes}" var="a" varStatus="q">
+                                        <h:form id="dadosMusica">
+                                            <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica, a.artista.idArtista)}"><h4 style="display: inline">#{a.musica.nomeMusica}</h4></h:commandLink>
+                                            <h6 class="text-muted" style="display: inline;">
+                                                <h:commandLink class="text-muted" style="float: right;" action="#{buscaControle.getArtistaRedirect(a.artista.idArtista)}">#{a.artista.nomeArtista}</h:commandLink>
+                                            </h6>
+                                        </h:form>
+                                    </ui:repeat>
+                                </div>
+                                <h3 class="page-header text-center">Mais Likes de sempre</h3>
+                                <ui:repeat value="#{scoreControle.topS1}" var="a" varStatus="q">
+                                    <h:form id="dadosMusica">
+                                        <div class="placeholder">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <img src="#{a.musica.album.capa}" width="62" height="62" class="img-responsive" alt="Generic placeholder thumbnail" style="float: left"/>
+                                                    <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica, a.artista.idArtista)}"><h4>#{a.musica.nomeMusica}</h4></h:commandLink>
+                                                    <h6 class="text-muted">
+                                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(a.artista.idArtista)}">#{a.artista.nomeArtista}</h:commandLink>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </ui:repeat>
+                                <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#total-scoreS">Lista Comlpeta</button>
+                                <div id="total-scoreS" class="collapse">
+                                    <ui:repeat value="#{scoreControle.total10S}" var="a" varStatus="q">
+                                        <h:form id="dadosMusica">
+                                            <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica, a.artista.idArtista)}"><h4 style="display: inline">#{a.musica.nomeMusica}</h4></h:commandLink>
+                                            <h6 class="text-muted" style="display: inline;">
+                                                <h:commandLink class="text-muted" style="float: right;" action="#{buscaControle.getArtistaRedirect(a.artista.idArtista)}">#{a.artista.nomeArtista}</h:commandLink>
+                                            </h6>
+                                        </h:form>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h2 class="page-header text-center">Mais Comentadas no mês</h2>
+                                <ui:repeat value="#{avaliacaoControle.top3}" var="a" varStatus="q">
+                                    <h:form id="dadosMusica">
+                                        <div class="placeholder">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <img src="#{a.musica.album.capa}" width="62" height="62" class="img-responsive" alt="Generic placeholder thumbnail" style="float: left"/>
+                                                    <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica, a.artista.idArtista)}"><h4>#{a.musica.nomeMusica}</h4></h:commandLink>
+                                                    <h6 class="text-muted">
+                                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(a.artista.idArtista)}">#{a.artista.nomeArtista}</h:commandLink>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </ui:repeat>
+                                <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#total-comentsM">Lista Comlpeta</button>
+                                <div id="total-comentsM" class="collapse">
+                                    <ui:repeat value="#{avaliacaoControle.totalMes}" var="a" varStatus="q">
+                                        <h:form id="dadosMusica">
+                                            <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica, a.artista.idArtista)}"><h4 style="display: inline">#{a.musica.nomeMusica}</h4></h:commandLink>
+                                            <h6 class="text-muted" style="display: inline;">
+                                                <h:commandLink class="text-muted" style="float: right;" action="#{buscaControle.getArtistaRedirect(a.artista.idArtista)}">#{a.artista.nomeArtista}</h:commandLink>
+                                            </h6>
+                                        </h:form>
+                                    </ui:repeat>
+                                </div>
+                                <h3 class="page-header text-center">Mais Comentadas de sempre</h3>
+                                <ui:repeat value="#{avaliacaoControle.topS1}" var="a" varStatus="q">
+                                    <h:form id="dadosMusica">
+                                        <div class="placeholder">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <img src="#{a.musica.album.capa}" width="62" height="62" class="img-responsive" alt="Generic placeholder thumbnail" style="float: left"/>
+                                                    <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica, a.artista.idArtista)}"><h4>#{a.musica.nomeMusica}</h4></h:commandLink>
+                                                    <h6 class="text-muted">
+                                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(a.artista.idArtista)}">#{a.artista.nomeArtista}</h:commandLink>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </ui:repeat>
+                                <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#total-comentsS">Lista Comlpeta</button>
+                                <div id="total-comentsS" class="collapse">
+                                    <ui:repeat value="#{avaliacaoControle.total10S}" var="a" varStatus="q">
+                                        <h:form id="dadosMusica">
+                                            <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica, a.artista.idArtista)}"><h4 style="display: inline">#{a.musica.nomeMusica}</h4></h:commandLink>
+                                            <h6 class="text-muted" style="display: inline;">
+                                                <h:commandLink class="text-muted" style="float: right;" action="#{buscaControle.getArtistaRedirect(a.artista.idArtista)}">#{a.artista.nomeArtista}</h:commandLink>
+                                            </h6>
+                                        </h:form>
+                                    </ui:repeat>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h2 class="page-header text-center">Top Likes do mês</h2>
+                                <ui:repeat value="#{scoreControle.top3}" var="a" varStatus="q">
+                                    <h:form id="dadosMusica">
+                                        <div class="placeholder">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <img src="#{a.musica.album.capa}" width="62" height="62" class="img-responsive" alt="Generic placeholder thumbnail" style="float: left"/>
+                                                    <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica, a.artista.idArtista)}"><h4>#{a.musica.nomeMusica}</h4></h:commandLink>
+                                                    <h6 class="text-muted">
+                                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(a.artista.idArtista)}">#{a.artista.nomeArtista}</h:commandLink>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </ui:repeat>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checagem de usuario -->
+                <h:form id="f" style="display: none">
+                    <p:panel id="panel">
+                        <p:inputText id="email" value="#{usuarioControle.usuario.email}"/>
+                        <p:inputText id="idR" value="#{usuarioControle.usuario.idR}"/>
+                        <p:inputText id="perfil" value="#{usuarioControle.usuario.perfil}"/>
+                        <p:commandButton value="Salvar" 
+                                         id="registra"
+                                         class="btn btn-default"
+                                         action="#{usuarioControle.salvar}">
+                        </p:commandButton>
+                    </p:panel>
+                </h:form>
+                <h:form id="f1" style="display: none">
+                    <p:panel id="panel">
+                        <p:inputText id="tipoUser" value="#{usuarioControle.tipo}"/>
+                        <p:inputText id="idR" value="#{usuarioControle.idR}"/>
+                        <p:commandButton value="Salvar" 
+                                         id="registra"
+                                         class="btn btn-default"
+                                         update="f1"
+                                         actionListener="#{usuarioControle.pegerIdR()}">
+                        </p:commandButton>
+                    </p:panel>
+                </h:form>
+                <h:form id="fodasse" style="display: none">
+                    <p:commandButton value="fodasse"
+                                     id="fodasse"
+                                     update="fodasse"
+                                     action="#{usuarioControle.nullar()}"/>
+                </h:form>
+            </div>
+            <!-- botao do login parte 2 -->
+            <div id="loginIfBlock" style="display: none">
+                <p:commandLink value="Log In"
+                               styleClass="btn btn-default" 
+                               style="padding: 8px; margin-top: 6px; margin-right: 6px;"
+                               onclick="$('#myModal').modal('show');"
+                               update=":memes:myMemes"
+                               immediate="true" />
+                <a href="#" onclick="signOut();">Sign out</a>
+            </div>
+            <!-- MODAL LOGIN -->
+            <h:form id="memes">
+                <div class="modal fade" 
+                     id="myModal"
+                     tabindex="-1" role="dialog"
+                     aria-labelledby="myModal" 
+                     aria-hidden="true" 
+                     data-keyboard="false" 
+                     data-backdrop="static">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <h:form id="myMemes">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&#215;</button>
+                                    <h4 class="modal-title">Login</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="g-signin2" style="margin-left: 25%" data-onsuccess="onSignIn">
+                                    </div>
+                                </div>
+                                <h:panelGroup layout="block" styleClass="modal-footer">
+                                    <p:commandLink value="Close" immediate="true" styleClass="btn btn-default" oncomplete="$('#myModal').modal('hide');" />
+                                </h:panelGroup>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid text-center">
+                <a href="/omaewa/home.xhtml">BitesTheDust</a>
+            </div>
+        </footer>
+        <script src="resources/js/dimLetras.js"></script>
+        <script src="resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <script src="resources/js/admBlock.js"></script>
+        <script src="resources/js/pageBlock.js"></script>
+        <script src="resources/js/googleLogin.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+        <script src="resources/js/buscaVox.js"></script>
+    </h:body>
+</html>

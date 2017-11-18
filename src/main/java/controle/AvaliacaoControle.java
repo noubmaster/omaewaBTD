@@ -10,12 +10,17 @@ import javax.faces.bean.SessionScoped;
 import modelo.Usuario;
 import modelo.Avaliacao;
 import modelo.Musica;
+import modelo.Participa;
 
 @ManagedBean
 @SessionScoped
 public class AvaliacaoControle {
 
     private List<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
+    private List<Participa> top3 = new ArrayList<Participa>();
+    private List<Participa> topS1 = new ArrayList<Participa>();
+    private List<Participa> totalMes = new ArrayList<Participa>();
+    private List<Participa> total10S = new ArrayList<Participa>();
     private List<Avaliacao> avaliacoes2 = new ArrayList<Avaliacao>();
     private Avaliacao avaliacao = new Avaliacao();
     private boolean salvar = true;
@@ -37,6 +42,10 @@ public class AvaliacaoControle {
     public void atualizaAvaliacoes() {
         try {
             avaliacoes = AvaliacaoDAO.getListaAvaliacoesRevisao();
+            top3 = AvaliacaoDAO.getListaTop3();
+            topS1 = AvaliacaoDAO.getListaTopSempre1();
+            totalMes = AvaliacaoDAO.getListaTotalMes();
+            total10S = AvaliacaoDAO.getListaTop10Sempre();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,6 +66,7 @@ public class AvaliacaoControle {
         }
 
     }
+
     public void verificar(int user) {
         user = iduserLogado;
         switch (user) {
@@ -173,6 +183,38 @@ public class AvaliacaoControle {
 
     public void setPlaceholder(String placeholder) {
         this.placeholder = placeholder;
+    }
+
+    public List<Participa> getTop3() {
+        return top3;
+    }
+
+    public void setTop3(List<Participa> top3) {
+        this.top3 = top3;
+    }
+
+    public List<Participa> getTotalMes() {
+        return totalMes;
+    }
+
+    public void setTotalMes(List<Participa> totalMes) {
+        this.totalMes = totalMes;
+    }
+
+    public List<Participa> getTopS1() {
+        return topS1;
+    }
+
+    public void setTopS3(List<Participa> topS1) {
+        this.topS1 = topS1;
+    }
+
+    public List<Participa> getTotal10S() {
+        return total10S;
+    }
+
+    public void setTotal10S(List<Participa> total10S) {
+        this.total10S = total10S;
     }
 
 }
