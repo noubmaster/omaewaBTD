@@ -197,22 +197,9 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <h2 class="page-header text-center">Top Likes do mês</h2>
-                                <ui:repeat value="#{scoreControle.top3}" var="a" varStatus="q">
-                                    <h:form id="dadosMusica">
-                                        <div class="placeholder">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <img src="#{a.musica.album.capa}" width="62" height="62" class="img-responsive" alt="Generic placeholder thumbnail" style="float: left"/>
-                                                    <h:commandLink action="#{buscaControle.getMusicaRedirect(a.musica.idMusica, a.artista.idArtista)}"><h4>#{a.musica.nomeMusica}</h4></h:commandLink>
-                                                    <h6 class="text-muted">
-                                                        <h:commandLink class="text-muted" action="#{buscaControle.getArtistaRedirect(a.artista.idArtista)}">#{a.artista.nomeArtista}</h:commandLink>
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </h:form>
-                                </ui:repeat>
+                                <h2 class="page-header text-center">Outras Estatísticas</h2>
+                                <h3 style="display: inline;">Usuários Novos no mês:</h3>
+                                <h3 style="display: inline; margin-left: 40px;" class="text-muted">#{usuarioControle.quantidadeMes}</h3>
                             </div>
                         </div>
                     </div>

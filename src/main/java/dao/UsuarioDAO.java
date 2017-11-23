@@ -47,7 +47,7 @@ public class UsuarioDAO {
 
         return lista;
     }
-    
+
     public static List<Usuario> getId(Usuario usuario) throws SQLException {
         List<Usuario> lista = new ArrayList<Usuario>();
         Connection con = Conexao.getConnection();
@@ -65,7 +65,7 @@ public class UsuarioDAO {
 
         return lista;
     }
-    
+
     public static void alterar(Usuario usuario) throws SQLException {
         Connection con = Conexao.getConnection();
         String sql
@@ -94,6 +94,26 @@ public class UsuarioDAO {
         stmt.execute();
         stmt.close();
         con.close();
+    }
+
+    public static int getQuantidadeMes() throws SQLException {
+        int quantidade = 0;
+        Connection con = Conexao.getConnection();
+        String sql = "SELECT\n"
+                + "	count(*) as 'quantidade'\n"
+                + "FROM\n"
+                + "	usuario us\n"
+                + "WHERE\n"
+                + "	year(curdate()) = year(us.data) AND\n"
+                + "	month(curdate()) = month(us.data);";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        rs.first();
+        quantidade = rs.getInt("quantidade");
+        stmt.close();
+        rs.close();
+        con.close();
+        return quantidade;
     }
 
     public static List<Usuario> getLista() throws SQLException {

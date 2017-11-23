@@ -21,6 +21,7 @@ public class UsuarioControle {
     private Usuario usuario = new Usuario();
     private boolean salvar = true;
     private String idR = null;
+    private int quantidadeMes = 0;
     private int tipo = 0;
     private int idUsuario = 0;
 
@@ -28,6 +29,7 @@ public class UsuarioControle {
     public void atualizarUsuarios() {
         try {
             usuarios = UsuarioDAO.getLista();
+            quantidadeMes = UsuarioDAO.getQuantidadeMes();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -132,6 +134,14 @@ public class UsuarioControle {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public int getQuantidadeMes() {
+        return quantidadeMes;
+    }
+
+    public void setQuantidadeMes(int quantidadeMes) {
+        this.quantidadeMes = quantidadeMes;
     }
 
 }
