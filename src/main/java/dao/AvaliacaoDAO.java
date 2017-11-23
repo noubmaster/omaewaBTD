@@ -371,7 +371,9 @@ public class AvaliacaoDAO {
                 + "GROUP BY\n"
                 + "	m.idMusica\n"
                 + "ORDER BY\n"
-                + "	avaliacao DESC;";
+                + "	avaliacao DESC\n"
+                + "LIMIT\n"
+                + "     10;";
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {

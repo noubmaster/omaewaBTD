@@ -312,7 +312,9 @@ public class ScoreDAO {
                 + "GROUP BY\n"
                 + "	m.idMusica\n"
                 + "ORDER BY\n"
-                + "	score DESC;";
+                + "	score DESC\n"
+                + "LIMIT\n"
+                + "     10;";
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
