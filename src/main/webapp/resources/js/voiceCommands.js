@@ -1,14 +1,35 @@
+/* global validacao */
+
 if (annyang) {
-    // Let's define our first command. First the text we expect, and then the function it should call
-    var commands = {
-        'show tps report': function () {
-            console.log("fodasse");
+    // Let's define a command.
+    console.log(validacao);
+    var logar = {
+        'login': function () {
+            $('#myModal').modal('show');
         }
     };
-
+    var logOut = {
+        'sign out': function () {
+            console.log('sign out');
+            signOut();
+        }
+    };
+    var cSearch = {
+        'search': function () {
+            document.getElementById("busca:searchss").click();
+        }
+    };
+    var wSearch = {
+        'write search': function () {
+            vozes();
+        }
+    };
     // Add our commands to annyang
-    annyang.addCommands(commands);
+    annyang.addCommands(cSearch);
+    annyang.addCommands(wSearch);
+    annyang.addCommands(logar);
+    annyang.addCommands(logOut);
 
-    // Start listening. You can call this here, or attach this call to an event, button, etc.
+    // Start listening.
     annyang.start();
 }

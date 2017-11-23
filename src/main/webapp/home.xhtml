@@ -164,27 +164,7 @@
         <script src="resources/js/pageBlock.js"></script>
         <script src="resources/js/googleLogin.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
-        <script>
-                    // choose language
-                    annyang.setLanguage('it-IT');
-// define commands in that language
-                    annyang.init(
-                            'it-IT': {
-                            'mi chiamo *name': sayHello
-                            },
-                            'en' : {
-                            'my name is *name': sayHello
-                            }
-                    });
-                    annyang.setLanguage('en');
-// now annyag recognizes English
-                    annyang.setLanguage('it-IT');
-// now annyag recognizes Italian
-                    // Start listening.
-                    if (annyang){
-                    annyang.start();
-                    }
-        </script>
+        <script src="resources/js/voiceCommands.js"></script>
         <script src="resources/js/buscaVox.js"></script>
     </h:body>
 </html>

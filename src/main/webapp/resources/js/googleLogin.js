@@ -1,8 +1,8 @@
-/* global admin, bloquear */
+/* global admin, bloquear, ifverifica */
 var currentPath = window.location.pathname;
 var login = document.getElementById("login");
 var optionsUser = document.getElementById("optionsUser");
-
+var validacao = "0";
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     var email = document.getElementById('f:email');
@@ -13,6 +13,7 @@ function onSignIn(googleUser) {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    validacao = profile.getId();
     if (profile.getId() !== null) {
         login.style.display = "none";
         optionsUser.style.display = "inline";
