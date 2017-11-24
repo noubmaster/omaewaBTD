@@ -1,8 +1,7 @@
-/* global admin, bloquear, ifverifica */
+/* global admin, bloquear, ifverifica, logado, desLogado */
 var currentPath = window.location.pathname;
 var login = document.getElementById("login");
 var optionsUser = document.getElementById("optionsUser");
-var validacao = "0";
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     var email = document.getElementById('f:email');
@@ -28,6 +27,7 @@ function onSignIn(googleUser) {
     }
     setTimeout(admin, 1000);
     setTimeout(bloquear, 1000);
+    setTimeout(logado, 1001);
     $('#myModal').modal('hide');
 }
 function signOut() {

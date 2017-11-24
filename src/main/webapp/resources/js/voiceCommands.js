@@ -1,8 +1,5 @@
-/* global validacao */
-
 if (annyang) {
     // Let's define a command.
-    console.log(validacao);
     var logar = {
         'login': function () {
             $('#myModal').modal('show');
@@ -37,8 +34,10 @@ if (annyang) {
     // Add our commands to annyang
     annyang.addCommands(cSearch);
     annyang.addCommands(wSearch);
-    annyang.addCommands(logar);
-    annyang.addCommands(logOut);
+    function logado() {
+        annyang.removeCommands(logar);
+        annyang.addCommands(logOut);
+    }
     annyang.addCommands(back);
     annyang.addCommands(backS);
 
