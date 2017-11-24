@@ -19,6 +19,16 @@ if (annyang) {
             document.getElementById("busca:searchss").click();
         }
     };
+    var back = {
+        'return': function () {
+            window.history.back();
+        }
+    };
+    var backS = {
+        'return home': function () {
+            document.location.href = "/omaewa/home.xhtml";
+        }
+    };
     var wSearch = {
         'write search': function () {
             vozes();
@@ -29,6 +39,8 @@ if (annyang) {
     annyang.addCommands(wSearch);
     annyang.addCommands(logar);
     annyang.addCommands(logOut);
+    annyang.addCommands(back);
+    annyang.addCommands(backS);
 
     // Start listening.
     annyang.start();

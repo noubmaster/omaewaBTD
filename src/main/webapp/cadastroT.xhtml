@@ -49,7 +49,7 @@
                                         <p:inputText id="txt" value="#{buscaControle.webInput}" placeholder="Search" class="form-control"/>
                                         <span class="input-group-btn">
                                             <p:commandLink onclick="vozes()" class="btn btn-primary btn-outline btn-info"><i class="fa fa-microphone" aria-hidden="true"></i></p:commandLink>
-                                            <h:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" action="index.xhtml" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></h:commandLink>
+                                            <h:commandLink style="box-shadow: none;" actionListener="#{buscaControle.buscar}" id="searchss" action="index.xhtml" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></h:commandLink>
                                         </span>
                                     </div>
                                 </h:form></li>
@@ -214,6 +214,7 @@
         <script src="resources/js/pageBlock.js"></script>
         <script src="resources/js/googleLogin.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+        <script src="resources/js/voiceCommands.js"></script>
         <script src="resources/js/buscaVox.js"></script>
     </h:body>
 </html>
