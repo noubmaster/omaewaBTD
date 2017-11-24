@@ -26,6 +26,7 @@ public class AvaliacaoControle {
     private boolean salvar = true;
     private boolean logado = true;
     private String placeholder;
+    private int quantidadeMes = 0;
     private int iduserLogado = 0;
     private int idUsuario = 0;
     private int idMusica = 0;
@@ -46,6 +47,7 @@ public class AvaliacaoControle {
             topS1 = AvaliacaoDAO.getListaTopSempre1();
             totalMes = AvaliacaoDAO.getListaTotalMes();
             total10S = AvaliacaoDAO.getListaTop10Sempre();
+            quantidadeMes = AvaliacaoDAO.getQuantidadeMes();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -215,6 +217,14 @@ public class AvaliacaoControle {
 
     public void setTotal10S(List<Participa> total10S) {
         this.total10S = total10S;
+    }
+
+    public int getQuantidadeMes() {
+        return quantidadeMes;
+    }
+
+    public void setQuantidadeMes(int quantidadeMes) {
+        this.quantidadeMes = quantidadeMes;
     }
 
 }

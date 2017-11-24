@@ -58,6 +58,26 @@ public class ScoreDAO {
         con.close();
     }
 
+    public static int getQuantidadeMes() throws SQLException {
+        int quantidade = 0;
+        Connection con = Conexao.getConnection();
+        String sql = "SELECT\n"
+                + "                	count(*) as 'quantidade'\n"
+                + "                FROM\n"
+                + "                	score sc\n"
+                + "                WHERE\n"
+                + "                	year(curdate()) = year(sc.data) AND\n"
+                + "                	month(curdate()) = month(sc.data);";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        rs.first();
+        quantidade = rs.getInt("quantidade");
+        stmt.close();
+        rs.close();
+        con.close();
+        return quantidade;
+    }
+
     public static int socoreGet(int idMusica, int idUsuario) throws SQLException {
         int getS = 0;
         List<Score> lista = new ArrayList<Score>();
@@ -160,7 +180,7 @@ public class ScoreDAO {
 
         return lista;
     }
-    
+
     public static List<Participa> getListaTopSempre1() throws SQLException {
         List<Participa> lista = new ArrayList<Participa>();
         Connection con = Conexao.getConnection();
@@ -220,7 +240,7 @@ public class ScoreDAO {
 
         return lista;
     }
-    
+
     public static List<Participa> getListaTop3() throws SQLException {
         List<Participa> lista = new ArrayList<Participa>();
         Connection con = Conexao.getConnection();

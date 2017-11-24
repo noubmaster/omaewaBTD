@@ -198,8 +198,20 @@
                             </div>
                             <div class="col-md-4">
                                 <h2 class="page-header text-center">Outras Estatísticas</h2>
-                                <h3 style="display: inline;">Usuários Novos no mês:</h3>
-                                <h3 style="display: inline; margin-left: 40px;" class="text-muted">#{usuarioControle.quantidadeMes}</h3>
+                                <table>
+                                    <td>
+                                        <h3 >Usuários Novos no mês:</h3>
+                                        <h3 >Likes no mês:</h3>
+                                        <h3 >Avaliações no mês:</h3>
+                                    </td>
+                                    <td class="text-center">
+                                        <h3 class="text-muted">#{usuarioControle.quantidadeMes}</h3>
+                                        <h3 class="text-muted">#{scoreControle.quantidadeMes}</h3>
+                                        <h3 class="text-muted">#{avaliacaoControle.quantidadeMes}</h3>
+                                    </td>
+                                </table>
+
+
                             </div>
                         </div>
                     </div>

@@ -25,6 +25,7 @@ public class ScoreControle {
     private Score score = new Score();
     private boolean salvar = true;
     private boolean disable = true;
+    private int quantidadeMes = 0;
     private int idUsuario = 0;
     private int scoreSet = 0;
     private int idMusica = 0;
@@ -44,6 +45,7 @@ public class ScoreControle {
             totalMes = ScoreDAO.getListaTotalMes();
             topS1 = ScoreDAO.getListaTopSempre1();
             total10S = ScoreDAO.getListaTop10Sempre();
+            quantidadeMes = ScoreDAO.getQuantidadeMes();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -195,6 +197,14 @@ public class ScoreControle {
 
     public void setTotal10S(List<Participa> total10S) {
         this.total10S = total10S;
+    }
+
+    public int getQuantidadeMes() {
+        return quantidadeMes;
+    }
+
+    public void setQuantidadeMes(int quantidadeMes) {
+        this.quantidadeMes = quantidadeMes;
     }
 
 }
