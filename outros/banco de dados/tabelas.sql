@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `album` (
   PRIMARY KEY (`idAlbum`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.album: ~7 rows (aproximadamente)
+-- Copiando dados para a tabela memes.album: ~9 rows (aproximadamente)
 DELETE FROM `album`;
 /*!40000 ALTER TABLE `album` DISABLE KEYS */;
 INSERT INTO `album` (`idAlbum`, `nomeAlbum`, `ano`, `capa`) VALUES
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `artista` (
   PRIMARY KEY (`idArtista`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.artista: ~11 rows (aproximadamente)
+-- Copiando dados para a tabela memes.artista: ~13 rows (aproximadamente)
 DELETE FROM `artista`;
 /*!40000 ALTER TABLE `artista` DISABLE KEYS */;
 INSERT INTO `artista` (`idArtista`, `nomeArtista`, `foto`) VALUES
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `avaliacao` (
   `idAvaliacao` int(11) NOT NULL AUTO_INCREMENT,
   `nota` int(11) NOT NULL,
   `comentario` varchar(200) NOT NULL,
-  `revisao` bit(1) DEFAULT NULL,
+  `revisao` bit(1) NOT NULL DEFAULT b'0',
   `idMusicaAvaliacao` int(11) NOT NULL,
   `idUsuarioAvaliacao` int(11) NOT NULL,
   `data` datetime DEFAULT NULL,
@@ -85,9 +85,9 @@ CREATE TABLE IF NOT EXISTS `avaliacao` (
   KEY `fk_Avaliacao_Usuario1_idx` (`idUsuarioAvaliacao`),
   CONSTRAINT `fk_Avaliacao_Musica1` FOREIGN KEY (`idMusicaAvaliacao`) REFERENCES `musica` (`idMusica`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Avaliacao_Usuario1` FOREIGN KEY (`idUsuarioAvaliacao`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.avaliacao: ~80 rows (aproximadamente)
+-- Copiando dados para a tabela memes.avaliacao: ~83 rows (aproximadamente)
 DELETE FROM `avaliacao`;
 /*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
 INSERT INTO `avaliacao` (`idAvaliacao`, `nota`, `comentario`, `revisao`, `idMusicaAvaliacao`, `idUsuarioAvaliacao`, `data`) VALUES
@@ -152,25 +152,28 @@ INSERT INTO `avaliacao` (`idAvaliacao`, `nota`, `comentario`, `revisao`, `idMusi
 	(72, 4, 'asd', b'0', 20, 15, '2017-11-18 11:37:45'),
 	(73, 4, 'tem um erro na letra dessa musica na sexta linha', b'0', 13, 76, '2017-11-18 11:37:46'),
 	(74, 3, 'tem um erro na letra dessa musica na sexta linha', b'1', 13, 76, '2017-11-18 11:37:47'),
-	(75, 4, 'I can do better', NULL, 1, 187, '2017-11-18 19:30:58'),
-	(76, 4, 'I can do better', NULL, 13, 187, '2017-11-18 19:30:58'),
-	(77, 4, 'I can do better', NULL, 16, 187, '2017-11-18 19:30:58'),
-	(78, 4, 'I can do better', NULL, 17, 187, '2017-11-18 19:30:58'),
-	(79, 4, 'I can do better', NULL, 18, 187, '2017-11-18 19:30:58'),
-	(80, 4, 'I can do better', NULL, 19, 187, '2017-11-18 19:30:58'),
-	(81, 4, 'I can do better', NULL, 20, 187, '2017-11-18 19:30:58'),
-	(82, 4, 'I can do better', NULL, 21, 187, '2017-11-18 19:30:58'),
-	(83, 4, 'I can do better', NULL, 32, 187, '2017-11-18 19:30:58'),
-	(84, 4, 'I can do better', NULL, 33, 187, '2017-11-18 19:30:58'),
-	(85, 4, 'I can do better', NULL, 34, 187, '2017-11-18 19:30:58'),
-	(86, 4, 'I can do better', NULL, 35, 187, '2017-11-18 19:30:58'),
-	(87, 4, 'I can do better', NULL, 36, 187, '2017-11-18 19:30:58'),
-	(88, 4, 'I can do better', NULL, 37, 187, '2017-11-18 19:30:58'),
-	(89, 4, 'I can do better', NULL, 38, 187, '2017-11-18 19:30:58'),
-	(90, 4, 'I can do better', NULL, 39, 187, '2017-11-18 19:30:58'),
-	(91, 4, 'I can do better', NULL, 40, 187, '2017-11-18 19:30:58'),
-	(92, 4, 'I can do better', NULL, 14, 187, '2017-11-18 19:30:58'),
-	(93, 4, 'I can do better', NULL, 15, 187, '2017-11-18 19:30:58');
+	(75, 4, 'I can do better', b'0', 1, 187, '2017-11-18 19:30:58'),
+	(76, 4, 'I can do better', b'0', 13, 187, '2017-11-18 19:30:58'),
+	(77, 4, 'I can do better', b'0', 16, 187, '2017-11-18 19:30:58'),
+	(78, 4, 'I can do better', b'0', 17, 187, '2017-11-18 19:30:58'),
+	(79, 4, 'I can do better', b'0', 18, 187, '2017-11-18 19:30:58'),
+	(80, 4, 'I can do better', b'0', 19, 187, '2017-11-18 19:30:58'),
+	(81, 4, 'I can do better', b'0', 20, 187, '2017-11-18 19:30:58'),
+	(82, 4, 'I can do better', b'0', 21, 187, '2017-11-18 19:30:58'),
+	(83, 4, 'I can do better', b'0', 32, 187, '2017-11-18 19:30:58'),
+	(84, 4, 'I can do better', b'0', 33, 187, '2017-11-18 19:30:58'),
+	(85, 4, 'I can do better', b'0', 34, 187, '2017-11-18 19:30:58'),
+	(86, 4, 'I can do better', b'0', 35, 187, '2017-11-18 19:30:58'),
+	(87, 4, 'I can do better', b'0', 36, 187, '2017-11-18 19:30:58'),
+	(88, 4, 'I can do better', b'0', 37, 187, '2017-11-18 19:30:58'),
+	(89, 4, 'I can do better', b'0', 38, 187, '2017-11-18 19:30:58'),
+	(90, 4, 'I can do better', b'0', 39, 187, '2017-11-18 19:30:58'),
+	(91, 4, 'I can do better', b'0', 40, 187, '2017-11-18 19:30:58'),
+	(92, 4, 'I can do better', b'0', 14, 187, '2017-11-18 19:30:58'),
+	(93, 4, 'I can do better', b'0', 15, 187, '2017-11-18 19:30:58'),
+	(94, 5, 'i miss you freddie :(', b'0', 2, 205, '2017-11-18 19:51:39'),
+	(95, 5, 'i miss you 2 Bri :(', b'0', 2, 206, '2017-11-18 19:53:08'),
+	(96, 5, 'WTF', b'0', 2, 205, '2017-11-18 19:53:31');
 /*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela memes.composicao
@@ -185,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `composicao` (
   CONSTRAINT `fk_Artista_has_Musica_Musica1` FOREIGN KEY (`Musica_idMusica`) REFERENCES `musica` (`idMusica`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.composicao: ~40 rows (aproximadamente)
+-- Copiando dados para a tabela memes.composicao: ~44 rows (aproximadamente)
 DELETE FROM `composicao`;
 /*!40000 ALTER TABLE `composicao` DISABLE KEYS */;
 INSERT INTO `composicao` (`Artista_idArtista`, `Musica_idMusica`) VALUES
@@ -243,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `genero` (
   PRIMARY KEY (`idGenero`)
 ) ENGINE=InnoDB AUTO_INCREMENT=272 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.genero: ~50 rows (aproximadamente)
+-- Copiando dados para a tabela memes.genero: ~51 rows (aproximadamente)
 DELETE FROM `genero`;
 /*!40000 ALTER TABLE `genero` DISABLE KEYS */;
 INSERT INTO `genero` (`idGenero`, `nomeGenero`) VALUES
@@ -443,7 +446,7 @@ CREATE TABLE IF NOT EXISTS `score` (
   CONSTRAINT `idUsuarioScore` FOREIGN KEY (`idUsuarioScore`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.score: ~13 rows (aproximadamente)
+-- Copiando dados para a tabela memes.score: ~17 rows (aproximadamente)
 DELETE FROM `score`;
 /*!40000 ALTER TABLE `score` DISABLE KEYS */;
 INSERT INTO `score` (`idScore`, `idUsuarioScore`, `idMusicaScore`, `data`) VALUES
@@ -479,9 +482,9 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `idR` (`idR`)
-) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=207 DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela memes.usuario: ~6 rows (aproximadamente)
+-- Copiando dados para a tabela memes.usuario: ~8 rows (aproximadamente)
 DELETE FROM `usuario`;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` (`idUsuario`, `nome`, `email`, `idR`, `tipo`, `perfil`, `data`) VALUES
@@ -490,7 +493,9 @@ INSERT INTO `usuario` (`idUsuario`, `nome`, `email`, `idR`, `tipo`, `perfil`, `d
 	(76, 'Elisha PHP', 'elishaphp@gmail.com', '107170213645449942722', 2, 'https://lh5.googleusercontent.com/-eTfe1uR0mnE/AAAAAAAAAAI/AAAAAAAAAHw/w1BgcRuJhT0/s96-c/photo.jpg', '2017-10-18 19:03:53'),
 	(90, 'Eliseu PHP', 'eliseuphp@gmail.com', '112355985130332857702', 4, 'https://lh3.googleusercontent.com/-snpJLNdEd6U/AAAAAAAAAAI/AAAAAAAAAAA/ANQ0kf6AajMMtB2SqhbH0DZPBrDo3tojZQ/s96-c/photo.jpg', '2017-10-18 19:03:57'),
 	(184, 'hugo morete', 'zplaysgames@gmail.com', '113790802213871725270', 1, 'https://lh6.googleusercontent.com/--yBoPqV478E/AAAAAAAAAAI/AAAAAAAAAAA/ANQ0kf7A24aQ9ddbaSZIz9RWBTGFfRyVCA/s96-c/photo.jpg', '2017-11-18 19:13:26'),
-	(187, 'Yngwie Malmsteen', 'malmsteen@gmail.com', 'ovanhalenéomelhor', 1, 'http://www.arcadalive.com/wp-content/uploads/2017/02/YNGWIE.jpg', '2017-11-18 19:25:45');
+	(187, 'Yngwie Malmsteen', 'malmsteen@gmail.com', 'ovanhalenéomelhor', 1, 'http://www.arcadalive.com/wp-content/uploads/2017/02/YNGWIE.jpg', '2017-11-18 19:25:45'),
+	(205, 'Brian May', 'brianmay@gmail.com', 'hellobrianmay', 1, 'https://queenphotos.files.wordpress.com/2014/01/freddie-and-brian-crazy-little-thing-called-love-live-in-japan-1985.jpg?w=627&h=575', '2017-11-18 19:46:20'),
+	(206, 'Freddie Mercury', 'freddiemercury', 'freddiemercury', 1, 'https://www.biography.com/.image/t_share/MTE5NDg0MDU1MDY3MDY3OTE5/freddie-mercury-9406228-1-402.jpg', '2017-11-18 19:50:34');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
