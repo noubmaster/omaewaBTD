@@ -25,6 +25,7 @@ public class ScoreControle {
     private Score score = new Score();
     private boolean salvar = true;
     private boolean disable = true;
+    private boolean erro = false;
     private int quantidadeMes = 0;
     private int idUsuario = 0;
     private int scoreSet = 0;
@@ -49,6 +50,10 @@ public class ScoreControle {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void tirarErro() {
+        erro = false;
     }
 
     public void preparaIncluir() {
@@ -94,6 +99,8 @@ public class ScoreControle {
             try {
                 ScoreDAO.inserir(score);
                 score = new Score();
+            } catch (com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException e) {
+                erro = true;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -205,6 +212,14 @@ public class ScoreControle {
 
     public void setQuantidadeMes(int quantidadeMes) {
         this.quantidadeMes = quantidadeMes;
+    }
+
+    public boolean isErro() {
+        return erro;
+    }
+
+    public void setErro(boolean erro) {
+        this.erro = erro;
     }
 
 }

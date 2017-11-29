@@ -67,8 +67,8 @@
                             <button class="btn btn-default dropdown-toggle" id="optionsUser" style="display: none; padding: 8px; margin-top: 6px; margin-right: 6px;" type="button" data-toggle="dropdown">Opções
                                 <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                    <li><a href="/omaewa/estatisticas.xhtml">Estatísticas</a></li>
-                                    <li><a href="#" onclick="signOut();">Sign out</a></li>
+                                <li><a href="/omaewa/estatisticas.xhtml">Estatísticas</a></li>
+                                <li><a href="#" onclick="signOut();">Sign out</a></li>
                                 <div class="admUser" style="display: none">
                                     <li class="divider"></li>
                                 </div>
@@ -189,6 +189,12 @@
                                     <p:inputText style="display: none" id="scoreGet" value="#{scoreControle.scoreSet}"/>
                                     <h5 style="display: inline">Gostou dessa musica: </h5>
                                     <h:commandLink style="display: inline" id="salvarS" disabled="#{scoreControle.disable}" action="#{scoreControle.salvar()}"><i class="fa fa-thumbs-up" aria-hidden="true"></i></h:commandLink>
+                                    <p:panel visible="#{scoreControle.erro}">
+                                        <div id="foda" class="alert alert-danger alert-dismissable"  onchange="">
+                                            <h:commandLink class="close" onclick="$(this).parent().alert('close');" action="#{scoreControle.tirarErro()}">×</h:commandLink>
+                                            Favor realizar Login.
+                                        </div>
+                                    </p:panel>
                                 </p:panel>
                             </h:form>
                         </div>
@@ -280,5 +286,10 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
         <script src="resources/js/voiceCommands.js"></script>
         <script src="resources/js/buscaVox.js"></script>
+        <script>
+            function foda(){
+                
+            }
+        </script>
     </h:body>
 </html>
